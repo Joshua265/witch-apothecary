@@ -5,25 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://rvsbbgkn3xdp" path="res://sprites/ui/book-button.png" id="3_m7pwg"]
 [ext_resource type="Script" uid="uid://bkej2xh7sjjr8" path="res://scripts/action_buttons_container.gd" id="4_ju08p"]
 [ext_resource type="PackedScene" uid="uid://clcfwpf777qly" path="res://scenes/clipboard.tscn" id="5_6j6nf"]
-[ext_resource type="Script" uid="uid://cfylfgmhp6un1" path="res://scenes/clipboard.gd" id="6_xwl5y"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwl5y"]
-size = Vector2(372, 528)
-
-[sub_resource type="Animation" id="Animation_6s7mn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Clipboard:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(52, 542)]
-}
+[ext_resource type="Script" uid="uid://cmj58j2v146wq" path="res://scenes/clipboard.gd" id="6_xwl5y"]
 
 [sub_resource type="Animation" id="Animation_xwl5y"]
 resource_name = "hover_in"
@@ -57,12 +39,30 @@ tracks/0/keys = {
 "values": [Vector2(52, 542), Vector2(52, 150)]
 }
 
+[sub_resource type="Animation" id="Animation_6s7mn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Clipboard:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(52, 542)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6s7mn"]
 _data = {
 &"RESET": SubResource("Animation_6s7mn"),
 &"hover_in": SubResource("Animation_xwl5y"),
 &"open": SubResource("Animation_57s40")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwl5y"]
+size = Vector2(372, 528)
 
 [node name="Diagnosis" type="Control"]
 layout_mode = 3
@@ -173,22 +173,20 @@ offset_left = 52.0
 offset_top = 542.0
 offset_right = 414.0
 offset_bottom = 1057.0
-mouse_filter = 2
 script = ExtResource("6_xwl5y")
 clipboard = NodePath(".")
 animation_player = NodePath("AnimationPlayer")
 area = NodePath("Area2D")
-
-[node name="Area2D" type="Area2D" parent="Clipboard"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Clipboard/Area2D"]
-position = Vector2(176, 254)
-shape = SubResource("RectangleShape2D_xwl5y")
+hover_distance = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Clipboard"]
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_6s7mn")
 }
+
+[node name="Area2D" type="Area2D" parent="Clipboard"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clipboard/Area2D"]
+position = Vector2(176, 254)
+shape = SubResource("RectangleShape2D_xwl5y")
