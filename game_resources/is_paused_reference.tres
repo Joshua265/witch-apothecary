@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BoolReference" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="BoolReference" load_steps=2 format=3 uid="uid://du05ue4heeow3"]
 
-[ext_resource type="Script" path="res://scripts/references/float_reference.gd" id="1_7d1wo"]
+[ext_resource type="Script" uid="uid://cvdkjrqdfd66k" path="res://scripts/references/float_reference.gd" id="1_7d1wo"]
 
 [resource]
 script = ExtResource("1_7d1wo")

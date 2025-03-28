@@ -1,25 +1,25 @@
 [gd_scene load_steps=22 format=3 uid="uid://tqr8mcs2r0kr"]
 
 [ext_resource type="PackedScene" uid="uid://ds4pyjrrj8npy" path="res://scenes/common/ui/dialog_box.tscn" id="1_lp2vr"]
-[ext_resource type="Script" path="res://scripts/ui/viewport_texture_rect.gd" id="4_eqcxs"]
-[ext_resource type="Script" path="res://scripts/camera/camera_targeter.gd" id="5_8twu0"]
+[ext_resource type="Script" uid="uid://bv8hdea7xev8s" path="res://scripts/ui/viewport_texture_rect.gd" id="4_eqcxs"]
+[ext_resource type="Script" uid="uid://rfxvuoa04mgt" path="res://scripts/camera/camera_targeter.gd" id="5_8twu0"]
 [ext_resource type="TileSet" uid="uid://beexykwva7t0i" path="res://game_resources/sample_tileset.tres" id="5_iijwm"]
 [ext_resource type="PackedScene" uid="uid://bfttx6rqnafe" path="res://scenes/common/camera/minimap_viewport.tscn" id="6_147y0"]
-[ext_resource type="Script" path="res://scripts/utilities/better_tilemap.gd" id="6_ljroe"]
+[ext_resource type="Script" uid="uid://pla5nbdd4ywf" path="res://scripts/utilities/better_tilemap.gd" id="6_ljroe"]
 [ext_resource type="PackedScene" uid="uid://djujqcbughbl" path="res://scenes/common/ui/pause_menu.tscn" id="6_qry4t"]
-[ext_resource type="Script" path="res://scripts/camera/camera_area_targeter.gd" id="7_60w6n"]
+[ext_resource type="Script" uid="uid://bxxvu0m5n52ai" path="res://scripts/camera/camera_area_targeter.gd" id="7_60w6n"]
 [ext_resource type="PackedScene" uid="uid://dnlir14iywfl8" path="res://scenes/common/simple_platformer_character.tscn" id="7_y5jga"]
 [ext_resource type="Resource" uid="uid://cpda1sleldpvn" path="res://game_resources/camera_area_entered_event.tres" id="8_3ebwk"]
-[ext_resource type="Script" path="res://scripts/camera/camera_area.gd" id="9_y6yr3"]
+[ext_resource type="Script" uid="uid://dgfcce12gsun1" path="res://scripts/camera/camera_area.gd" id="9_y6yr3"]
 [ext_resource type="PackedScene" uid="uid://c73mpiglgnsfd" path="res://scenes/common/camera/camera_area.tscn" id="11_xajsl"]
-[ext_resource type="Resource" path="res://game_resources/camera_area_exited_event.tres" id="11_xwxnv"]
-[ext_resource type="Shader" path="res://shaders/minimap.gdshader" id="12_jhea5"]
-[ext_resource type="Script" path="res://scripts/utilities/save_area.gd" id="15_yjjb5"]
+[ext_resource type="Resource" uid="uid://cy1alhnil62qd" path="res://game_resources/camera_area_exited_event.tres" id="11_xwxnv"]
+[ext_resource type="Shader" uid="uid://brd7n175co4qj" path="res://shaders/minimap.gdshader" id="12_jhea5"]
+[ext_resource type="Script" uid="uid://2jycjskl7o0n" path="res://scripts/utilities/save_area.gd" id="15_yjjb5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ihgoj"]
 shader = ExtResource("12_jhea5")
 shader_parameter/color = Color(0.992157, 0, 0, 1)
-shader_parameter/background_color = null
+shader_parameter/background_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_drpd8"]
 viewport_path = NodePath("minimap_viewport")
@@ -79,7 +79,7 @@ viewport = NodePath("../../../minimap_viewport")
 [node name="camera_player" type="Camera2D" parent="."]
 visibility_layer = 2
 position = Vector2(12, 8)
-zoom = Vector2(2, 2)
+zoom = Vector2(5, 5)
 editor_draw_limits = true
 
 [node name="CameraTargeter" type="Node" parent="camera_player" node_paths=PackedStringArray("camera")]
