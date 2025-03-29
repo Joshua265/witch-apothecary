@@ -2,7 +2,6 @@ extends Panel
 
 @export var clipboard : Panel 
 @export var animation_player : AnimationPlayer 
-@export var area : Area2D  
 @export var hover_distance : float = 10  
 var closed_position : Vector2  
 var is_open : bool = false 

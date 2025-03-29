@@ -23,7 +23,7 @@ func _ready():
 		if question_button is Button:
 			question_button.pressed.connect(_on_question_selected.bind(question_button.text))
 	
-	# Initially hide question list and dialogue box
+	# Initially hide irrelevant stuff
 	question_list.hide()
 	dialogue_box.hide()
 	back_button.hide()
@@ -46,7 +46,6 @@ func _on_back_pressed():
 	diagnose_button.show()
 	inspect_button.show()
 	
-
 func _on_question_selected(question_text):
 	# Hide UI and show only the background and character
 	ui_container.hide() #todo: ui_container.hide doesnt work, so I added the two beneath. fix that
