@@ -1,4 +1,5 @@
 extends Panel
+#todo: Rework this into the script for control on top maybe? 
 
 @export var ask_button : Button
 @export var examine_button : Button
@@ -32,15 +33,10 @@ func _process(delta):
 
 func _ready():
 	# Connect button signals
-	ask_button.pressed.connect(_on_ask_button_pressed)
 	examine_button.pressed.connect(_on_examine_button_pressed)
 	diagnosis_button.pressed.connect(_on_diagnosis_button_pressed)
 	
 	# Add more initialization if needed
-
-func _on_ask_button_pressed():
-	# Trigger ask action
-	print("Starting dialogue with patient")
 
 func _on_examine_button_pressed():
 	# Trigger examination action

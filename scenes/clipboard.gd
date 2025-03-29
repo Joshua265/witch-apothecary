@@ -14,8 +14,10 @@ func _ready():
 	is_hovered = false
 	print("Clipboard initialized at position: ", closed_position)
 	
+	mouse_filter = Control.MOUSE_FILTER_STOP  # Ensures it captures clicks
 	#area.mouse_filter_mode = Area2D.MouseFilterMode.Pass
-	area.input_event.connect(_on_area_input_event) 
+	#area.input_event.connect(_on_area_input_event) 
+	#area.input_pickable = true
 
 func _process(delta):
 	var mouse_position = get_global_mouse_position()
@@ -26,17 +28,9 @@ func _process(delta):
 			animate_hover_in()
 			is_hovered = true
 	else:
-		if is_hovered: 
+		if is_hovered and !is_open: 
 			animate_hover_out()
 			is_hovered = false	
-
-func _on_area_input_event(event: InputEvent) -> void:
-	print("Miaumiau1!")
-	if event is InputEventMouseButton:
-		print("Miaumiau!")
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			print("Left mouse button clicked on Area2D inside ClipboardNode!")
-			_on_clipboard_pressed()
 			
 func animate_hover_in():
 	print("Playing hover_in animation: Moving clipboard up.")
@@ -56,3 +50,7 @@ func _on_clipboard_pressed():
 		print("Clipboard pressed again. Closing clipboard.")
 		animation_player.play_backwards("open")
 		is_open = false
+
+func _gui_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		_on_clipboard_pressed();

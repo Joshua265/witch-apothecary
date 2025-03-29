@@ -1,21 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbjahp7gaioja"]
+[gd_scene load_steps=13 format=3 uid="uid://cbjahp7gaioja"]
 
 [ext_resource type="Texture2D" uid="uid://bqogy6bhtv266" path="res://sprites/backgrounds/1/2304x1296.png" id="1_gge8t"]
+[ext_resource type="Script" uid="uid://bpbrqtsix38iv" path="res://scenes/diagnosis.gd" id="1_hkpsx"]
 [ext_resource type="Script" uid="uid://vs8yxv3m6ydw" path="res://scripts/patient.gd" id="2_lmtnd"]
 [ext_resource type="Texture2D" uid="uid://rvsbbgkn3xdp" path="res://sprites/ui/book-button.png" id="3_m7pwg"]
 [ext_resource type="Script" uid="uid://bkej2xh7sjjr8" path="res://scripts/action_buttons_container.gd" id="4_ju08p"]
 [ext_resource type="PackedScene" uid="uid://clcfwpf777qly" path="res://scenes/clipboard.tscn" id="5_6j6nf"]
+[ext_resource type="Script" uid="uid://cuisabtlexv1k" path="res://scenes/question_list.gd" id="6_57s40"]
 [ext_resource type="Script" uid="uid://cfylfgmhp6un1" path="res://scenes/clipboard.gd" id="6_xwl5y"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwl5y"]
-size = Vector2(372, 528)
 
 [sub_resource type="Animation" id="Animation_6s7mn"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Clipboard:position")
+tracks/0/path = NodePath("Interaction/Clipboard:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -31,7 +30,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Clipboard:position")
+tracks/0/path = NodePath("Interaction/Clipboard:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,7 +46,7 @@ length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Clipboard:position")
+tracks/0/path = NodePath("Interaction/Clipboard:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -64,13 +63,24 @@ _data = {
 &"open": SubResource("Animation_57s40")
 }
 
-[node name="Diagnosis" type="Control"]
+[node name="Diagnosis" type="Control" node_paths=PackedStringArray("ask_button", "inspect_button", "diagnose_button", "back_button", "question_list", "dialogue_box", "dialogue_label", "ui_container", "character", "background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hkpsx")
+ask_button = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button")
+inspect_button = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Inspect_Button")
+diagnose_button = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Diagnose_Button")
+back_button = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/Back_Button")
+question_list = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
+dialogue_box = NodePath("DialogueBox")
+dialogue_label = NodePath("DialogueBox/Panel/Dialogue")
+ui_container = NodePath("Interaction")
+character = NodePath("patient_image")
+background = NodePath("Background")
 
 [node name="Background" type="TextureRect" parent="."]
 clip_contents = true
@@ -99,9 +109,16 @@ stretch_mode = 3
 script = ExtResource("2_lmtnd")
 patient_image = NodePath(".")
 
-[node name="Top_Right_Buttons" type="Node" parent="."]
+[node name="Interaction" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 52.0
+offset_top = 542.0
+offset_right = 92.0
+offset_bottom = 582.0
 
-[node name="Info_buton" type="TextureButton" parent="Top_Right_Buttons"]
+[node name="Top_Right_Buttons" type="Node" parent="Interaction"]
+
+[node name="Settings_buton" type="TextureButton" parent="Interaction/Top_Right_Buttons"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -109,7 +126,7 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="BoK_button" type="TextureButton" parent="Top_Right_Buttons"]
+[node name="BoK_button" type="TextureButton" parent="Interaction/Top_Right_Buttons"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -123,7 +140,8 @@ pivot_offset = Vector2(300, 0)
 tooltip_text = "Book of Knowledge"
 texture_normal = ExtResource("3_m7pwg")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="Interaction"]
+clip_contents = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 7
@@ -131,43 +149,63 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -40.0
-offset_right = 100.0
-offset_bottom = -6.0
+offset_left = 404.0
+offset_top = 26.0
+offset_right = 604.0
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 0
 vertical_scroll_mode = 0
 
-[node name="ActionButtonsContainer" type="Panel" parent="ScrollContainer" node_paths=PackedStringArray("ask_button", "examine_button", "diagnosis_button", "scroll_container")]
-clip_contents = true
+[node name="ActionButtonsContainer" type="Panel" parent="Interaction/ScrollContainer" node_paths=PackedStringArray("ask_button", "examine_button", "diagnosis_button", "scroll_container")]
 custom_minimum_size = Vector2(190, 30)
 layout_mode = 2
 script = ExtResource("4_ju08p")
-ask_button = NodePath("HBoxContainer/Dialogue_Button")
-examine_button = NodePath("HBoxContainer/Inspect_Button")
-diagnosis_button = NodePath("HBoxContainer/Diagnose_Button")
+ask_button = NodePath("MainActions/Dialogue_Button")
+examine_button = NodePath("MainActions/Inspect_Button")
+diagnosis_button = NodePath("MainActions/Diagnose_Button")
 scroll_container = NodePath("..")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/ActionButtonsContainer"]
-clip_children = 2
+[node name="MainActions" type="HBoxContainer" parent="Interaction/ScrollContainer/ActionButtonsContainer"]
 layout_mode = 0
 offset_right = 189.0
 offset_bottom = 31.0
 
-[node name="Dialogue_Button" type="Button" parent="ScrollContainer/ActionButtonsContainer/HBoxContainer"]
+[node name="Dialogue_Button" type="Button" parent="Interaction/ScrollContainer/ActionButtonsContainer/MainActions"]
 layout_mode = 2
 text = "Ask"
 
-[node name="Inspect_Button" type="Button" parent="ScrollContainer/ActionButtonsContainer/HBoxContainer"]
+[node name="Inspect_Button" type="Button" parent="Interaction/ScrollContainer/ActionButtonsContainer/MainActions"]
 layout_mode = 2
 text = "Inspect"
 
-[node name="Diagnose_Button" type="Button" parent="ScrollContainer/ActionButtonsContainer/HBoxContainer"]
+[node name="Diagnose_Button" type="Button" parent="Interaction/ScrollContainer/ActionButtonsContainer/MainActions"]
 layout_mode = 2
 text = "Diagnose"
 
-[node name="Clipboard" parent="." node_paths=PackedStringArray("clipboard", "animation_player", "area") instance=ExtResource("5_6j6nf")]
+[node name="Dialogue_Section" type="Node" parent="Interaction/ScrollContainer/ActionButtonsContainer"]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section"]
+offset_left = 450.0
+offset_top = 494.0
+offset_right = 693.0
+offset_bottom = 604.0
+horizontal_scroll_mode = 0
+
+[node name="QuestionList" type="VBoxContainer" parent="Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_57s40")
+
+[node name="Back_Button" type="Button" parent="Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section"]
+offset_left = 478.0
+offset_top = 606.0
+offset_right = 666.0
+offset_bottom = 637.0
+text = "Back"
+
+[node name="Clipboard" parent="Interaction" node_paths=PackedStringArray("clipboard", "animation_player") instance=ExtResource("5_6j6nf")]
+top_level = true
 layout_mode = 0
 offset_left = 52.0
 offset_top = 542.0
@@ -177,18 +215,36 @@ mouse_filter = 2
 script = ExtResource("6_xwl5y")
 clipboard = NodePath(".")
 animation_player = NodePath("AnimationPlayer")
-area = NodePath("Area2D")
 
-[node name="Area2D" type="Area2D" parent="Clipboard"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Clipboard/Area2D"]
-position = Vector2(176, 254)
-shape = SubResource("RectangleShape2D_xwl5y")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Clipboard"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interaction/Clipboard"]
+root_node = NodePath("../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_6s7mn")
 }
+
+[node name="DialogueBox" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 161.0
+offset_top = 482.0
+offset_right = 1014.0
+offset_bottom = 632.0
+
+[node name="Panel" type="Panel" parent="DialogueBox"]
+layout_mode = 0
+offset_left = -28.0
+offset_top = -15.0
+offset_right = 868.0
+offset_bottom = 159.0
+
+[node name="Dialogue" type="RichTextLabel" parent="DialogueBox/Panel"]
+top_level = true
+layout_mode = 0
+offset_left = 148.0
+offset_top = 475.0
+offset_right = 1064.0
+offset_bottom = 629.0
+text = "Sample text for testing"
+fit_content = true
+
+[connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button" to="." method="_on_ask_pressed"]
+[connection signal="question_selected" from="Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList" to="." method="_on_question_selected"]
