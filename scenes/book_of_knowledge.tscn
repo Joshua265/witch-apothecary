@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddh0by5vpm5c2"]
+[gd_scene load_steps=5 format=3 uid="uid://ddh0by5vpm5c2"]
 
-[ext_resource type="Script" uid="uid://cylc37pv182tk" path="res://BoK.gd" id="1_je2ii"]
+[ext_resource type="Texture2D" uid="uid://djqwib2sbvrs5" path="res://sprites/ui/bok.png" id="1_h2r53"]
+[ext_resource type="Script" uid="uid://cylc37pv182tk" path="res://scripts/BoK.gd" id="1_je2ii"]
+[ext_resource type="Texture2D" uid="uid://dht8rp8dcfdhh" path="res://sprites/ui/close.png" id="3_v1ci7"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_je2ii"]
 
 [node name="Book_of_Knowledge" type="Control"]
+clip_children = 2
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,12 +16,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel(temp)" type="Panel" parent="." node_paths=PackedStringArray("left_button", "right_button", "left_panel", "right_panel", "close_button")]
+[node name="TextureRect" type="TextureRect" parent="." node_paths=PackedStringArray("left_button", "right_button", "left_panel", "right_panel", "close_button")]
 layout_mode = 0
-offset_left = 69.0
-offset_top = 3.0
-offset_right = 1069.0
-offset_bottom = 651.0
+offset_left = -11.0
+offset_top = -30.0
+offset_right = 1166.0
+offset_bottom = 737.0
+texture = ExtResource("1_h2r53")
+expand_mode = 1
 script = ExtResource("1_je2ii")
 left_button = NodePath("Left_Flip")
 right_button = NodePath("Right_Flip")
@@ -25,43 +31,48 @@ left_panel = NodePath("Left_VBox")
 right_panel = NodePath("Right_VBox")
 close_button = NodePath("Close_Button")
 
-[node name="Left_VBox" type="VBoxContainer" parent="Panel(temp)"]
-layout_mode = 2
-offset_left = 29.0
-offset_top = 28.0
-offset_right = 479.0
-offset_bottom = 622.0
-
-[node name="Right_VBox" type="VBoxContainer" parent="Panel(temp)"]
-layout_mode = 2
-offset_left = 507.0
-offset_top = 25.0
-offset_right = 957.0
-offset_bottom = 625.0
-
-[node name="Left_Flip" type="TextureButton" parent="Panel(temp)"]
-layout_mode = 2
-offset_left = 38.0
-offset_top = 564.0
-offset_right = 95.0
-offset_bottom = 617.0
+[node name="Close_Button" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
+offset_left = 952.0
+offset_top = 83.0
+offset_right = 1019.0
+offset_bottom = 150.0
+texture_normal = ExtResource("3_v1ci7")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Right_Flip" type="TextureButton" parent="Panel(temp)"]
+[node name="Right_Flip" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 895.0
-offset_top = 550.0
-offset_right = 960.0
-offset_bottom = 614.0
+offset_left = 954.0
+offset_top = 571.0
+offset_right = 1019.0
+offset_bottom = 635.0
 texture_normal = SubResource("ImageTexture_je2ii")
 ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="Close_Button" type="TextureButton" parent="Panel(temp)"]
-layout_mode = 0
-offset_left = 921.0
-offset_top = 11.0
-offset_right = 988.0
-offset_bottom = 78.0
+[node name="Left_Flip" type="TextureButton" parent="TextureRect"]
+layout_mode = 2
+offset_left = 151.0
+offset_top = 538.0
+offset_right = 208.0
+offset_bottom = 591.0
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Right_VBox" type="VBoxContainer" parent="TextureRect"]
+clip_contents = true
+layout_mode = 2
+offset_left = 603.0
+offset_top = 94.0
+offset_right = 967.0
+offset_bottom = 542.0
+
+[node name="Left_VBox" type="VBoxContainer" parent="TextureRect"]
+clip_contents = true
+layout_mode = 2
+offset_left = 198.0
+offset_top = 81.0
+offset_right = 540.0
+offset_bottom = 529.0

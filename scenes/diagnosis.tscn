@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://cbjahp7gaioja"]
 
-[ext_resource type="Texture2D" uid="uid://bqogy6bhtv266" path="res://sprites/backgrounds/1/2304x1296.png" id="1_gge8t"]
+[ext_resource type="Texture2D" uid="uid://cwu8l8m3gphcb" path="res://sprites/backgrounds/1/2304x1296.png" id="1_gge8t"]
 [ext_resource type="Script" uid="uid://bpbrqtsix38iv" path="res://scripts/diagnosis.gd" id="1_hkpsx"]
 [ext_resource type="Script" uid="uid://vs8yxv3m6ydw" path="res://scripts/patient.gd" id="2_lmtnd"]
 [ext_resource type="Texture2D" uid="uid://rvsbbgkn3xdp" path="res://sprites/ui/book-button.png" id="3_m7pwg"]
@@ -277,10 +277,10 @@ libraries = {
 
 [node name="DialogueBox" parent="." instance=ExtResource("11_c6x2f")]
 layout_mode = 1
-offset_left = 140.0
-offset_top = 457.0
-offset_right = -143.0
-offset_bottom = -33.0
+offset_left = 124.0
+offset_top = 436.0
+offset_right = -159.0
+offset_bottom = -54.0
 
 [connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button" to="." method="_on_ask_pressed"]
 [connection signal="question_selected" from="Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList" to="." method="_on_question_selected"]

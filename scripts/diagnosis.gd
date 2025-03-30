@@ -18,7 +18,7 @@ func _ready():
 	# Connect signals
 	ask_button.pressed.connect(_on_ask_pressed)
 	back_button.pressed.connect(_on_back_pressed)
-	dialogue_label = dialogue_box.get_node("Panel/Dialogue")
+	dialogue_label = dialogue_box.get_node("Dialoguebox/Dialogue")
 	
 	for question_button in question_list.get_children():
 		if question_button is Button:

@@ -1,4 +1,4 @@
-extends Panel
+extends TextureRect
 
 @export var left_button : TextureButton
 @export var right_button : TextureButton
@@ -9,7 +9,7 @@ extends Panel
 signal back_pressed  # Define a signal
 
 var illnesses = [
-	{"name": "Simple Cold / Flu", "details": "Symptoms: Congestion, headache, fatigue, mild fever.
+	{"name": "Simple Cold   Flu", "details": "Symptoms: Congestion, headache, fatigue, mild fever.
  		Diagnosis: Likely a simple cold or flu.
  		Treatment: Herbal remedy like Lavender or Thornroot to reduce fever and clear congestion. A magical sleep potion to speed up recovery."},
 	{"name": "Food Poisoning", "details": "Symptoms: Nausea, stomach ache, dizziness, occasional vomiting
@@ -43,7 +43,6 @@ func _ready():
 	# Update the display
 	update_page()
 
-#todo: change the style of the text
 # Function to update the current page with illness info
 func update_page():
 	# Remove all previous items from both panels
@@ -56,39 +55,44 @@ func update_page():
 	for i in range(0,6):
 		if illness_index >= illnesses.size():
 			break
-			
 		var illness = illnesses[illness_index]
 
-		# Create Labels for Illness Name and Details
-		var name_label = Label.new()
-		name_label.text = illness["name"]
-		#name_label.add_stylebox_override("normal", preload("res://path_to_your_style.tres"))  # Optional larger text style
-		if i < 3:
-			left_panel.add_child(name_label)
-		else:
-			right_panel.add_child(name_label)
+		# Create name label
+		var name_label = create_label(illness["name"], "res://fonts/Gorck Helozat Trial.ttf", 24, true)
+		var details_label = create_label(illness["details"], "res://fonts/Gorck Helozat Trial.ttf", 12)
 
-		var details_label = Label.new()
-		details_label.text = illness["details"]
-		details_label.autowrap_mode = true
-		#details_label.add_stylebox_override("normal", preload("res://path_to_your_style.tres"))  # Optional smaller text style
-		if i < 3:
-			left_panel.add_child(details_label)
-		else:
-			right_panel.add_child(details_label)
+		# Determine the panel to add elements to
+		var target_panel = left_panel if i < 3 else right_panel
 		
-		#todo: Add a Seperation Line or something ? Structure it more 
+		# Adding the elements
+		target_panel.add_child(name_label)
+		var separator = HSeparator.new()
+		target_panel.add_child(separator)
+		target_panel.add_child(details_label)
 		
-		# Update the panel index
 		illness_index += 1
-		if i  == 6:
-			break  # Stop after adding 6 illnesses (3 for each panel)
-
-	# Update button visibility based on the current page
+	
+	# Button visibility
 	left_button.visible = current_page > 0  
 	right_button.visible = (current_page * 6) + 6 < illnesses.size()
 
+# Function to create and style a label
+func create_label(text: String, font_path: String, font_size: int, bold: bool = false) -> Label:
+	var label = Label.new()
+	label.text = text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	label.set("theme_override_colors/font_color", Color.BLACK)  
 
+	var font = FontFile.new()
+	font.font_data = load(font_path)
+
+	var theme_override = Theme.new()
+	theme_override.set_font("font", "Label", font)
+	theme_override.set_font_size("font_size", "Label", font_size)
+
+	label.theme = theme_override
+	return label
+	
 # Function to go to the previous page
 func _on_left_button_pressed():
 	current_page -= 1
