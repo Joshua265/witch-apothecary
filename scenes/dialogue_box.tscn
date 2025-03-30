@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cfdj6vpwj0ka"]
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -28.0
+offset_top = -15.0
+offset_right = 868.0
+offset_bottom = 159.0
+
+[node name="Dialogue" type="RichTextLabel" parent="Panel"]
+top_level = true
+layout_mode = 0
+offset_left = 148.0
+offset_top = 475.0
+offset_right = 1064.0
+offset_bottom = 629.0
+text = "Sample text for testing"
+fit_content = true

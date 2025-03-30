@@ -6,18 +6,19 @@ extends Control
 @export var back_button: Button
 @export var question_list : ScrollContainer
 @export var dialogue_box: Control
-@export var dialogue_label: RichTextLabel
 @export var ui_container: Control 
 @export var character: TextureRect
 @export var background: TextureRect
 
 var dialogue_queue = []
 var is_dialogue_active = false
+var dialogue_label
 
 func _ready():
 	# Connect signals
 	ask_button.pressed.connect(_on_ask_pressed)
 	back_button.pressed.connect(_on_back_pressed)
+	dialogue_label = dialogue_box.get_node("Panel/Dialogue")
 	
 	for question_button in question_list.get_children():
 		if question_button is Button:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cbjahp7gaioja"]
+[gd_scene load_steps=19 format=3 uid="uid://cbjahp7gaioja"]
 
 [ext_resource type="Texture2D" uid="uid://bqogy6bhtv266" path="res://sprites/backgrounds/1/2304x1296.png" id="1_gge8t"]
 [ext_resource type="Script" uid="uid://bpbrqtsix38iv" path="res://scripts/diagnosis.gd" id="1_hkpsx"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cfylfgmhp6un1" path="res://scripts/clipboard.gd" id="6_xwl5y"]
 [ext_resource type="PackedScene" uid="uid://ddh0by5vpm5c2" path="res://scenes/book_of_knowledge.tscn" id="9_6s7mn"]
 [ext_resource type="Script" uid="uid://lsy1wjlw2y0l" path="res://scripts/book_of_knowledge.gd" id="10_c6x2f"]
+[ext_resource type="PackedScene" uid="uid://cfdj6vpwj0ka" path="res://scenes/dialogue_box.tscn" id="11_c6x2f"]
 
 [sub_resource type="Animation" id="Animation_6s7mn"]
 length = 0.001
@@ -101,7 +102,7 @@ _data = {
 &"show": SubResource("Animation_7sw3p")
 }
 
-[node name="Diagnosis" type="Control" node_paths=PackedStringArray("ask_button", "inspect_button", "diagnose_button", "back_button", "question_list", "dialogue_box", "dialogue_label", "ui_container", "character", "background")]
+[node name="Diagnosis" type="Control" node_paths=PackedStringArray("ask_button", "inspect_button", "diagnose_button", "back_button", "question_list", "dialogue_box", "ui_container", "character", "background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,7 +116,6 @@ diagnose_button = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/M
 back_button = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/Back_Button")
 question_list = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
 dialogue_box = NodePath("DialogueBox")
-dialogue_label = NodePath("DialogueBox/Panel/Dialogue")
 ui_container = NodePath("Interaction")
 character = NodePath("patient_image")
 background = NodePath("Background")
@@ -260,30 +260,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_6s7mn")
 }
 
-[node name="DialogueBox" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 161.0
-offset_top = 482.0
-offset_right = 1014.0
-offset_bottom = 632.0
-
-[node name="Panel" type="Panel" parent="DialogueBox"]
-layout_mode = 0
-offset_left = -28.0
-offset_top = -15.0
-offset_right = 868.0
-offset_bottom = 159.0
-
-[node name="Dialogue" type="RichTextLabel" parent="DialogueBox/Panel"]
-top_level = true
-layout_mode = 0
-offset_left = 148.0
-offset_top = 475.0
-offset_right = 1064.0
-offset_bottom = 629.0
-text = "Sample text for testing"
-fit_content = true
-
 [node name="Book_of_Knowledge" parent="." node_paths=PackedStringArray("bok", "animation_player", "bok_button") instance=ExtResource("9_6s7mn")]
 top_level = true
 layout_mode = 1
@@ -298,6 +274,13 @@ bok_button = NodePath("../Interaction/Top_Right_Buttons/BoK_button")
 libraries = {
 &"": SubResource("AnimationLibrary_6q0qn")
 }
+
+[node name="DialogueBox" parent="." instance=ExtResource("11_c6x2f")]
+layout_mode = 1
+offset_left = 140.0
+offset_top = 457.0
+offset_right = -143.0
+offset_bottom = -33.0
 
 [connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button" to="." method="_on_ask_pressed"]
 [connection signal="question_selected" from="Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList" to="." method="_on_question_selected"]

@@ -9,9 +9,15 @@ extends Panel
 signal back_pressed  # Define a signal
 
 var illnesses = [
-	{"name": "Illness 1", "details": "Details of Illness 1."},
-	{"name": "Illness 2", "details": "Details of Illness 2."},
-	{"name": "Illness 3", "details": "Details of Illness 3."},
+	{"name": "Simple Cold / Flu", "details": "Symptoms: Congestion, headache, fatigue, mild fever.
+ 		Diagnosis: Likely a simple cold or flu.
+ 		Treatment: Herbal remedy like Lavender or Thornroot to reduce fever and clear congestion. A magical sleep potion to speed up recovery."},
+	{"name": "Food Poisoning", "details": "Symptoms: Nausea, stomach ache, dizziness, occasional vomiting
+ 		Diagnosis: Likely food poisoning, possibly due to a toxic ingredient or spoiled food.
+ 		Treatment: Healing herbs such as Juniper to soothe the stomach, and a detoxifying potion to cleanse the system."},
+	{"name": "Overexertion", "details": "Symptoms: Muscle soreness, fatigue, lightheadedness, occasional shortness of breath.
+		 Diagnosis: Overexertion from physical labor, possibly compounded by dehydration or fatigue.
+		 Treatment: Rest, hydration, and soothing muscle balm (made with herbs like Eucalyptus or Healing Herb). Encourage lighter activity in the future."},
 	{"name": "Illness 4", "details": "Details of Illness 4."},
 	{"name": "Illness 5", "details": "Details of Illness 5."},
 	{"name": "Illness 6", "details": "Details of Illness 6."},
@@ -37,6 +43,7 @@ func _ready():
 	# Update the display
 	update_page()
 
+#todo: change the style of the text
 # Function to update the current page with illness info
 func update_page():
 	# Remove all previous items from both panels
@@ -63,12 +70,15 @@ func update_page():
 
 		var details_label = Label.new()
 		details_label.text = illness["details"]
+		details_label.autowrap_mode = true
 		#details_label.add_stylebox_override("normal", preload("res://path_to_your_style.tres"))  # Optional smaller text style
 		if i < 3:
 			left_panel.add_child(details_label)
 		else:
 			right_panel.add_child(details_label)
-
+		
+		#todo: Add a Seperation Line or something ? Structure it more 
+		
 		# Update the panel index
 		illness_index += 1
 		if i  == 6:

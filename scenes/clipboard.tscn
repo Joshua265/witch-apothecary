@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://clcfwpf777qly"]
 
+[ext_resource type="Texture2D" uid="uid://fxror64qsc4a" path="res://sprites/ui/clipboard.png" id="1_js5ej"]
 [ext_resource type="Script" uid="uid://xcfiuweqgoqm" path="res://scripts/patientInfo.gd" id="1_u1xd4"]
-
-[sub_resource type="ImageTexture" id="ImageTexture_u1xd4"]
 
 [node name="Clipboard" type="Panel"]
 clip_contents = true
@@ -11,11 +10,10 @@ offset_top = 45.0
 offset_right = 360.0
 offset_bottom = 560.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 363.0
-offset_bottom = 517.0
-texture = SubResource("ImageTexture_u1xd4")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_js5ej")
+offset = Vector2(1000, 1000)
 
 [node name="clipboard" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "history_text")]
 clip_children = 1
@@ -26,9 +24,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -151.5
-offset_top = -221.5
+offset_top = -231.0
 offset_right = 151.5
-offset_bottom = 221.5
+offset_bottom = 231.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u1xd4")
