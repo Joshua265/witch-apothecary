@@ -2,9 +2,7 @@ extends VBoxContainer
 
 signal question_selected(question_text)
 
-#todo: Children stretch to the size of the container properly
-
-var questions = [
+@export var questions: Array[String] = [
 	"What is your name?",
 	"Where are you from?",
 	"What do you do?",
@@ -12,20 +10,20 @@ var questions = [
 ]
 
 func _ready():
-	create_question_buttons()
+	_generate_question_buttons()
 
-func create_question_buttons():
-	# Remove any existing buttons
+func _generate_question_buttons():
+	# Remove existing buttons before generating new ones
 	for child in get_children():
 		child.queue_free()
 
-	# Loop through the questions and create buttons
+	# Create buttons dynamically for each question
 	for question in questions:
-		var button = Button.new()
+		var button := Button.new()
 		button.text = question
-		button.size_flags_horizontal = SIZE_EXPAND_FILL  # Makes it scale nicely
-		button.pressed.connect(_on_question_pressed.bind(question))
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.pressed.connect(func(): _on_question_pressed(question))
 		add_child(button)
 
-func _on_question_pressed(question_text):
+func _on_question_pressed(question_text: String):
 	question_selected.emit(question_text)  # Emit signal to DialogueBox

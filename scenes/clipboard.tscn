@@ -10,13 +10,12 @@ offset_right = 360.0
 offset_bottom = 560.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-350.155, -255.407)
-scale = Vector2(0.524155, 0.507407)
+position = Vector2(-388.802, -309.519)
+scale = Vector2(0.562802, 0.548954)
 texture = ExtResource("1_js5ej")
 offset = Vector2(1000, 1000)
 
 [node name="clipboard" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "history_text")]
-clip_children = 1
 clip_contents = true
 layout_mode = 1
 anchors_preset = 8
@@ -24,12 +23,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -155.0
-offset_top = -225.5
-offset_right = 145.0
-offset_bottom = 236.5
+offset_left = -156.0
+offset_top = -238.5
+offset_right = 147.0
+offset_bottom = 186.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
 script = ExtResource("1_u1xd4")
 patient_image = NodePath("Main/Patient_Picture")
 name_label = NodePath("Main/Patient_Info/Name")
@@ -43,11 +44,10 @@ history_text = NodePath("History")
 clip_children = 2
 clip_contents = true
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="Patient_Picture" type="TextureRect" parent="clipboard/Main"]
 clip_contents = true
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
@@ -82,7 +82,8 @@ layout_mode = 2
 text = "Blood Pressure: X"
 
 [node name="History" type="TextEdit" parent="clipboard"]
-custom_minimum_size = Vector2(0, 275)
+clip_contents = false
+custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 placeholder_text = "This is placeholder text for dialogue

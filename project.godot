@@ -26,11 +26,21 @@ AudioManager="*res://scenes/preloads/audio_manager.tscn"
 SceneTransitionManager="*res://scenes/preloads/scene_transition_manager.tscn"
 SaveManager="*res://scenes/preloads/save_manager.tscn"
 CameraShakeManager="*res://scenes/preloads/camera_shake_manager.tscn"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+Clipboard="*res://scenes/clipboard.tscn"
+
+[dialogue_manager]
+
+runtime/balloon_path="res://scenes/balloon.tscn"
 
 [display]
 
 window/size/resizable=false
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
@@ -80,6 +90,10 @@ shoot={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(85, 20),"global_position":Vector2(89, 63),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialogue_test.dialogue")
 
 [layer_names]
 

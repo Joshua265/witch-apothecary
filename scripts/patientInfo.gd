@@ -33,12 +33,17 @@ func set_patient_info():
 	occupation_label.text = "Occupation: " + patient_data["occupation"]
 	temperature_label.text = "Temperature: " + patient_data["temperature"] 
 	heartrate_label.text = "Heart Rate: " + patient_data["heartrate"] 
+	
+	#UI Stuff idk if theres a better way to do this!
+	name_label.set("theme_override_colors/font_color", Color.BLACK)  
+	age_label.set("theme_override_colors/font_color", Color.BLACK) 
+	occupation_label.set("theme_override_colors/font_color", Color.BLACK) 
+	temperature_label.set("theme_override_colors/font_color", Color.BLACK) 
+	heartrate_label.set("theme_override_colors/font_color", Color.BLACK) 
 
 func add_history_text(text: String):
-	# Add new text to the history box
 	history_text.text += "\n" + text
 
-# Example functions to update stats dynamically
 func update_temperature(new_temp: String):
 	patient_data["temperature"] = new_temp
 	temperature_label.text = "Temperature: " + new_temp 
