@@ -1,12 +1,12 @@
 extends VBoxContainer
 
-@export var patient_image : TextureRect  # Reference to the patient's image
-@export var name_label : Label  # Reference to the name label
-@export var age_label : Label  # Reference to the age label
-@export var occupation_label : Label  # Reference to the occupation label
-@export var temperature_label : Label  # Reference to the temperature label
-@export var heartrate_label : Label  # Reference to the heartrate label
-@export var history_text : TextEdit  # Reference to the history text area
+@export var patient_image : TextureRect 
+@export var name_label : Label  
+@export var age_label : Label 
+@export var occupation_label : Label 
+@export var temperature_label : Label  
+@export var heartrate_label : Label  
+@export var history_text : TextEdit 
 
 var patient_data : Dictionary = {
 	"name": "Helena",
@@ -26,23 +26,39 @@ func _ready():
 	add_history_text(patient_data["history"])
 
 func set_patient_info():
-	# Set the patient's image, name, age, occupation, and stats
+	# Load patient image and update the UI
 	patient_image.texture = load(patient_data["image_path"]) as Texture
 	name_label.text = patient_data["name"]
 	age_label.text = "Age: " + str(patient_data["age"])
 	occupation_label.text = "Occupation: " + patient_data["occupation"]
-	temperature_label.text = "Temperature: " + patient_data["temperature"] 
-	heartrate_label.text = "Heart Rate: " + patient_data["heartrate"] 
-	
-	#UI Stuff idk if theres a better way to do this!
-	name_label.set("theme_override_colors/font_color", Color.BLACK)  
-	age_label.set("theme_override_colors/font_color", Color.BLACK) 
-	occupation_label.set("theme_override_colors/font_color", Color.BLACK) 
-	temperature_label.set("theme_override_colors/font_color", Color.BLACK) 
-	heartrate_label.set("theme_override_colors/font_color", Color.BLACK) 
+	temperature_label.text = "Temperature: " + patient_data["temperature"]
+	heartrate_label.text = "Heart Rate: " + patient_data["heartrate"]
+
+	var dynamic_font = FontFile.new()
+	#dynamic_font.font_data = load("res://path_to_your_font.ttf")
+	var theme_override = Theme.new()
+	theme_override.set_font_size("font_size", "Label", 10)
+
+	# Set the font and font color for each label
+	name_label.theme= theme_override
+	age_label.theme= theme_override
+	occupation_label.theme= theme_override
+	temperature_label.theme= theme_override
+	heartrate_label.theme= theme_override
+
+	# Set font color for all labels
+	var font_color = Color.BLACK  # Set the desired font color
+	name_label.set("theme_override_colors/font_color", font_color)
+	age_label.set("theme_override_colors/font_color", font_color)
+	occupation_label.set("theme_override_colors/font_color", font_color)
+	temperature_label.set("theme_override_colors/font_color", font_color)
+	heartrate_label.set("theme_override_colors/font_color", font_color)
+
 
 func add_history_text(text: String):
 	history_text.text += "\n" + text
+	print(history_text.text)
+	history_text.queue_redraw()
 
 func update_temperature(new_temp: String):
 	patient_data["temperature"] = new_temp

@@ -30,7 +30,7 @@ func animate_hover_in():
 
 func animate_hover_out():
 	animation_player.play_backwards("hover_in")
-	#animation_player.play("hover_out")
+	animation_player.play("hover_out")
 
 func _on_clipboard_pressed():
 	if !is_open:

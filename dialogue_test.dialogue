@@ -1,26 +1,20 @@
 ~ ask_name
 Nathan: [[Hi|Hello|Howdy]], my name is Nathan.
 Nathan: What would you like to know?
-do Clipboard.clipboard.add_history_text("I wanna add some text.")
+do get_node("/root/Clipboard/frame").add_history_text("New info dropped")
 => END
 
 ~ ask_origin
 Nathan: [[Hi|Hello|Howdy]], I come from a distant land.
 Nathan: Do you want to hear a story?
-- Yes, tell me
-	Nathan: Once upon a time, I set out on a great journey...
-- Maybe later => END
+=> END
 
 ~ ask_job
 Nathan: [[Hi|Hello|Howdy]], I’m an adventurer.
 Nathan: I travel the world, looking for mysteries to solve.
-- That sounds exciting!
-	Nathan: It is! Every day brings something new.
-- Sounds dangerous => END
+ => END
 
 ~ ask_secret
 Nathan: [[Hi|Hello|Howdy]], you want to know a secret?
 Nathan: Okay, but keep it between us.
-- Yes, tell me
-	Nathan: Sometimes, I pretend to be an NPC just to mess with people.
-- I don’t keep secrets => END
+ => END

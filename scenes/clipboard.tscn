@@ -1,21 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://clcfwpf777qly"]
+[gd_scene load_steps=4 format=3 uid="uid://clcfwpf777qly"]
 
 [ext_resource type="Texture2D" uid="uid://fxror64qsc4a" path="res://sprites/ui/clipboard.png" id="1_js5ej"]
 [ext_resource type="Script" uid="uid://xcfiuweqgoqm" path="res://scripts/patientInfo.gd" id="1_u1xd4"]
 
-[node name="Clipboard" type="Panel"]
-offset_left = -2.0
-offset_top = 45.0
-offset_right = 360.0
-offset_bottom = 560.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-388.802, -309.519)
-scale = Vector2(0.562802, 0.548954)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_js5ej"]
 texture = ExtResource("1_js5ej")
-offset = Vector2(1000, 1000)
 
-[node name="clipboard" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "history_text")]
+[node name="Clipboard" type="Panel"]
+clip_contents = true
+offset_left = -2.0
+offset_top = -90.0
+offset_right = 466.0
+offset_bottom = 560.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_js5ej")
+
+[node name="frame" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "history_text")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 8
@@ -23,10 +22,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -156.0
-offset_top = -238.5
-offset_right = 147.0
-offset_bottom = 186.5
+offset_left = -124.5
+offset_top = -205.5
+offset_right = 129.5
+offset_bottom = 206.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -40,50 +39,50 @@ temperature_label = NodePath("Main/Patient_Info/Temperature")
 heartrate_label = NodePath("Main/Patient_Info/Heartrate")
 history_text = NodePath("History")
 
-[node name="Main" type="HBoxContainer" parent="clipboard"]
+[node name="Main" type="HBoxContainer" parent="frame"]
 clip_children = 2
 clip_contents = true
 layout_mode = 2
 
-[node name="Patient_Picture" type="TextureRect" parent="clipboard/Main"]
+[node name="Patient_Picture" type="TextureRect" parent="frame/Main"]
 clip_contents = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Patient_Info" type="VBoxContainer" parent="clipboard/Main"]
+[node name="Patient_Info" type="VBoxContainer" parent="frame/Main"]
 clip_contents = true
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="Name" type="Label" parent="clipboard/Main/Patient_Info"]
+[node name="Name" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Name: x"
 
-[node name="Age" type="Label" parent="clipboard/Main/Patient_Info"]
+[node name="Age" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Age: x"
 
-[node name="Occupation" type="Label" parent="clipboard/Main/Patient_Info"]
+[node name="Occupation" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Occupation: x "
 
-[node name="Temperature" type="Label" parent="clipboard/Main/Patient_Info"]
+[node name="Temperature" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Temperature: x"
 
-[node name="Heartrate" type="Label" parent="clipboard/Main/Patient_Info"]
+[node name="Heartrate" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Heartrate: x"
 
-[node name="Blood Pressure" type="Label" parent="clipboard/Main/Patient_Info"]
+[node name="Blood Pressure" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Blood Pressure: X"
 
-[node name="History" type="TextEdit" parent="clipboard"]
+[node name="History" type="TextEdit" parent="frame"]
 clip_contents = false
-custom_minimum_size = Vector2(250, 250)
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 placeholder_text = "This is placeholder text for dialogue
