@@ -1,14 +1,39 @@
-[gd_scene load_steps=17 format=3 uid="uid://cbjahp7gaioja"]
+[gd_scene load_steps=24 format=3 uid="uid://cbjahp7gaioja"]
 
-[ext_resource type="Texture2D" uid="uid://cwu8l8m3gphcb" path="res://sprites/backgrounds/1/2304x1296.png" id="1_gge8t"]
 [ext_resource type="Script" uid="uid://bpbrqtsix38iv" path="res://scripts/diagnosis.gd" id="1_hkpsx"]
+[ext_resource type="Texture2D" uid="uid://ho45arpf6p6j" path="res://sprites/backgrounds/bg.png" id="2_6s7mn"]
 [ext_resource type="Script" uid="uid://vs8yxv3m6ydw" path="res://scripts/patient.gd" id="2_lmtnd"]
 [ext_resource type="Texture2D" uid="uid://rvsbbgkn3xdp" path="res://sprites/ui/book-button.png" id="3_m7pwg"]
 [ext_resource type="PackedScene" uid="uid://clcfwpf777qly" path="res://scenes/clipboard.tscn" id="5_6j6nf"]
+[ext_resource type="Texture2D" uid="uid://w2qxs2v1lcdc" path="res://sprites/ui/action_buttons.png" id="5_c6x2f"]
 [ext_resource type="Script" uid="uid://cuisabtlexv1k" path="res://scripts/question_list.gd" id="6_57s40"]
 [ext_resource type="Script" uid="uid://cfylfgmhp6un1" path="res://scripts/clipboard.gd" id="6_xwl5y"]
 [ext_resource type="PackedScene" uid="uid://ddh0by5vpm5c2" path="res://scenes/book_of_knowledge.tscn" id="9_6s7mn"]
 [ext_resource type="Script" uid="uid://lsy1wjlw2y0l" path="res://scripts/book_of_knowledge.gd" id="10_c6x2f"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7sw3p"]
+texture = ExtResource("5_c6x2f")
+region_rect = Rect2(895, 63, 490, 507)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4p3gb"]
+texture = ExtResource("5_c6x2f")
+region_rect = Rect2(103, 59, 485, 494)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6q0qn"]
+texture = ExtResource("5_c6x2f")
+region_rect = Rect2(890, 658, 490, 507)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66e7y"]
+texture = ExtResource("5_c6x2f")
+region_rect = Rect2(98, 654, 485, 494)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p7dsy"]
+texture = ExtResource("5_c6x2f")
+region_rect = Rect2(909, 1290, 490, 507)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v8pne"]
+texture = ExtResource("5_c6x2f")
+region_rect = Rect2(117, 1286, 485, 494)
 
 [sub_resource type="Animation" id="Animation_6s7mn"]
 length = 0.001
@@ -122,7 +147,7 @@ clip_contents = true
 layout_mode = 0
 offset_right = 1153.0
 offset_bottom = 651.0
-texture = ExtResource("1_gge8t")
+texture = ExtResource("2_6s7mn")
 expand_mode = 2
 stretch_mode = 3
 
@@ -198,20 +223,28 @@ layout_mode = 2
 
 [node name="MainActions" type="HBoxContainer" parent="Interaction/ScrollContainer/ActionButtonsContainer"]
 layout_mode = 0
-offset_right = 189.0
+offset_left = -24.0
+offset_top = -80.0
+offset_right = 264.0
 offset_bottom = 31.0
 
 [node name="Dialogue_Button" type="Button" parent="Interaction/ScrollContainer/ActionButtonsContainer/MainActions"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Ask"
+theme_override_styles/hover = SubResource("StyleBoxTexture_7sw3p")
+theme_override_styles/normal = SubResource("StyleBoxTexture_4p3gb")
 
 [node name="Inspect_Button" type="Button" parent="Interaction/ScrollContainer/ActionButtonsContainer/MainActions"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Inspect"
+theme_override_styles/hover = SubResource("StyleBoxTexture_6q0qn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_66e7y")
 
 [node name="Diagnose_Button" type="Button" parent="Interaction/ScrollContainer/ActionButtonsContainer/MainActions"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Diagnose"
+theme_override_styles/hover = SubResource("StyleBoxTexture_p7dsy")
+theme_override_styles/normal = SubResource("StyleBoxTexture_v8pne")
 
 [node name="Dialogue_Section" type="Node" parent="Interaction/ScrollContainer/ActionButtonsContainer"]
 
