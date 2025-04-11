@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cbjahp7gaioja"]
+[gd_scene load_steps=25 format=3 uid="uid://cbjahp7gaioja"]
 
 [ext_resource type="Script" uid="uid://bpbrqtsix38iv" path="res://scripts/diagnosis.gd" id="1_hkpsx"]
 [ext_resource type="Texture2D" uid="uid://ho45arpf6p6j" path="res://sprites/backgrounds/bg.png" id="2_6s7mn"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://cfylfgmhp6un1" path="res://scripts/clipboard.gd" id="6_xwl5y"]
 [ext_resource type="PackedScene" uid="uid://ddh0by5vpm5c2" path="res://scenes/book_of_knowledge.tscn" id="9_6s7mn"]
 [ext_resource type="Script" uid="uid://lsy1wjlw2y0l" path="res://scripts/book_of_knowledge.gd" id="10_c6x2f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6s7mn"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7sw3p"]
 texture = ExtResource("5_c6x2f")
@@ -35,9 +37,8 @@ region_rect = Rect2(909, 1290, 490, 507)
 texture = ExtResource("5_c6x2f")
 region_rect = Rect2(117, 1286, 485, 494)
 
-[sub_resource type="Animation" id="Animation_6s7mn"]
-resource_name = "open"
-length = 0.75
+[sub_resource type="Animation" id="Animation_6q0qn"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,10 +46,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.75),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-12, 530.38), Vector2(-12, 100)]
+"values": [Vector2(-12, 531)]
 }
 
 [sub_resource type="Animation" id="Animation_c6x2f"]
@@ -67,8 +68,9 @@ tracks/0/keys = {
 "values": [Vector2(-12, 531), Vector2(-12, 500)]
 }
 
-[sub_resource type="Animation" id="Animation_6q0qn"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_6s7mn"]
+resource_name = "open"
+length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -76,10 +78,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-12, 531)]
+"values": [Vector2(-12, 530.38), Vector2(-12, 100)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7sw3p"]
@@ -220,6 +222,7 @@ vertical_scroll_mode = 0
 [node name="ActionButtonsContainer" type="Panel" parent="Interaction/ScrollContainer"]
 custom_minimum_size = Vector2(190, 30)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6s7mn")
 
 [node name="MainActions" type="HBoxContainer" parent="Interaction/ScrollContainer/ActionButtonsContainer"]
 layout_mode = 0
