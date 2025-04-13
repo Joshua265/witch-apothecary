@@ -10,12 +10,7 @@ func _ready():
 
 
 func _generate_question_buttons(dialogue_line):
-
-	print("dialogue Line:",dialogue_line)
-	print("Number of responses: ", dialogue_line.responses.size())
-	# Create buttons dynamically for each question
 	for res in dialogue_line.responses:
-		print(res.text)
 		var button := Button.new()
 		button.text = res.text
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL

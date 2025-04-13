@@ -1,12 +1,14 @@
 ~ start
- - Just a couple
- 	Nathan: That's not so bad.
-do get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text("New info dropped")
-=> END
- - A lot
- 	Nathan: Maybe you should finish one before starting another one.
-=> END
- - I always finish my projects
- 	Nathan: That's great!
- 	Nathan: ...but how many is that?
-=> END
+- Choice1
+	Nathan: That's not so bad.
+	do get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text("New info dropped")
+	=> END
+- A lot
+	Nathan: Maybe you should finish one before starting another one.
+	do get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text("New info dropped")
+	=> END
+- I always finish my projects
+	Nathan: That's great!
+	Nathan: ...but how many is that?
+	do get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text("New info dropped")
+	=> END
