@@ -303,4 +303,3 @@ libraries = {
 }
 
 [connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button" to="." method="_on_ask_pressed"]
-[connection signal="question_selected" from="Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList" to="." method="_on_question_selected"]
