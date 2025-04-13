@@ -7,7 +7,6 @@ extends Control
 @export var question_list: ScrollContainer
 @export var ui_container: Control 
 @export var main_action_container: HBoxContainer
-@export var dialogue_container: ScrollContainer
 @export var character: TextureRect
 @export var background: TextureRect
 
@@ -28,15 +27,15 @@ func _ready():
 
 func _on_ask_pressed():
 	main_action_container.hide()
-	dialogue_container.show()
+	question_list.show()
 	back_button.show()
 
 func _on_back_pressed():
 	main_action_container.show()
-	dialogue_container.hide()
+	question_list.hide()
 	back_button.hide()
 
 func _on_question_selected(next_id:String):
-	dialogue_container.hide()
+	question_list.hide()
 	back_button.hide()
 	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, next_id)
