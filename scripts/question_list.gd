@@ -1,29 +1,28 @@
 extends VBoxContainer
 
 signal question_selected(question_text)
-
-@export var questions: Array[String] = [
-	"What is your name?",
-	"Where are you from?",
-	"What do you do?",
-	"Can you tell me a secret?"
-]
+#not ideal since we double load? eventually make it a autoload? 
+var resource = ResourceLoader.load("res://test_dialogue.dialogue")
 
 func _ready():
-	_generate_question_buttons()
+	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource, "start")
+	_generate_question_buttons(dialogue_line);
 
-func _generate_question_buttons():
+func _generate_question_buttons(dialogue_line):
 	# Remove existing buttons before generating new ones
 	for child in get_children():
 		child.queue_free()
-
+		
+	print("dialogue Line:",dialogue_line)
+	print("Number of responses: ", dialogue_line.responses.size())
 	# Create buttons dynamically for each question
-	for question in questions:
+	for res in dialogue_line.responses:
+		print(res.text)
 		var button := Button.new()
-		button.text = question
+		button.text = res.text
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.pressed.connect(func(): _on_question_pressed(question))
+		button.pressed.connect(func(): _on_question_pressed(res.next_id))
 		add_child(button)
-
-func _on_question_pressed(question_text: String):
-	question_selected.emit(question_text)  # Emit signal to DialogueBox
+	
+func _on_question_pressed(next_id: String):
+	question_selected.emit(next_id)  # Emit signal to DialogueBox

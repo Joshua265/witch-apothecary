@@ -54,11 +54,10 @@ func set_patient_info():
 	temperature_label.set("theme_override_colors/font_color", font_color)
 	heartrate_label.set("theme_override_colors/font_color", font_color)
 
-
 func add_history_text(text: String):
-	history_text.text += "\n" + text
-	print(history_text.text)
-	history_text.queue_redraw()
+	history_text.text += ("\n" if history_text.text != "" else "") + text
+	get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer").show()
+	get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/Back_Button").show()
 
 func update_temperature(new_temp: String):
 	patient_data["temperature"] = new_temp

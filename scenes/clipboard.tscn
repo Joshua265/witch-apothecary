@@ -7,7 +7,6 @@
 texture = ExtResource("1_js5ej")
 
 [node name="Clipboard" type="Panel"]
-clip_contents = true
 offset_left = -2.0
 offset_top = -90.0
 offset_right = 466.0
@@ -15,7 +14,6 @@ offset_bottom = 560.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_js5ej")
 
 [node name="frame" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "history_text")]
-clip_contents = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -40,8 +38,6 @@ heartrate_label = NodePath("Main/Patient_Info/Heartrate")
 history_text = NodePath("History")
 
 [node name="Main" type="HBoxContainer" parent="frame"]
-clip_children = 2
-clip_contents = true
 layout_mode = 2
 
 [node name="Patient_Picture" type="TextureRect" parent="frame/Main"]
@@ -52,7 +48,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Patient_Info" type="VBoxContainer" parent="frame/Main"]
-clip_contents = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
@@ -88,4 +83,3 @@ theme_override_font_sizes/font_size = 10
 placeholder_text = "This is placeholder text for dialogue
 "
 editable = false
-indent_wrapped_lines = true

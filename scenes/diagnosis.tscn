@@ -127,7 +127,7 @@ _data = {
 &"show": SubResource("Animation_7sw3p")
 }
 
-[node name="Diagnosis" type="Control" node_paths=PackedStringArray("ask_button", "inspect_button", "diagnose_button", "back_button", "question_list", "ui_container", "character", "background")]
+[node name="Diagnosis" type="Control" node_paths=PackedStringArray("ask_button", "inspect_button", "diagnose_button", "back_button", "question_list", "ui_container", "main_action_container", "dialogue_container", "character", "background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,6 +141,8 @@ diagnose_button = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/M
 back_button = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/Back_Button")
 question_list = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
 ui_container = NodePath("Interaction")
+main_action_container = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/MainActions")
+dialogue_container = NodePath("Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
 character = NodePath("patient_image")
 background = NodePath("Background")
 
