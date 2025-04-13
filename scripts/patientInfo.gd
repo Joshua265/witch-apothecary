@@ -6,7 +6,6 @@ extends VBoxContainer
 @export var occupation_label : Label 
 @export var temperature_label : Label  
 @export var heartrate_label : Label  
-@export var history_text : TextEdit 
 
 var patient_data : Dictionary = {
 	"name": "Helena",
@@ -23,7 +22,7 @@ func _ready():
 	set_patient_info()
 
 	# Add some initial history text
-	add_history_text(patient_data["history"])
+	# add_history_text(patient_data["history"])
 
 func set_patient_info():
 	# Load patient image and update the UI
@@ -56,9 +55,9 @@ func set_patient_info():
 
 
 func add_history_text(text: String):
-	history_text.text += "\n" + text
-	print(history_text.text)
-	history_text.queue_redraw()
+	var history_label = get_node("/root/Diagnosis/Clipboard/TextureRect/frame/History") as RichTextLabel
+	history_label.text = history_label.text + "\n" + text
+	print(get_node("/root/Diagnosis/Clipboard/TextureRect/frame/History").text)
 
 func update_temperature(new_temp: String):
 	patient_data["temperature"] = new_temp

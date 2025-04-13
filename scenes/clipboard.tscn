@@ -1,20 +1,36 @@
 [gd_scene load_steps=4 format=3 uid="uid://clcfwpf777qly"]
 
-[ext_resource type="Texture2D" uid="uid://fxror64qsc4a" path="res://sprites/ui/clipboard.png" id="1_js5ej"]
+[ext_resource type="Texture2D" uid="uid://fxror64qsc4a" path="res://sprites/ui/clipboard.png" id="1_8y8vx"]
 [ext_resource type="Script" uid="uid://xcfiuweqgoqm" path="res://scripts/patientInfo.gd" id="1_u1xd4"]
+[ext_resource type="Texture2D" uid="uid://bo0nhrkfpn0wh" path="res://sprites/characters/text.png" id="3_uay1b"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_js5ej"]
-texture = ExtResource("1_js5ej")
-
-[node name="Clipboard" type="Panel"]
+[node name="Clipboard" type="Control"]
 clip_contents = true
+layout_mode = 3
+anchors_preset = 0
 offset_left = -2.0
 offset_top = -90.0
 offset_right = 466.0
 offset_bottom = 560.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_js5ej")
 
-[node name="frame" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "history_text")]
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = -278.0
+offset_right = 201.0
+offset_bottom = 279.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8y8vx")
+expand_mode = 4
+
+[node name="frame" type="VBoxContainer" parent="TextureRect" node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 8
@@ -22,10 +38,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -124.5
-offset_top = -205.5
-offset_right = 129.5
-offset_bottom = 206.5
+offset_left = -152.0
+offset_top = -206.0
+offset_right = 152.0
+offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -37,55 +53,54 @@ age_label = NodePath("Main/Patient_Info/Age")
 occupation_label = NodePath("Main/Patient_Info/Occupation")
 temperature_label = NodePath("Main/Patient_Info/Temperature")
 heartrate_label = NodePath("Main/Patient_Info/Heartrate")
-history_text = NodePath("History")
 
-[node name="Main" type="HBoxContainer" parent="frame"]
+[node name="Main" type="HBoxContainer" parent="TextureRect/frame"]
 clip_children = 2
 clip_contents = true
 layout_mode = 2
 
-[node name="Patient_Picture" type="TextureRect" parent="frame/Main"]
+[node name="Patient_Picture" type="TextureRect" parent="TextureRect/frame/Main"]
+z_index = 4
 clip_contents = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+texture = ExtResource("3_uay1b")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Patient_Info" type="VBoxContainer" parent="frame/Main"]
+[node name="Patient_Info" type="VBoxContainer" parent="TextureRect/frame/Main"]
+modulate = Color(0, 0, 0, 1)
 clip_contents = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="Name" type="Label" parent="frame/Main/Patient_Info"]
+[node name="Name" type="Label" parent="TextureRect/frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Name: x"
 
-[node name="Age" type="Label" parent="frame/Main/Patient_Info"]
+[node name="Age" type="Label" parent="TextureRect/frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Age: x"
 
-[node name="Occupation" type="Label" parent="frame/Main/Patient_Info"]
+[node name="Occupation" type="Label" parent="TextureRect/frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Occupation: x "
 
-[node name="Temperature" type="Label" parent="frame/Main/Patient_Info"]
+[node name="Temperature" type="Label" parent="TextureRect/frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Temperature: x"
 
-[node name="Heartrate" type="Label" parent="frame/Main/Patient_Info"]
+[node name="Heartrate" type="Label" parent="TextureRect/frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Heartrate: x"
 
-[node name="Blood Pressure" type="Label" parent="frame/Main/Patient_Info"]
+[node name="Blood Pressure" type="Label" parent="TextureRect/frame/Main/Patient_Info"]
 layout_mode = 2
 text = "Blood Pressure: X"
 
-[node name="History" type="TextEdit" parent="frame"]
-clip_contents = false
+[node name="History" type="RichTextLabel" parent="TextureRect/frame"]
+modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-placeholder_text = "This is placeholder text for dialogue
+text = "History:
 "
-editable = false
-indent_wrapped_lines = true

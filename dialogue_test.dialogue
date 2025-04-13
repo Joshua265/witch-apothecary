@@ -1,14 +1,15 @@
 ~ start
  
-Nathan: How many projects have you started and not finished?
-- Just a couple
-	Nathan: That's not so bad.
-- A lot
-	Nathan: Maybe you should finish one before starting another one.
-- I always finish my projects
-	Nathan: That's great!
-	Nathan: ...but how many is that?
-	- A few
-		Nathan: That's great!
-	- I haven't actually started any
-		Nathan: That's what I thought.
+Helena: Hi.
+- What's your Name?
+	Helena: My Name is Helena.
+	do get_node("/root/Diagnosis/Clipboard/TextureRect/frame").add_history_text("New info dropped")
+- Miau
+	Helena: Miau Miau
+- Miau Miau
+	Helena: Miau Miau
+	Helena: ...Miau Miau?
+	- Miau Miau
+		Helena: That's great!
+	- Miau  
+		Helena: That's what I thought.

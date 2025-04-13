@@ -145,6 +145,7 @@ character = NodePath("patient_image")
 background = NodePath("Background")
 
 [node name="Background" type="TextureRect" parent="."]
+show_behind_parent = true
 clip_contents = true
 layout_mode = 0
 offset_right = 1153.0
@@ -270,19 +271,19 @@ offset_right = 666.0
 offset_bottom = 637.0
 text = "Back"
 
-[node name="Clipboard" parent="Interaction" node_paths=PackedStringArray("clipboard", "animation_player") instance=ExtResource("5_6j6nf")]
-top_level = true
+[node name="Clipboard" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_6j6nf")]
+z_index = 100
+z_as_relative = false
 layout_mode = 0
-offset_left = -12.0
-offset_top = 531.0
-offset_right = 440.0
-offset_bottom = 1116.0
+offset_left = -5.0
+offset_top = 495.0
+offset_right = 447.0
+offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("6_xwl5y")
-clipboard = NodePath(".")
 animation_player = NodePath("AnimationPlayer")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Interaction/Clipboard"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Clipboard"]
 libraries = {
 &"": SubResource("AnimationLibrary_7sw3p")
 }
@@ -290,8 +291,10 @@ libraries = {
 [node name="Book_of_Knowledge" parent="." node_paths=PackedStringArray("bok", "animation_player", "bok_button") instance=ExtResource("9_6s7mn")]
 top_level = true
 layout_mode = 1
-offset_top = 647.0
-offset_bottom = 647.0
+offset_left = 31.0
+offset_top = 805.0
+offset_right = 31.0
+offset_bottom = 805.0
 script = ExtResource("10_c6x2f")
 bok = NodePath(".")
 animation_player = NodePath("AnimationPlayer")

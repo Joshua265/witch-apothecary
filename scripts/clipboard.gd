@@ -1,6 +1,6 @@
-extends Panel
+extends Control
 
-@export var clipboard : Panel 
+@export var clipboard : Control 
 @export var animation_player : AnimationPlayer 
 @export var hover_distance : float = 10  
 var closed_position : Vector2  
@@ -8,7 +8,7 @@ var is_open : bool = false
 var is_hovered : bool = false 
 
 func _ready():
-	closed_position = clipboard.position
+	closed_position = self.position
 	is_open = false
 	is_hovered = false
 	mouse_filter = Control.MOUSE_FILTER_STOP 
@@ -16,7 +16,7 @@ func _ready():
 func _process(delta):
 	var mouse_position = get_global_mouse_position()
 	
-	if clipboard.get_rect().has_point(mouse_position):
+	if self.get_rect().has_point(mouse_position):
 		if !is_hovered:
 			animate_hover_in()
 			is_hovered = true
