@@ -55,7 +55,10 @@ func set_patient_info():
 	heartrate_label.set("theme_override_colors/font_color", font_color)
 
 func add_history_text(text: String):
+	if text in history_text.text:
+		return 
 	history_text.text += ("\n" if history_text.text != "" else "") + text
+
 	get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer").show()
 	get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/Back_Button").show()
 
