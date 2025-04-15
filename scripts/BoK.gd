@@ -18,12 +18,38 @@ var illnesses = [
 	{"name": "Overexertion", "details": "Symptoms: Muscle soreness, fatigue, lightheadedness, occasional shortness of breath.
 		 Diagnosis: Overexertion from physical labor, possibly compounded by dehydration or fatigue.
 		 Treatment: Rest, hydration, and soothing muscle balm (made with herbs like Eucalyptus or Healing Herb). Encourage lighter activity in the future."},
-	{"name": "Illness 4", "details": "Details of Illness 4."},
-	{"name": "Illness 5", "details": "Details of Illness 5."},
-	{"name": "Illness 6", "details": "Details of Illness 6."},
-	{"name": "Illness 7", "details": "Details of Illness 7."},
-	{"name": "Illness 8", "details": "Details of Illness 8."},
-	{"name": "Illness 9", "details": "Details of Illness 9."}
+	{"name": "Dehydration", "details": "Symptoms: Dry mouth, dizziness, fainting spells, fatigue.
+ 			Tools: Pulse check, skin elasticity test, temperature check.
+ 			Diagnosis: Likely dehydration, possibly from not drinking enough water or overexertion.
+ 			Treatment: Rehydration potions or water infused with hydrating herbs like Aloe and Waterleaf. Rest and frequent small sips of water."},
+	{"name": "Sprained Ankle", "details": "Symptoms: Swelling, pain, difficulty moving.
+		 Tools: Visual inspection, gentle touch to assess pain response, temperature check.
+		 Diagnosis: A sprained ankle or minor injury to the joints.
+		 Treatment: Cooling herbal poultice made with Arnica and Ice Fern. Rest and elevate the injured limb. If swelling persists, check for broken bones using magical diagnostics (or simple x-ray equivalent)."},
+	{"name": "Sore Throat (Viral or Allergic)", "details": "Symptoms: Sore throat, mild cough, swollen lymph nodes, slight fever.
+		 Tools: Temperature check, throat inspection.
+		 Diagnosis: Viral infection or mild allergic reaction.
+		 Treatment: Soothing tea with herbs like Sage and Thyme, or a mild magic potion to relieve throat irritation. Advise rest for the voice."},
+	{"name": "Rash / Skin Irritation", "details": "Symptoms: Redness, itching, possibly bumps or welts.
+		 Tools: Skin inspection, pulse check, questioning about recent exposure to plants or chemicals.
+		 Diagnosis: Likely a mild allergic reaction, or contact with an irritant like poison ivy or a magical herb.
+		 Treatment: Herbal salve made with Calendula and Aloe, or a light magical healing touch to ease irritation."},
+	{"name": "Constipation", "details": "Symptoms: Abdominal discomfort, bloating, infrequent bowel movements.
+		 Tools: Abdominal palpation, questioning about diet.
+		 Diagnosis: Likely constipation, possibly due to diet or stress.
+		 Treatment: Gentle laxative herbs like Senna or a magical potion to encourage digestion. Suggest dietary changes (more fiber, fluids) for long-term relief."},
+	{"name": "Ear Infection", "details": "Symptoms: Ear pain, possibly fever, muffled hearing.
+		 Tools: Ear inspection with a magical diagnostic tool.
+		 Diagnosis: Likely an ear infection, possibly viral or bacterial.
+		 Treatment: Healing herbs like Garlic and Echinacea for antibacterial properties, or a magical spell to clear the infection. Recommend resting and avoiding loud noises."},
+	{"name": "Anxiety / Stress-Induced Symptoms", "details": "Symptoms: Racing heartbeat, shortness of breath, sweating, restlessness.
+		 Tools: Pulse check, deep breathing assessment.
+		 Diagnosis: Anxiety or stress-induced physical symptoms.
+		 Treatment: Calming herbs such as Chamomile or Lemon Balm. Use relaxation techniques like deep breathing or a calming magic spell. Suggest taking breaks and managing stress levels."},
+	{"name": "Sinus Infection", "details": "Symptoms: Nasal congestion, headache, pressure in the face, cough, mild fever.
+		 Tools: Temperature check, inspection of nasal passages.
+		 Diagnosis: Likely sinus infection.
+		 Treatment: Decongesting herbal remedies like Eucalyptus, and a steam bath infused with these herbs. Encourage the patient to rest and stay hydrated."}
 ]
 
 var current_page : int = 0

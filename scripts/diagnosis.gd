@@ -5,6 +5,7 @@ extends Control
 @export var diagnose_button: Button
 @export var back_button: Button
 @export var question_list: ScrollContainer
+@export var inspect_list: ScrollContainer
 @export var ui_container: Control 
 @export var main_action_container: HBoxContainer
 @export var character: TextureRect
@@ -15,6 +16,7 @@ var resource = ResourceLoader.load("res://test_dialogue.dialogue")
 func _ready():
 	# Connect buttons
 	ask_button.pressed.connect(_on_ask_pressed)
+	inspect_button.pressed.connect(_on_inspect_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	
 	for question_button in question_list.get_children():
@@ -29,10 +31,16 @@ func _on_ask_pressed():
 	main_action_container.hide()
 	question_list.show()
 	back_button.show()
+	
+func _on_inspect_pressed():
+	main_action_container.hide()
+	inspect_list.show()
+	back_button.show()
 
 func _on_back_pressed():
 	main_action_container.show()
 	question_list.hide()
+	inspect_list.hide()
 	back_button.hide()
 
 func _on_question_selected(next_id:String):
