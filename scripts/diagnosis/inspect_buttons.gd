@@ -21,19 +21,11 @@ func _generate_inspect_buttons():
 #todo: Handle for multiple patients
 func _on_pulse_check_pressed():
 	get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_heartrate("new temp")
-	 # remove a action
-	get_node("/root/Diagnosis/ActionCounter").use_action()
-
 	
 func _on_temperature_check_pressed():
 	get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_temperature("new temp")
-	 # remove a action
-	get_node("/root/Diagnosis/ActionCounter").use_action()
-
 
 #todo: Add breathing section in clipboard? or just use add info
 func _on_breathing_check_pressed():
 	print("Breathing Check: Using magical wind instrument to assess breath and detect irregularities.")
 	#get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_breathing("Info")
-	 # remove a action
-	get_node("/root/Diagnosis/ActionCounter").use_action()

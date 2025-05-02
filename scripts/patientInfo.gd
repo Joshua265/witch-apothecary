@@ -45,7 +45,7 @@ func set_patient_info():
 	temperature_label.theme= theme_override
 	heartrate_label.theme= theme_override
 
-
+#todo: Not sure if best idea to remove action here honestly but oh well at least in one place
 func add_history_text(text: String):
 	print("Adding history text: ", text)
 
@@ -63,11 +63,22 @@ func add_history_text(text: String):
 		return
 
 	history_text.text += ("\n" if history_text.text != "" else "") + text
+	# remove a action
+	get_node("/root/Diagnosis/ActionCounter").use_action()
 
 func update_temperature(new_temp: String):
+	if  patient_data["temperature"] == new_temp:
+		return
+		
 	patient_data["temperature"] = new_temp
 	temperature_label.text = "Temperature: " + new_temp 
+	# remove a action
+	get_node("/root/Diagnosis/ActionCounter").use_action()
 
 func update_heartrate(new_heartrate: String):
+	if patient_data["heartrate"] == new_heartrate:
+		return 
 	patient_data["heartrate"] = new_heartrate
 	heartrate_label.text = "Heart Rate: " + new_heartrate 
+	# remove a action
+	get_node("/root/Diagnosis/ActionCounter").use_action()

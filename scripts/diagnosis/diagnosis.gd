@@ -51,7 +51,5 @@ func _on_question_selected(next_id:String):
 	clipboard.hide()
 	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, next_id)
 	
-	 # remove a action
-	get_node("/root/Diagnosis/ActionCounter").use_action()
 
 	
