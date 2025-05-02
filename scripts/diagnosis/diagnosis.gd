@@ -19,7 +19,7 @@ func _ready():
 	ask_button.pressed.connect(_on_ask_pressed)
 	inspect_button.pressed.connect(_on_inspect_pressed)
 	back_button.pressed.connect(_on_back_pressed)
-	
+
 	for question_button in question_list.get_children():
 		if question_button is Button:
 			question_button.pressed.connect(_on_question_selected.bind(question_button.text))
@@ -38,7 +38,7 @@ func _on_inspect_pressed():
 	main_action_container.hide()
 	inspect_list.show()
 	back_button.show()
-
+	
 func _on_back_pressed():
 	main_action_container.show()
 	question_list.hide()
@@ -50,3 +50,8 @@ func _on_question_selected(next_id:String):
 	back_button.hide()
 	clipboard.hide()
 	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, next_id)
+	
+	 # remove a action
+	get_node("/root/Diagnosis/ActionCounter").use_action()
+
+	

@@ -1,10 +1,9 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cg0cp5jantdbd"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cg0cp5jantdbd"]
 
-[ext_resource type="FontFile" uid="uid://c6nec1ej45ox7" path="res://fonts/Gorck Helozat Trial.ttf" id="1_xlh88"]
-[ext_resource type="FontFile" uid="uid://b7cp8m7vt3qlv" path="res://fonts/Gorck Helozat Trial.otf" id="2_ub4iq"]
+[ext_resource type="FontFile" uid="uid://cd2udo5msdo" path="res://fonts/Tagesschrift-Regular.ttf" id="1_xlh88"]
 
 [resource]
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/fonts/font = ExtResource("1_xlh88")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
-RichTextLabel/fonts/normal_font = ExtResource("2_ub4iq")
+RichTextLabel/fonts/normal_font = ExtResource("1_xlh88")
