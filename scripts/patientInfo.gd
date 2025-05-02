@@ -34,8 +34,7 @@ func set_patient_info():
 	temperature_label.text = "Temperature: " + patient_data["temperature"]
 	heartrate_label.text = "Heart Rate: " + patient_data["heartrate"]
 
-	var dynamic_font = FontFile.new()
-	#dynamic_font.font_data = load("res://path_to_your_font.ttf")
+	#todo: Text size- if you can handle this with global please remove here
 	var theme_override = Theme.new()
 	theme_override.set_font_size("font_size", "Label", 10)
 
@@ -46,13 +45,6 @@ func set_patient_info():
 	temperature_label.theme= theme_override
 	heartrate_label.theme= theme_override
 
-	# Set font color for all labels
-	var font_color = Color.BLACK  # Set the desired font color
-	name_label.set("theme_override_colors/font_color", font_color)
-	age_label.set("theme_override_colors/font_color", font_color)
-	occupation_label.set("theme_override_colors/font_color", font_color)
-	temperature_label.set("theme_override_colors/font_color", font_color)
-	heartrate_label.set("theme_override_colors/font_color", font_color)
 
 func add_history_text(text: String):
 	print("Adding history text: ", text)
@@ -60,8 +52,7 @@ func add_history_text(text: String):
 	var dialogue_scroll = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
 	var back_button = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Back_Button")
 	var clipboard = get_node_or_null("/root/Diagnosis/Interaction/Clipboard")
-	print("back_button: ", back_button)
-
+	
 	if dialogue_scroll and back_button and clipboard:
 		dialogue_scroll.show()
 		back_button.show()

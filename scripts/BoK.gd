@@ -84,8 +84,8 @@ func update_page():
 		var illness = illnesses[illness_index]
 
 		# Create name label
-		var name_label = create_label(illness["name"], "res://fonts/Gorck Helozat Trial.ttf", 24, true)
-		var details_label = create_label(illness["details"], "res://fonts/Gorck Helozat Trial.ttf", 12)
+		var name_label = create_label(illness["name"],24, true)
+		var details_label = create_label(illness["details"], 12)
 
 		# Determine the panel to add elements to
 		var target_panel = left_panel if i < 3 else right_panel
@@ -103,17 +103,12 @@ func update_page():
 	right_button.visible = (current_page * 6) + 6 < illnesses.size()
 
 # Function to create and style a label
-func create_label(text: String, font_path: String, font_size: int, bold: bool = false) -> Label:
+func create_label(text: String,font_size: int, bold: bool = false) -> Label:
 	var label = Label.new()
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	label.set("theme_override_colors/font_color", Color.BLACK)  
-
-	var font = FontFile.new()
-	font.font_data = load(font_path)
 
 	var theme_override = Theme.new()
-	theme_override.set_font("font", "Label", font)
 	theme_override.set_font_size("font_size", "Label", font_size)
 
 	label.theme = theme_override
