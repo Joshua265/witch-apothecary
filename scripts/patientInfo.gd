@@ -55,16 +55,23 @@ func set_patient_info():
 	heartrate_label.set("theme_override_colors/font_color", font_color)
 
 func add_history_text(text: String):
-	var dialogue_scroll = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
-	var back_button = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/Back_Button")
+	print("Adding history text: ", text)
 
-	if dialogue_scroll and back_button:
+	var dialogue_scroll = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
+	var back_button = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Back_Button")
+	var clipboard = get_node_or_null("/root/Diagnosis/Interaction/Clipboard")
+	print("back_button: ", back_button)
+
+	if dialogue_scroll and back_button and clipboard:
 		dialogue_scroll.show()
 		back_button.show()
-	if text in history_text.text:
-		return 
-	history_text.text += ("\n" if history_text.text != "" else "") + text
+		clipboard.show()
 
+	if text in history_text.text:
+		print("Text already in history, skipping.")
+		return
+
+	history_text.text += ("\n" if history_text.text != "" else "") + text
 
 func update_temperature(new_temp: String):
 	patient_data["temperature"] = new_temp

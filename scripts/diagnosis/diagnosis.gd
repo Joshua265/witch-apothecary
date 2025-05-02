@@ -10,6 +10,7 @@ extends Control
 @export var main_action_container: HBoxContainer
 @export var character: TextureRect
 @export var background: TextureRect
+@export var clipboard: Panel
 
 var resource = ResourceLoader.load("res://test_dialogue.dialogue")
 
@@ -25,6 +26,7 @@ func _ready():
 
 	# Initially hide irrelevant UI elements
 	question_list.hide()
+	inspect_list.hide()
 	back_button.hide()
 
 func _on_ask_pressed():
@@ -46,4 +48,5 @@ func _on_back_pressed():
 func _on_question_selected(next_id:String):
 	question_list.hide()
 	back_button.hide()
+	clipboard.hide()
 	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, next_id)
