@@ -8,49 +8,78 @@ extends TextureRect
 
 signal back_pressed  # Define a signal
 
+const ILLNESSES_PER_PAGE = 2
+
 var illnesses = [
-	{"name": "Simple Cold   Flu", "details": "Symptoms: Congestion, headache, fatigue, mild fever.
- 		Diagnosis: Likely a simple cold or flu.
- 		Treatment: Herbal remedy like Lavender or Thornroot to reduce fever and clear congestion. A magical sleep potion to speed up recovery."},
-	{"name": "Food Poisoning", "details": "Symptoms: Nausea, stomach ache, dizziness, occasional vomiting
- 		Diagnosis: Likely food poisoning, possibly due to a toxic ingredient or spoiled food.
- 		Treatment: Healing herbs such as Juniper to soothe the stomach, and a detoxifying potion to cleanse the system."},
-	{"name": "Overexertion", "details": "Symptoms: Muscle soreness, fatigue, lightheadedness, occasional shortness of breath.
-		 Diagnosis: Overexertion from physical labor, possibly compounded by dehydration or fatigue.
-		 Treatment: Rest, hydration, and soothing muscle balm (made with herbs like Eucalyptus or Healing Herb). Encourage lighter activity in the future."},
-	{"name": "Dehydration", "details": "Symptoms: Dry mouth, dizziness, fainting spells, fatigue.
- 			Tools: Pulse check, skin elasticity test, temperature check.
- 			Diagnosis: Likely dehydration, possibly from not drinking enough water or overexertion.
- 			Treatment: Rehydration potions or water infused with hydrating herbs like Aloe and Waterleaf. Rest and frequent small sips of water."},
-	{"name": "Sprained Ankle", "details": "Symptoms: Swelling, pain, difficulty moving.
-		 Tools: Visual inspection, gentle touch to assess pain response, temperature check.
-		 Diagnosis: A sprained ankle or minor injury to the joints.
-		 Treatment: Cooling herbal poultice made with Arnica and Ice Fern. Rest and elevate the injured limb. If swelling persists, check for broken bones using magical diagnostics (or simple x-ray equivalent)."},
-	{"name": "Sore Throat (Viral or Allergic)", "details": "Symptoms: Sore throat, mild cough, swollen lymph nodes, slight fever.
-		 Tools: Temperature check, throat inspection.
-		 Diagnosis: Viral infection or mild allergic reaction.
-		 Treatment: Soothing tea with herbs like Sage and Thyme, or a mild magic potion to relieve throat irritation. Advise rest for the voice."},
-	{"name": "Rash / Skin Irritation", "details": "Symptoms: Redness, itching, possibly bumps or welts.
-		 Tools: Skin inspection, pulse check, questioning about recent exposure to plants or chemicals.
-		 Diagnosis: Likely a mild allergic reaction, or contact with an irritant like poison ivy or a magical herb.
-		 Treatment: Herbal salve made with Calendula and Aloe, or a light magical healing touch to ease irritation."},
-	{"name": "Constipation", "details": "Symptoms: Abdominal discomfort, bloating, infrequent bowel movements.
-		 Tools: Abdominal palpation, questioning about diet.
-		 Diagnosis: Likely constipation, possibly due to diet or stress.
-		 Treatment: Gentle laxative herbs like Senna or a magical potion to encourage digestion. Suggest dietary changes (more fiber, fluids) for long-term relief."},
-	{"name": "Ear Infection", "details": "Symptoms: Ear pain, possibly fever, muffled hearing.
-		 Tools: Ear inspection with a magical diagnostic tool.
-		 Diagnosis: Likely an ear infection, possibly viral or bacterial.
-		 Treatment: Healing herbs like Garlic and Echinacea for antibacterial properties, or a magical spell to clear the infection. Recommend resting and avoiding loud noises."},
-	{"name": "Anxiety / Stress-Induced Symptoms", "details": "Symptoms: Racing heartbeat, shortness of breath, sweating, restlessness.
-		 Tools: Pulse check, deep breathing assessment.
-		 Diagnosis: Anxiety or stress-induced physical symptoms.
-		 Treatment: Calming herbs such as Chamomile or Lemon Balm. Use relaxation techniques like deep breathing or a calming magic spell. Suggest taking breaks and managing stress levels."},
-	{"name": "Sinus Infection", "details": "Symptoms: Nasal congestion, headache, pressure in the face, cough, mild fever.
-		 Tools: Temperature check, inspection of nasal passages.
-		 Diagnosis: Likely sinus infection.
-		 Treatment: Decongesting herbal remedies like Eucalyptus, and a steam bath infused with these herbs. Encourage the patient to rest and stay hydrated."}
-]
+  {
+	"name": "Simple Cold/Flu",
+	"details": "[i]Symptoms[/i]: Congestion, headache, fatigue, and mild fever.\n" +
+			   "[i]Diagnosis[/i]: Likely a viral upper respiratory infection (common cold or influenza).\n" +
+			   "[i]Treatment[/i]: Supportive care with rest, hydration, and herbal supplements such as elderberry extract, echinacea, pelargonium sidoides extract, and warming ginger/garlic teas."
+  },
+  {
+	"name": "Food Poisoning",
+	"details": "[i]Symptoms[/i]: Nausea, abdominal pain, dizziness, and occasional vomiting.\n" +
+			   "[i]Diagnosis[/i]: Likely due to ingestion of contaminated food resulting in foodborne illness.\n" +
+			   "[i]Treatment[/i]: Supportive care with oral rehydration and electrolyte replacement; complementary options include ginger tea (for nausea), peppermint tea (to ease stomach discomfort), and chamomile tea (to soothe gastrointestinal irritation)."
+  },
+  {
+	"name": "Overexertion",
+	"details": "[i]Symptoms[/i]: Muscle soreness, fatigue, lightheadedness, and occasional shortness of breath.\n" +
+			   "[i]Diagnosis[/i]: Likely related to overexertion compounded by dehydration.\n" +
+			   "[i]Treatment[/i]: Rest and increased fluid intake; complementary herbal treatments include topical arnica montana cream to reduce pain and inflammation, and ginger (via massage oil or compress) to ease muscle soreness."
+  },
+  {
+	"name": "Dehydration",
+	"details": "[i]Symptoms[/i]: Dry mouth, dizziness, episodes of fainting, and fatigue.\n" +
+			   "[i]Diagnosis[/i]: Likely caused by insufficient fluid intake or excessive fluid loss (e.g., from exertion).\n" +
+			   "[i]Treatment[/i]: Prompt rehydration with fluids and electrolytes; consider hydrating herbal options like aloe vera juice to provide both water and gentle gastrointestinal soothing."
+  },
+  {
+	"name": "Sprained Ankle",
+	"details": "[i]Symptoms[/i]: Swelling, pain, and difficulty in movement of the ankle.\n" +
+			   "[i]Diagnosis[/i]: Likely an acute sprain involving the ankle ligaments.\n" +
+			   "[i]Treatment[/i]: Begin with RICE therapy (rest, ice, compression, elevation) and complement with topical arnica montana cream and cooled chamomile tea compresses to reduce inflammation."
+  },
+  {
+	"name": "Sore Throat (Viral or Allergic)",
+	"details": "[i]Symptoms[/i]: Sore throat, mild cough, swollen lymph nodes, and slight fever.\n" +
+			   "[i]Diagnosis[/i]: Likely due to a viral infection or mild allergic reaction.\n" +
+			   "[i]Treatment[/i]: Support with warm saltwater gargles and fluid intake; herbal options include teas made from sage and thyme (for their antimicrobial and anti-inflammatory properties), marshmallow root or slippery elm (to soothe mucous membranes), licorice root, and chamomile tea."
+  },
+  {
+	"name": "Rash / Skin Irritation",
+	"details": "[i]Symptoms[/i]: Redness, itching, and possible bumps or welts on the skin.\n" +
+			   "[i]Diagnosis[/i]: Likely a localized allergic reaction or contact irritation.\n" +
+			   "[i]Treatment[/i]: Topical application of herbal preparations such as calendula officinalis ointment, aloe vera gel, or chamomile extract to reduce inflammation and promote healing."
+  },
+  {
+	"name": "Constipation",
+	"details": "[i]Symptoms[/i]: Abdominal discomfort, bloating, and infrequent or difficult bowel movements.\n" +
+			   "[i]Diagnosis[/i]: Likely related to low dietary fiber, inadequate fluid intake, or stress-related changes in bowel motility.\n" +
+			   "[i]Treatment[/i]: Increase dietary fiber and fluids; for short-term relief, use herbal stimulant laxatives such as senna (Senna alexandrina) to promote bowel movements."
+  },
+  {
+	"name": "Ear Infection",
+	"details": "[i]Symptoms[/i]: Ear pain, mild fever, and muffled hearing.\n" +
+			   "[i]Diagnosis[/i]: Likely acute otitis media or outer ear infection of viral or bacterial origin.\n" +
+			   "[i]Treatment[/i]: Standard management includes maintaining ear hygiene and pain control; complementary herbal options may include carefully prepared garlic-mullein oil drops to leverage antimicrobial properties, and (if appropriate) diluted tea tree oil preparations. Use these remedies only under professional guidance."
+  },
+  {
+	"name": "Anxiety / Stress-Induced Symptoms",
+	"details": "[i]Symptoms[/i]: Racing heartbeat, shortness of breath, sweating, and restlessness.\n" +
+			   "[i]Diagnosis[/i]: Symptoms consistent with anxiety or stress-related conditions.\n" +
+			   "[i]Treatment[/i]: Along with standard stress management practices (e.g., deep breathing, mindfulness), consider herbal support such as lemon balm tea, chamomile, valerian root, and optionally passionflower or lavender (via teas or aromatherapy) to promote relaxation."
+  },
+  {
+	"name": "Sinus Infection",
+	"details": "[i]Symptoms[/i]: Nasal congestion, headache, facial pressure, cough, and mild fever.\n" +
+			   "[i]Diagnosis[/i]: Likely acute sinusitis, commonly of viral origin.\n" +
+			   "[i]Treatment[/i]: Supportive care with hydration, rest, and steam inhalation; complementary herbal therapies include the use of eucalyptus oil (in steam inhalation), peppermint oil (for its cooling decongestant effects), and thyme tea for its antimicrobial support."
+  }
+];
+
+
 
 var current_page : int = 0
 var illness_index  = 0
@@ -60,9 +89,9 @@ func _ready():
 	right_button.pressed.connect(_on_right_button_pressed)
 	close_button.pressed.connect(_on_close_button_pressed)
 	
-	var texture = preload("res://sprites/ui/arrow.png")
-	left_button.texture_normal = texture
-	right_button.texture_normal = texture
+	var button_texture = preload("res://sprites/ui/arrow.png")
+	left_button.texture_normal = button_texture
+	right_button.texture_normal = button_texture
 	
 	right_button.flip_h = true
 
@@ -78,7 +107,7 @@ func update_page():
 		child.queue_free()
 
 	# Add illnesses to left and right panels
-	for i in range(0,6):
+	for i in range(0,ILLNESSES_PER_PAGE * 2):
 		if illness_index >= illnesses.size():
 			break
 		var illness = illnesses[illness_index]
@@ -88,7 +117,7 @@ func update_page():
 		var details_label = create_label(illness["details"], "res://fonts/Gorck Helozat Trial.ttf", 12)
 
 		# Determine the panel to add elements to
-		var target_panel = left_panel if i < 3 else right_panel
+		var target_panel = left_panel if i < ILLNESSES_PER_PAGE else right_panel
 		
 		# Adding the elements
 		target_panel.add_child(name_label)
@@ -100,21 +129,27 @@ func update_page():
 	
 	# Button visibility
 	left_button.visible = current_page > 0  
-	right_button.visible = (current_page * 6) + 6 < illnesses.size()
+	right_button.visible = (current_page * 2 * ILLNESSES_PER_PAGE) + (2 * ILLNESSES_PER_PAGE) < illnesses.size()
 
 # Function to create and style a label
-func create_label(text: String, font_path: String, font_size: int, bold: bool = false) -> Label:
-	var label = Label.new()
-	label.text = text
+func create_label(text: String, font_path: String, font_size: int, bold: bool = false) -> RichTextLabel:
+	var label = RichTextLabel.new()
+	label.bbcode_enabled = true
+	if bold:
+		var bold_format_string = "[b]%s[/b]"
+		label.bbcode_text = bold_format_string % text
+	else:
+		label.bbcode_text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	label.set("theme_override_colors/font_color", Color.BLACK)  
+	label.fit_content = true
 
 	var font = FontFile.new()
 	font.font_data = load(font_path)
 
 	var theme_override = Theme.new()
-	theme_override.set_font("font", "Label", font)
-	theme_override.set_font_size("font_size", "Label", font_size)
+	theme_override.set_color("default_color", "RichTextLabel", Color.BLACK)
+	theme_override.set_font("normal_font", "RichTextLabel", font)
+	theme_override.set_font_size("font_size", "RichTextLabel", font_size)
 
 	label.theme = theme_override
 	return label
@@ -123,7 +158,7 @@ func create_label(text: String, font_path: String, font_size: int, bold: bool = 
 func _on_left_button_pressed():
 	current_page -= 1
 	#reset index
-	illness_index =current_page * 6
+	illness_index =current_page * 2 * ILLNESSES_PER_PAGE
 	update_page()
 
 # Function to go to the next page
