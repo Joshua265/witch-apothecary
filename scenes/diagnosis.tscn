@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cbjahp7gaioja"]
+[gd_scene load_steps=31 format=3 uid="uid://cbjahp7gaioja"]
 
 [ext_resource type="Script" uid="uid://bpbrqtsix38iv" path="res://scripts/diagnosis/diagnosis.gd" id="1_hkpsx"]
 [ext_resource type="Texture2D" uid="uid://ho45arpf6p6j" path="res://sprites/backgrounds/bg.png" id="2_6s7mn"]
@@ -14,10 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://38kl03rt12nu" path="res://sprites/ui/action.png" id="12_4p3gb"]
 [ext_resource type="Script" uid="uid://bun7nf0mm1ist" path="res://scripts/diagnosis/action_counter.gd" id="12_7sw3p"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_7sw3p"]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4p3gb"]
-atlas = SubResource("ImageTexture_7sw3p")
+atlas = ExtResource("4_4p3gb")
+region = Rect2(519, 62, 346, 352)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hmhuk"]
 texture = SubResource("AtlasTexture_4p3gb")
