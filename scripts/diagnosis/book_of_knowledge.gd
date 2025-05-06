@@ -2,7 +2,7 @@ extends Control
 
 @export var bok : Control
 @export var animation_player : AnimationPlayer 
-@export var bok_button: TextureButton
+@export var bok_button: Button
 
 var book_content_instance 
 

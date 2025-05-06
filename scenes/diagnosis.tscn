@@ -1,9 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://cbjahp7gaioja"]
+[gd_scene load_steps=32 format=3 uid="uid://cbjahp7gaioja"]
 
 [ext_resource type="Script" uid="uid://bpbrqtsix38iv" path="res://scripts/diagnosis/diagnosis.gd" id="1_hkpsx"]
 [ext_resource type="Texture2D" uid="uid://ho45arpf6p6j" path="res://sprites/backgrounds/bg.png" id="2_6s7mn"]
 [ext_resource type="Script" uid="uid://vs8yxv3m6ydw" path="res://scripts/diagnosis/patient.gd" id="2_lmtnd"]
-[ext_resource type="Texture2D" uid="uid://rvsbbgkn3xdp" path="res://sprites/ui/book-button.png" id="3_m7pwg"]
+[ext_resource type="Texture2D" uid="uid://rvsbbgkn3xdp" path="res://sprites/ui/book-button.png" id="4_4p3gb"]
 [ext_resource type="PackedScene" uid="uid://clcfwpf777qly" path="res://scenes/clipboard.tscn" id="5_6j6nf"]
 [ext_resource type="Texture2D" uid="uid://w2qxs2v1lcdc" path="res://sprites/ui/action_buttons.png" id="5_c6x2f"]
 [ext_resource type="Script" uid="uid://cuisabtlexv1k" path="res://scripts/diagnosis/question_list.gd" id="6_57s40"]
@@ -11,7 +11,20 @@
 [ext_resource type="Script" uid="uid://sy8m8vsqi2o0" path="res://scripts/diagnosis/inspect_buttons.gd" id="7_c6x2f"]
 [ext_resource type="PackedScene" uid="uid://ddh0by5vpm5c2" path="res://scenes/book_of_knowledge.tscn" id="9_6s7mn"]
 [ext_resource type="Script" uid="uid://lsy1wjlw2y0l" path="res://scripts/diagnosis/book_of_knowledge.gd" id="10_c6x2f"]
+[ext_resource type="Texture2D" uid="uid://38kl03rt12nu" path="res://sprites/ui/action.png" id="12_4p3gb"]
 [ext_resource type="Script" uid="uid://bun7nf0mm1ist" path="res://scripts/diagnosis/action_counter.gd" id="12_7sw3p"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_7sw3p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4p3gb"]
+atlas = SubResource("ImageTexture_7sw3p")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hmhuk"]
+texture = SubResource("AtlasTexture_4p3gb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d5vsc"]
+texture = ExtResource("4_4p3gb")
+region_rect = Rect2(60, 48, 346, 352)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6s7mn"]
 
@@ -193,19 +206,13 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="BoK_button" type="TextureButton" parent="Interaction/Top_Right_Buttons"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -349.0
-offset_top = -2.0
-offset_right = 111.0
-offset_bottom = 458.0
-grow_horizontal = 0
-scale = Vector2(0.2, 0.2)
-pivot_offset = Vector2(300, 0)
-tooltip_text = "Book of Knowledge"
-texture_normal = ExtResource("3_m7pwg")
+[node name="BoK_button" type="Button" parent="Interaction/Top_Right_Buttons"]
+offset_left = 1029.0
+offset_top = 22.0
+offset_right = 1096.0
+offset_bottom = 90.0
+theme_override_styles/hover = SubResource("StyleBoxTexture_hmhuk")
+theme_override_styles/normal = SubResource("StyleBoxTexture_d5vsc")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Interaction"]
 clip_contents = false
@@ -321,14 +328,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_6q0qn")
 }
 
-[node name="ActionCounter" type="Node" parent="." node_paths=PackedStringArray("action_text")]
+[node name="ActionCounter" type="Node" parent="." node_paths=PackedStringArray("action_container")]
 script = ExtResource("12_7sw3p")
-action_text = NodePath("Temporary_Action_Text")
+action_container = NodePath("HBoxContainer")
+action_icon_texture = ExtResource("12_4p3gb")
 
-[node name="Temporary_Action_Text" type="Label" parent="ActionCounter"]
-offset_right = 312.0
-offset_bottom = 61.0
-text = "Remaining Actions: x out of  y"
+[node name="HBoxContainer" type="HBoxContainer" parent="ActionCounter"]
+custom_minimum_size = Vector2(50, 0)
+offset_right = 286.0
+offset_bottom = 41.0
+size_flags_stretch_ratio = 0.22
 
 [connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button" to="." method="_on_ask_pressed"]
 [connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Inspect_Button" to="." method="_on_inspect_pressed"]
