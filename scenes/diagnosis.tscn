@@ -341,4 +341,5 @@ size_flags_stretch_ratio = 0.22
 
 [connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button" to="." method="_on_ask_pressed"]
 [connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Inspect_Button" to="." method="_on_inspect_pressed"]
+[connection signal="pressed" from="Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Diagnose_Button" to="." method="_on_diagnose_pressed"]
 [connection signal="question_selected" from="Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList" to="." method="_on_question_selected"]

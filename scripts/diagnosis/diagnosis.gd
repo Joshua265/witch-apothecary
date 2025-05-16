@@ -19,6 +19,7 @@ func _ready():
 	ask_button.pressed.connect(_on_ask_pressed)
 	inspect_button.pressed.connect(_on_inspect_pressed)
 	back_button.pressed.connect(_on_back_pressed)
+	diagnose_button.pressed.connect(_on_diagnose_pressed)
 
 	for question_button in question_list.get_children():
 		if question_button is Button:
@@ -51,5 +52,7 @@ func _on_question_selected(next_id:String):
 	clipboard.hide()
 	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, next_id)
 	
+func _on_diagnose_pressed():
+	print("Diagnose pressed")
 
 	
