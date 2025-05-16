@@ -53,6 +53,9 @@ func _on_question_selected(next_id:String):
 	var dialogue_line = await DialogueManager.show_dialogue_balloon(resource, next_id)
 	
 func _on_diagnose_pressed():
-	print("Diagnose pressed")
-
+	#todo: Prolly better way to do this but I'm tired oof
+	get_node("/root/Diagnosis/Book_of_Knowledge/TextureRect").diagnose_mode = true
+	#todo: acting weird, not sure if we should call ready instead or make sep function?
+	get_node("/root/Diagnosis/Book_of_Knowledge/TextureRect").update_page()
+	get_node("/root/Diagnosis/Book_of_Knowledge")._on_bok_pressed()
 	

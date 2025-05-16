@@ -5,10 +5,18 @@ extends TextureRect
 @export var left_panel : VBoxContainer
 @export var right_panel : VBoxContainer
 @export var close_button: TextureButton
+@export var popup : Panel
+@export var popup_text : Label
+@export var popup_yes_button: Button
+@export var popup_no_button: Button
 
 signal back_pressed  # Define a signal
 
 const ILLNESSES_PER_PAGE = 2
+var current_page : int = 0
+var illness_index  = 0
+#todo: maybe we should move popup stuff to its own script
+var diagnose_mode = false
 
 var illnesses = [
   {
@@ -79,12 +87,10 @@ var illnesses = [
   }
 ];
 
-
-
-var current_page : int = 0
-var illness_index  = 0
-
 func _ready():
+	#hide popup initially
+	popup.hide()
+	
 	left_button.pressed.connect(_on_left_button_pressed)
 	right_button.pressed.connect(_on_right_button_pressed)
 	close_button.pressed.connect(_on_close_button_pressed)
@@ -113,8 +119,12 @@ func update_page():
 		var illness = illnesses[illness_index]
 
 		# Create name label
-		var name_label = create_label(illness["name"],24, true)
+		#todo: Only name is pickable right now- should we make a button, that just has both as their text?
+		#var name_label = create_label(illness["name"],24, true)
+		var name_label= create_label_button(illness["name"], 24, true)
 		var details_label = create_label(illness["details"], 12)
+		#var details_label = create_label_button(illness["details"], 12)
+
 
 		# Determine the panel to add elements to
 		var target_panel = left_panel if i < ILLNESSES_PER_PAGE else right_panel
@@ -131,7 +141,43 @@ func update_page():
 	left_button.visible = current_page > 0  
 	right_button.visible = (current_page * 2 * ILLNESSES_PER_PAGE) + (2 * ILLNESSES_PER_PAGE) < illnesses.size()
 
-# Function to create and style a label
+func create_label_button(text: String, font_size: int, bold: bool = false) -> Button:
+	var button = Button.new()
+	button.text = text
+	button.flat = true
+	button.focus_mode = Control.FOCUS_NONE
+	button.autowrap_mode = true
+	if !diagnose_mode:
+		button.disabled = true
+
+	# Make it fill horizontally
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+	# Do we need this?
+	button.custom_minimum_size.y = 30
+
+	# Theme override
+	var theme_override = Theme.new()
+	var font = FontFile.new()
+	font.font_data = load("res://fonts/Gorck Helozat Trial.ttf")
+	# Set font size override
+	button.theme = null
+	button.add_theme_font_size_override("font_size", font_size)
+	button.add_theme_color_override("color", Color.BLACK)
+	theme_override.set_font("font", "Button", font)
+	#theme_override.set_color("font","Button",Color.BLACK) 'todo: how to set it to black? maybe make a theme and just set it here instead of all of this!
+	
+	# Padding to behave like a label
+	button.add_theme_constant_override("content_margin_left", 4)
+	button.add_theme_constant_override("content_margin_right", 4)
+	button.add_theme_constant_override("content_margin_top", 2)
+	button.add_theme_constant_override("content_margin_bottom", 2)
+
+	button.pressed.connect(func(): _on_illness_pressed(button.text))
+	return button
+	
+#Function to create and style a label
 func create_label(text: String,font_size: int, bold: bool = false) -> Label:
 	var label = Label.new()
 	label.text = text
@@ -157,3 +203,15 @@ func _on_right_button_pressed():
 	
 func _on_close_button_pressed():
 	back_pressed.emit()  # Emit the signal when the button is pressed
+
+func _on_illness_pressed(illnessName:String):
+	popup.show()
+	popup_text.text = "Do you want to confirm?" + illnessName
+
+func _on_confirm_diagnosis() -> void:
+	diagnose_mode = false
+	update_page()
+	# todo: close BoK again or move on to cutscene which would hide whole Diagnosis Node anyways!
+	
+func _on_no_pressed() -> void:
+	popup.hide()

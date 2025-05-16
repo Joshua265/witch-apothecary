@@ -19,3 +19,7 @@ func _on_bok_pressed():
 
 func _on_back_button_pressed():
 	animation_player.play_backwards("show")
+	#todo: Prolly souldnt do this here but oof
+	get_node("/root/Diagnosis/Book_of_Knowledge/TextureRect").diagnose_mode = false
+	#todo: acting weird, not sure if we should call ready instead or make sep function?
+	get_node("/root/Diagnosis/Book_of_Knowledge/TextureRect").update_page()
