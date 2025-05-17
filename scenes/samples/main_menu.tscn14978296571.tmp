@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="4_05n6c"]
 [ext_resource type="Script" uid="uid://c0jcandn6gcs5" path="res://scripts/ui/audio_menu.gd" id="4_mjs4o"]
 [ext_resource type="Script" uid="uid://dcq40oleurf78" path="res://scripts/ui/viewport_container.gd" id="6_8dq4u"]
-[ext_resource type="PackedScene" uid="uid://bjwefw4x3ecis" path="res://scenes/Cutscene.tscn" id="8_qlfhf"]
+[ext_resource type="PackedScene" uid="uid://bfkv6y5wxs0tv" path="res://scenes/cutscene.tscn" id="8_qlfhf"]
 [ext_resource type="PackedScene" uid="uid://ckgaebvstccxe" path="res://scenes/common/ui/load_button.tscn" id="9_ijoqn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ve7hb"]

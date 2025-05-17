@@ -1,7 +1,16 @@
 ~ start
 do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/text.png", get_node("/root/Cutscene").get_position_from_keyword("center"))
-    Witch: Can you tell me more about the fatigue? How long have you been feeling this way?
-    Helena: It all started a couple of weeks ago. I’ve been feeling drained, especially after work. I just can’t shake off the tiredness.
-    Witch: How long has the fatigue been persistent? Did anything change recently to make it worse?
-    Helena: It's been this way for a few weeks now, and I think it's been getting worse with my long hours of work. I’m always sewing and don’t really take breaks.
-    => END
+On a rainy night, the wind howled through the crooked trees of Eldervale.
+At the edge of the town, where the forest met the fog, an old hut sat hunched beneath the the thicketh of the forest.
+And where usually no soul dared to touch, a single candle flickered inside. Yes, the once vacant hut, now had a resident, that the townsfolk yet to had warm up to.
+It all started with a desperate knock sounded at the witch's door.
+Edgar: Please...we need your help. My wife- she not well. The doctor in town is too costly for the likes of us.
+Witch: Come closer, both of you. No need to stand in the rain.
+Helena: I'm sorry to trouble you, ma'am… but I… I haven’t been feeling right.
+Witch: Worry not, child. Tell me, what troubles you?
+Helena: It started a few weeks back. I’ve been so tired… I come home from work and I feel like my bones weigh a hundred pounds.
+Witch: I see. How long have you felt this way? Has it worsened?
+Helena: Yes. The longer the days, the worse it gets. I sew all day, barely stopping, and by nightfall, it’s like my head’s splitting and the room won’t stay still.
+Edgar: And her pulse… it races, even when she’s resting. I’ve seen it. I can’t bear to watch her waste away.
+Witch: I understand. Please — sit down over here, Helena. Let’s have a closer look.
+  => END
