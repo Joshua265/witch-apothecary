@@ -1,0 +1,7 @@
+~ start
+do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/text.png", get_node("/root/Cutscene").get_position_from_keyword("center"))
+    Witch: Can you tell me more about the fatigue? How long have you been feeling this way?
+    Helena: It all started a couple of weeks ago. I’ve been feeling drained, especially after work. I just can’t shake off the tiredness.
+    Witch: How long has the fatigue been persistent? Did anything change recently to make it worse?
+    Helena: It's been this way for a few weeks now, and I think it's been getting worse with my long hours of work. I’m always sewing and don’t really take breaks.
+    => END
