@@ -26,7 +26,7 @@ func trigger_scene_changed_signal():
 	get_tree().tree_changed.disconnect(trigger_scene_changed_signal)
 	
 # added by us!
-func change_to_cutscene(cutscene_path: String, background_path: String):
+func change_to_cutscene(cutscene_path: String, background_path: String,cutscene_name:String):
 	var cutscene_scene = preload("res://scenes/Cutscene.tscn").instantiate()
 	get_tree().root.add_child(cutscene_scene)
-	cutscene_scene.start_cutscene(background_path, cutscene_path)
+	cutscene_scene.start_cutscene(background_path, cutscene_path,cutscene_name)

@@ -211,7 +211,14 @@ func _on_illness_pressed(illnessName:String):
 func _on_confirm_diagnosis() -> void:
 	diagnose_mode = false
 	update_page()
-	# todo: close BoK again or move on to cutscene which would hide whole Diagnosis Node anyways!
+	
+	#move on to post level scene
+	#todo: not dynamic yet, this sets level1!
+	SceneTransitionManager.change_to_cutscene(
+		"res://sprites/prologue1.dialogue",
+		"res://sprites/backgrounds/bg.png",
+		"post_level1"
+	)
 	
 func _on_no_pressed() -> void:
 	popup.hide()

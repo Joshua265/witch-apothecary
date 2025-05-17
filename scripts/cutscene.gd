@@ -8,12 +8,12 @@ const DEFAULT_SPRITE_SIZE = Vector2(300, 400)
 func _ready():
 	pass
 	
-func start_cutscene(background_path: String, cutscene_path: String):
+func start_cutscene(background_path: String, cutscene_path: String, cutscene_name:String):
 	set_background(background_path)
 	var resource = ResourceLoader.load(cutscene_path)
 
 	# Show the dialogue
-	DialogueManager.show_dialogue_balloon(resource)
+	DialogueManager.show_dialogue_balloon(resource, cutscene_name)
 
 	# Wait for the dialogue_ended signal
 	await DialogueManager.dialogue_ended
