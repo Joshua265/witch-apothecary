@@ -1,13 +1,15 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://byds11vsd6ber"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://byds11vsd6ber"]
 
+[ext_resource type="FontFile" uid="uid://bf7lt5xj6dp7k" path="res://fonts/more_to_choose/Simonetta-Italic.ttf" id="1_jl2i5"]
 [ext_resource type="StyleBox" uid="uid://b6h4sqok6xlxy" path="res://themes/pixelart/button_normal_style.tres" id="1_o2icn"]
-[ext_resource type="FontFile" uid="uid://07yvi11ui7vg" path="res://fonts/Peaberry/PeaberryMono.ttf" id="1_qo4up"]
 [ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="2_adtur"]
 [ext_resource type="StyleBox" uid="uid://dj0ib6qvmygdj" path="res://themes/pixelart/button_pressed_style.tres" id="2_igfm3"]
 [ext_resource type="StyleBox" uid="uid://cg0tootlnej3o" path="res://themes/pixelart/slider_grabber_area_texture.tres" id="4_liesh"]
 [ext_resource type="Texture2D" uid="uid://c0coqpvq7hu6j" path="res://sprites/ui/ui-grabber.png" id="4_pfl2f"]
-[ext_resource type="StyleBox" path="res://themes/pixelart/slider_area_texture.tres" id="5_fa0x8"]
+[ext_resource type="StyleBox" uid="uid://l6xjkhifsp27" path="res://themes/pixelart/slider_area_texture.tres" id="5_fa0x8"]
 [ext_resource type="Texture2D" uid="uid://vcoxg8ao2cpn" path="res://sprites/ui/ui-grabber-disabled.png" id="5_i611v"]
+[ext_resource type="FontFile" uid="uid://cnp1ejhs2stme" path="res://fonts/more_to_choose/Simonetta-Regular.ttf" id="8_xhuci"]
+[ext_resource type="FontFile" uid="uid://dkbjcitb6gmu6" path="res://fonts/more_to_choose/Simonetta-Black.ttf" id="10_xhuci"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ve7hb"]
 
@@ -22,17 +24,19 @@ axis_stretch_vertical = 1
 region_rect = Rect2(0, 0, 32, 32)
 
 [resource]
-default_font = ExtResource("1_qo4up")
+default_font = ExtResource("1_jl2i5")
 Button/constants/h_separation = 0
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
-Button/font_sizes/font_size = 30
-Button/fonts/font = ExtResource("1_qo4up")
+Button/font_sizes/font_size = 25
+Button/fonts/font = ExtResource("1_jl2i5")
 Button/styles/disabled = null
 Button/styles/focus = SubResource("StyleBoxEmpty_ve7hb")
 Button/styles/hover = ExtResource("1_o2icn")
 Button/styles/normal = ExtResource("1_o2icn")
 Button/styles/pressed = ExtResource("2_igfm3")
+CheckBox/fonts/font = ExtResource("1_jl2i5")
+CheckButton/fonts/font = ExtResource("1_jl2i5")
 HScrollBar/styles/scroll = ExtResource("5_fa0x8")
 HSlider/icons/grabber = ExtResource("4_pfl2f")
 HSlider/icons/grabber_disabled = ExtResource("5_i611v")
@@ -40,11 +44,22 @@ HSlider/icons/grabber_highlight = ExtResource("4_pfl2f")
 HSlider/styles/grabber_area = ExtResource("4_liesh")
 HSlider/styles/grabber_area_highlight = ExtResource("4_liesh")
 HSlider/styles/slider = ExtResource("5_fa0x8")
-Label/font_sizes/font_size = 16
-Label/fonts/font = ExtResource("1_qo4up")
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("8_xhuci")
+LineEdit/font_sizes/font_size = 20
+LineEdit/fonts/font = ExtResource("1_jl2i5")
+MenuButton/fonts/font = ExtResource("1_jl2i5")
+OptionButton/font_sizes/font_size = 25
+OptionButton/fonts/font = ExtResource("1_jl2i5")
 Panel/styles/panel = SubResource("StyleBoxTexture_rbmb2")
+ProgressBar/fonts/font = ExtResource("1_jl2i5")
 ProgressBar/styles/background = ExtResource("5_fa0x8")
 ProgressBar/styles/fill = ExtResource("4_liesh")
+TabBar/font_sizes/font_size = 18
+TabBar/fonts/font = ExtResource("1_jl2i5")
+TextEdit/font_sizes/font_size = 20
+TextEdit/fonts/font = ExtResource("1_jl2i5")
+Tree/fonts/font = ExtResource("10_xhuci")
 VScrollBar/styles/scroll = ExtResource("5_fa0x8")
 VSlider/icons/grabber = ExtResource("4_pfl2f")
 VSlider/icons/grabber_disabled = ExtResource("5_i611v")

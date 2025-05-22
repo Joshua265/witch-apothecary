@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3]
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://l6xjkhifsp27"]
 
 [ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="1_s554w"]
 
