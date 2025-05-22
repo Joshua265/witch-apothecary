@@ -15,20 +15,30 @@ extends Control
 var resource = ResourceLoader.load("res://test_dialogue.dialogue")
 
 func _ready():
-	# Connect buttons
-	ask_button.pressed.connect(_on_ask_pressed)
-	inspect_button.pressed.connect(_on_inspect_pressed)
-	back_button.pressed.connect(_on_back_pressed)
-	diagnose_button.pressed.connect(_on_diagnose_pressed)
+	# Connect buttons safely
+	if not ask_button.pressed.is_connected(_on_ask_pressed):
+		ask_button.pressed.connect(_on_ask_pressed)
 
+	if not inspect_button.pressed.is_connected(_on_inspect_pressed):
+		inspect_button.pressed.connect(_on_inspect_pressed)
+
+	if not back_button.pressed.is_connected(_on_back_pressed):
+		back_button.pressed.connect(_on_back_pressed)
+
+	if not diagnose_button.pressed.is_connected(_on_diagnose_pressed):
+		diagnose_button.pressed.connect(_on_diagnose_pressed)
+
+	# Connect question buttons
 	for question_button in question_list.get_children():
 		if question_button is Button:
-			question_button.pressed.connect(_on_question_selected.bind(question_button.text))
+			if not question_button.pressed.is_connected(_on_question_selected):
+				question_button.pressed.connect(_on_question_selected.bind(question_button.text))
 
 	# Initially hide irrelevant UI elements
 	question_list.hide()
 	inspect_list.hide()
 	back_button.hide()
+
 
 func _on_ask_pressed():
 	main_action_container.hide()
