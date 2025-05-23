@@ -32,7 +32,8 @@ func _on_start_button_pressed():
 	SceneTransitionManager.change_to_cutscene(
 		"res://sprites/prologue1.dialogue",
 		"res://sprites/backgrounds/bg.png",
-		"level1"
+		"level1",
+		"res://scenes/diagnosis.tscn"
 	)
 
 func _on_exit_pressed():

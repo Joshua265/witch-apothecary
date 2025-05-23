@@ -14,8 +14,10 @@ func _generate_question_buttons(dialogue_line):
 		var button := Button.new()
 		button.text = res.text
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.pressed.connect(func(): _on_question_pressed(res.next_id))
+		button.pressed.connect(func(): _on_question_pressed(res.next_id,res.text))
 		add_child(button)
 
-func _on_question_pressed(next_id: String):
+func _on_question_pressed(next_id: String, question:String):
 	question_selected.emit(next_id)  # Emit signal to DialogueBox
+	# add the string to the action log!
+	get_node("/root/Diagnosis/ActionCounter").add_action_log("You asked" + str(question))

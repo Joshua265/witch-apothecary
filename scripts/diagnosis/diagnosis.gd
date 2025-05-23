@@ -15,6 +15,9 @@ extends Control
 var resource = ResourceLoader.load("res://test_dialogue.dialogue")
 
 func _ready():
+	#register to gamestate
+	GameState.diagnosis_scene=self
+	
 	# Connect buttons safely
 	if not ask_button.pressed.is_connected(_on_ask_pressed):
 		ask_button.pressed.connect(_on_ask_pressed)

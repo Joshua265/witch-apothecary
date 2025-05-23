@@ -1,11 +1,13 @@
 ~ level1
-do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/text.png", get_node("/root/Cutscene").get_position_from_keyword("center"))
+do get_node("/root/Cutscene").set_background("res://sprites/backgrounds/outside_hut.png")
 On a rainy night, the wind howled through the crooked trees of Eldervale.
 At the edge of the town, where the forest met the fog, an old hut sat hunched beneath the the thicketh of the forest.
 And where usually no soul dared to touch, a single candle flickered inside. Yes, the once vacant hut, now had a resident, that the townsfolk yet to had warm up to.
 It all started with a desperate knock sounded at the witch's door.
+do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/husband.png",GameState.cutscene_scene.get_position_from_keyword("left"))
 Edgar: Please...we need your help. My wife- she not well. The doctor in town is too costly for the likes of us.
 Witch: Come closer, both of you. No need to stand in the rain.
+do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
 Helena: I'm sorry to trouble you, ma'am… but I… I haven’t been feeling right.
 Witch: Worry not, child. Tell me, what troubles you?
 Helena: It started a few weeks back. I’ve been so tired… I come home from work and I feel like my bones weigh a hundred pounds.
@@ -16,7 +18,10 @@ Witch: I understand. Please — sit down over here, Helena. Let’s have a close
   => END
 
 ~ post_level1
-do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/text.png", get_node("/root/Cutscene").get_position_from_keyword("center"))
 Testing, this is after first diagnosis
-  => END
+do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/husband.png",GameState.cutscene_scene.get_position_from_keyword("left"))
+do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
+Helena: It started a few weeks back. I’ve been so tired… I come home from work and I feel like my bones weigh a hundred pounds.
+Witch: I see. How long have you felt this way? Has it worsened?
+ => END
 

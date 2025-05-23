@@ -4,9 +4,9 @@ extends Node
 @export var action_icon_texture : Texture2D
 signal action_used
 
-var actions_remaining: int = 10
+var actions_remaining: int = 11
+var action_log: Array = [] 
 
-#todo: Do it with gridlayout or something instead so it doesnt try to match the size of the container when removing
 func _ready():
 	if action_container:
 		for i in range(actions_remaining):
@@ -15,6 +15,7 @@ func _ready():
 			icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 			action_container.add_child(icon)
 
+#todo: Move to result scene?
 func use_action():
 	if actions_remaining > 0:
 		actions_remaining -= 1
@@ -25,8 +26,15 @@ func use_action():
 		if icon_count > 0:
 			action_container.get_child(icon_count - 1).queue_free()
 			print("Removing icon")
-
+		#todo: Info for user!
 		if actions_remaining == 0:
 			print("No more actions left — no more points can be earned.")
-	else:
-		print("You're out of actions — no more points available.")
+				
+func add_action_log(action: String):
+	if not action_log.has(action):
+		action_log.append(action)
+		print("Added" + action)
+
+func get_action_log() -> Array:
+	return action_log
+	

@@ -176,6 +176,7 @@ func create_label_button(text: String, font_size: int, bold: bool = false) -> Bu
 	button.focus_mode = Control.FOCUS_NONE
 	button.add_theme_font_size_override("font_size", font_size)
 	button.add_theme_color_override("font_color", Color.BLACK)
+	button.add_theme_color_override("font_disabled_color", Color.DIM_GRAY)
 	button.autowrap_mode = true
 	if !diagnose_mode:
 		button.disabled = true
@@ -230,15 +231,15 @@ func _on_illness_pressed(illnessName:String):
 # ahh i got it -> maybe add a list of things done wrong or correctly??
 func _on_confirm_diagnosis() -> void:
 	diagnose_mode = false
-	update_page()
-	
-	#move on to post level scene
-	#todo: not dynamic yet, this sets level1!
+	#update_page()
+	##move on to post level scene
+	##todo: not dynamic yet, this sets level1!
 	SceneTransitionManager.change_to_cutscene(
 		"res://sprites/prologue1.dialogue",
 		"res://sprites/backgrounds/bg.png",
-		"post_level1"
+		"post_level1",
+		"res://scenes/results.tscn"
 	)
-	
+
 func _on_no_pressed() -> void:
 	popup.hide()

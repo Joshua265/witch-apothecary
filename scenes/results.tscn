@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnr3pm868uip1"]
+
+[ext_resource type="Script" uid="uid://d3jsie3pwibn6" path="res://scripts/actionlogscreen.gd" id="2_r4wmc"]
+
+[sub_resource type="Theme" id="Theme_21kdr"]
+
+[sub_resource type="Theme" id="Theme_qh7lt"]
+
+[node name="Result" type="Control" node_paths=PackedStringArray("action_list_node")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_21kdr")
+script = ExtResource("2_r4wmc")
+action_list_node = NodePath("VBoxContainer")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1157.0
+offset_bottom = 656.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 397.0
+offset_top = 40.0
+offset_right = 756.0
+offset_bottom = 568.0
+theme = SubResource("Theme_qh7lt")
