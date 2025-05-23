@@ -221,11 +221,11 @@ script = ExtResource("6_8dq4u")
 [node name="Menu Control" type="Control" parent="Main Menu" node_paths=PackedStringArray("start_button", "settings_button", "exit_button")]
 layout_mode = 2
 script = ExtResource("1_7gw0o")
-start_scene_path = ExtResource("8_qlfhf")
-transition_path = ExtResource("3_lqaap")
 start_button = NodePath("../MarginContainer/VBoxContainer/start_button")
 settings_button = NodePath("../MarginContainer/VBoxContainer/settings_button")
 exit_button = NodePath("../MarginContainer/VBoxContainer/exit_button")
+start_scene_path = ExtResource("8_qlfhf")
+transition_path = ExtResource("3_lqaap")
 
 [node name="MarginContainer" type="MarginContainer" parent="Main Menu"]
 layout_mode = 2

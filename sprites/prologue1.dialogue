@@ -18,10 +18,8 @@ Witch: I understand. Please — sit down over here, Helena. Let’s have a close
   => END
 
 ~ post_level1
-Testing, this is after first diagnosis
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/husband.png",GameState.cutscene_scene.get_position_from_keyword("left"))
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
-Helena: It started a few weeks back. I’ve been so tired… I come home from work and I feel like my bones weigh a hundred pounds.
-Witch: I see. How long have you felt this way? Has it worsened?
+Helena: So I have {{GameState.current_illness}} ? 
  => END
 

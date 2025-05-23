@@ -25,3 +25,8 @@ func update_action_log() -> void:
 func set_action_log(new_log: Array) -> void:
 	action_log = new_log
 	print("Action log updated.")
+
+#todo: Use this to navigate to Level overview
+func _on_button_pressed() -> void:
+	var main_menu_scene : PackedScene = load("res://scenes/samples/main_menu.tscn")
+	get_tree().change_scene_to_packed(main_menu_scene)

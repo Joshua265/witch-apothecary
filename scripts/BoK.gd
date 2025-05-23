@@ -208,7 +208,6 @@ func create_label(text: String, font_size: int) -> RichTextLabel:
 	
 	return label
 
-	
 # Function to go to the previous page
 func _on_left_button_pressed():
 	current_page -= 1
@@ -227,6 +226,9 @@ func _on_close_button_pressed():
 func _on_illness_pressed(illnessName:String):
 	popup.show()
 	popup_text.text = "Do you want to confirm?\n" + illnessName
+	
+	#todo: Find a better place to do this
+	GameState.current_illness = illnessName 
 
 # ahh i got it -> maybe add a list of things done wrong or correctly??
 func _on_confirm_diagnosis() -> void:

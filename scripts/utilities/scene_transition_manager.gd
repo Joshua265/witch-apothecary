@@ -25,7 +25,7 @@ func trigger_scene_changed_signal():
 	on_scene_changed.emit()
 	get_tree().tree_changed.disconnect(trigger_scene_changed_signal)
 	
-# added by us!
+# added by us! unforuntately this adds ac hild to the tree no change the scene properly ahhh!
 func change_to_cutscene(cutscene_path: String, background_path: String,cutscene_name:String,next_scene_path:String):
 	var cutscene_scene = preload("res://scenes/cutscene.tscn").instantiate()
 	get_tree().root.add_child(cutscene_scene)
