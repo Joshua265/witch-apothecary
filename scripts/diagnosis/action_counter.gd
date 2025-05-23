@@ -5,7 +5,6 @@ extends Node
 signal action_used
 
 var actions_remaining: int = 11
-var action_log: Array = [] 
 
 func _ready():
 	if action_container:
@@ -31,10 +30,5 @@ func use_action():
 			print("No more actions left — no more points can be earned.")
 				
 func add_action_log(action: String):
-	if not action_log.has(action):
-		action_log.append(action)
-		print("Added" + action)
-
-func get_action_log() -> Array:
-	return action_log
+	GameState.add_action_log(action)
 	

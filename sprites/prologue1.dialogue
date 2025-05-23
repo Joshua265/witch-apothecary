@@ -22,4 +22,3 @@ do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/husb
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
 Helena: So I have {{GameState.current_illness}} ? 
  => END
-
