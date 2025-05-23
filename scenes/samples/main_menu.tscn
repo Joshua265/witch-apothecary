@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://chee17ae0u5op"]
+[gd_scene load_steps=33 format=3 uid="uid://chee17ae0u5op"]
 
 [ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="1_0bcbq"]
 [ext_resource type="Script" uid="uid://dk1wq7olueyfk" path="res://scripts/ui/main_menu.gd" id="1_7gw0o"]
@@ -9,8 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="4_05n6c"]
 [ext_resource type="Script" uid="uid://c0jcandn6gcs5" path="res://scripts/ui/audio_menu.gd" id="4_mjs4o"]
 [ext_resource type="Script" uid="uid://dcq40oleurf78" path="res://scripts/ui/viewport_container.gd" id="6_8dq4u"]
+[ext_resource type="Texture2D" uid="uid://dckq5ya81pb1" path="res://background.png" id="6_qhip2"]
 [ext_resource type="PackedScene" uid="uid://bjwefw4x3ecis" path="res://scenes/cutscene.tscn" id="8_qlfhf"]
 [ext_resource type="PackedScene" uid="uid://ckgaebvstccxe" path="res://scenes/common/ui/load_button.tscn" id="9_ijoqn"]
+[ext_resource type="Texture2D" uid="uid://7jklqre0yeg3" path="res://sprites/Logo.png" id="11_j1ra7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ve7hb"]
 
@@ -48,6 +50,12 @@ Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_i2dk5")
 Label/styles/normal = SubResource("StyleBoxEmpty_n3wa8")
 Panel/styles/panel = SubResource("StyleBoxTexture_rbmb2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j1ra7"]
+texture = ExtResource("6_qhip2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r7lwt"]
+texture = ExtResource("11_j1ra7")
 
 [sub_resource type="LabelSettings" id="LabelSettings_utnyj"]
 font_size = 100
@@ -199,6 +207,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_0bcbq")
+theme_override_styles/panel = SubResource("StyleBoxTexture_j1ra7")
 
 [node name="Main Menu" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -226,8 +235,10 @@ layout_mode = 2
 alignment = 1
 
 [node name="title" type="Label" parent="Main Menu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
-text = "Title"
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_r7lwt")
 label_settings = SubResource("LabelSettings_utnyj")
 horizontal_alignment = 1
 vertical_alignment = 1
