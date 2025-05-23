@@ -1,14 +1,14 @@
 extends Control
 
-@export var background: TextureRect 
+@export var background: TextureRect
 
-# Preload default speaker sprite size if we need this 
+# Preload default speaker sprite size if we need this
 const DEFAULT_SPRITE_SIZE = Vector2(500, 1000)
 
 func _ready():
 	GameState.cutscene_scene= self
 	pass
-	
+
 func start_cutscene(background_path: String, cutscene_path: String, cutscene_name:String,next_scene_path: String):
 	set_background(background_path)
 	var resource = ResourceLoader.load(cutscene_path)
@@ -20,13 +20,17 @@ func start_cutscene(background_path: String, cutscene_path: String, cutscene_nam
 	await DialogueManager.dialogue_ended
 
 	# Change scene
-	  # Dynamically load the next scene
-	var next_scene = ResourceLoader.load(next_scene_path)
-	if next_scene:
-		SceneTransitionManager.change_scene(next_scene)
-	else:
-		push_error("Next scene not found: " + next_scene_path)
-		
+	#   # Dynamically load the next scene
+	# var next_scene = ResourceLoader.load(next_scene_path)
+	# if next_scene:
+	# 	SceneTransitionManager.change_scene(next_scene)
+	# else:
+	# 	push_error("Next scene not found: " + next_scene_path)
+
+	var level_select_scene = preload("res://scenes/level_select.tscn")
+	SceneTransitionManager.change_scene(level_select_scene)
+
+
 # Set the background image
 func set_background(texture_path: String):
 	background.texture = load(texture_path)

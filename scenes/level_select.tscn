@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkicfvlxedtew"]
+
+[ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="1_2epne"]
+[ext_resource type="Texture2D" uid="uid://dckq5ya81pb1" path="res://background.png" id="2_rif6e"]
+[ext_resource type="Script" uid="uid://dhbb8fy2bmiol" path="res://scripts/level_select/grid_container.gd" id="3_chg43"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r77uv"]
+texture = ExtResource("2_rif6e")
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2epne")
+theme_override_styles/panel = SubResource("StyleBoxTexture_r77uv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+columns = 3
+script = ExtResource("3_chg43")

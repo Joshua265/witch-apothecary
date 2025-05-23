@@ -65,7 +65,7 @@ script/source = "extends Button
 
 func _on_pressed():
 	await get_tree().create_timer(1.0).timeout  # Short delay
-	get_tree().change_scene_to_file(\"res://scenes/diagnosis.tscn\")
+	get_tree().change_scene_to_file(\"res://scenes/level_select.tscn\")
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qyyl"]

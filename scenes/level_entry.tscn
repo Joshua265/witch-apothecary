@@ -1,0 +1,165 @@
+[gd_scene load_steps=11 format=3 uid="uid://clf7li1yvoked"]
+
+[ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="1_4b3o7"]
+[ext_resource type="Texture2D" uid="uid://b5kr6tlbbajag" path="res://sprites/ui/level_frame.png" id="1_ng2bm"]
+[ext_resource type="Script" uid="uid://crkpe3ic8xk0k" path="res://scripts/level_entry.gd" id="1_ts3ki"]
+[ext_resource type="Texture2D" uid="uid://bcwmhg663hch0" path="res://icon.svg" id="2_57vh3"]
+[ext_resource type="Shader" uid="uid://dnbes1nfkkqn1" path="res://shaders/clip_circle.gdshader" id="2_i4n8g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ts3ki"]
+shader = ExtResource("2_i4n8g")
+
+[sub_resource type="Animation" id="Animation_tnt1e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ts3ki"]
+resource_name = "hover_enter"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.2, 1.2, 1.2, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gpeum"]
+resource_name = "hover_exit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.2, 1.2, 1.2, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gpeum"]
+_data = {
+&"RESET": SubResource("Animation_tnt1e"),
+&"hover_enter": SubResource("Animation_ts3ki"),
+&"hover_exit": SubResource("Animation_gpeum")
+}
+
+[node name="LevelEntry" type="TextureButton"]
+clip_contents = true
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -896.0
+offset_bottom = -392.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+script = ExtResource("1_ts3ki")
+
+[node name="Frame" type="TextureRect" parent="."]
+z_index = 2
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ng2bm")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Index" type="Label" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -512.0
+offset_top = 4.0
+offset_right = 512.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "001"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="."]
+z_index = 3
+layout_mode = 0
+offset_left = 39.0
+offset_top = 192.0
+offset_right = 218.0
+offset_bottom = 247.0
+theme_override_font_sizes/font_size = 24
+text = "Level Title"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Image" type="TextureRect" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_ts3ki")
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -100.0
+offset_right = 164.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_57vh3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Background" type="TextureRect" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -100.0
+offset_right = 164.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4b3o7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gpeum")
+}
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
