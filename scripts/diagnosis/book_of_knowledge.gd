@@ -1,25 +1,41 @@
 extends Control
 
-@export var bok : Control
-@export var animation_player : AnimationPlayer 
+@export var bok: Control
+@export var animation_player: AnimationPlayer
 @export var bok_button: Button
 
-var book_content_instance 
+var book_content_instance
 
 func _ready():
+	# Connect the BoK button to open the book
 	bok_button.pressed.connect(_on_bok_pressed)
-	
-	# Connect the back_button_pressed signal from BookContent to a function in the parent
+
+	# Try to connect the back button signal from inside the book panel
 	var panel_node = bok.get_node("TextureRect")
-	panel_node.back_pressed.connect(_on_back_button_pressed)
-	
+	if panel_node.has_signal("back_pressed"):
+		panel_node.back_pressed.connect(_on_back_button_pressed)
+	else:
+		push_warning("TextureRect node is missing the 'back_pressed' signal.")
+
 func _on_bok_pressed():
-	#hide everything else
-	animation_player.play("show")
+	open_book()
 
 func _on_back_button_pressed():
+	close_book()
+
+func open_book():
+	animation_player.play("show")
+
+func close_book():
 	animation_player.play_backwards("show")
-	#todo: Prolly souldnt do this here but oof
-	get_node("/root/Diagnosis/Book_of_Knowledge/TextureRect").diagnose_mode = false
-	#todo: acting weird, not sure if we should call ready instead or make sep function?
-	get_node("/root/Diagnosis/Book_of_Knowledge/TextureRect").update_page()
+
+	# Access the TextureRect inside the book and reset diagnose mode + update
+	var texture_rect = bok.get_node("TextureRect")
+	if texture_rect:
+		if texture_rect.has_method("update_page"):
+			texture_rect.diagnose_mode = false
+			texture_rect.update_page()
+		else:
+			push_warning("TextureRect node is missing 'update_page' method.")
+	else:
+		push_error("TextureRect not found under bok.")

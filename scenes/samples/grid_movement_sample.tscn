@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbo7b5vgtetx3"]
+[gd_scene load_steps=12 format=3 uid="uid://bgv5ucen54qv2"]
 
 [ext_resource type="Texture2D" uid="uid://bs5ru4bg8n3bj" path="res://sprites/tilesets/test-tileset.png" id="1_uxx57"]
-[ext_resource type="Texture2D" uid="uid://ctuyqlhugsiwo" path="res://icon.svg" id="2_cg4w5"]
+[ext_resource type="Texture2D" uid="uid://bcwmhg663hch0" path="res://icon.svg" id="2_cg4w5"]
 [ext_resource type="Script" uid="uid://bm7t6s0k7kvvt" path="res://scripts/movement/grid_controller.gd" id="2_tnplj"]
 [ext_resource type="Script" uid="uid://rfxvuoa04mgt" path="res://scripts/camera/camera_targeter.gd" id="4_8jsyy"]
 [ext_resource type="Script" uid="uid://dnoxuj0e5arpa" path="res://scripts/gameplay/push_grid_object.gd" id="5_xassj"]

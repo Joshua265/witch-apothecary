@@ -1,10 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://clnfq2gqweyhp"]
+[gd_scene load_steps=34 format=3 uid="uid://br5ln8atw2j6w"]
 
 [ext_resource type="Script" uid="uid://cam17rgiyuugd" path="res://scripts/movement/top_down_controller.gd" id="1_1dc0n"]
 [ext_resource type="Shader" uid="uid://dcjgbym1r7qrr" path="res://shaders/sprite.gdshader" id="2_tpd8u"]
 [ext_resource type="Script" uid="uid://der2hdoehm16n" path="res://scripts/movement/flip_to_cursor.gd" id="2_w4yy5"]
 [ext_resource type="Script" uid="uid://71ehilgwwwav" path="res://scripts/interaction/hit/hitbox.gd" id="3_f7uyv"]
-[ext_resource type="Texture2D" uid="uid://ctuyqlhugsiwo" path="res://icon.svg" id="3_kwe0j"]
+[ext_resource type="Texture2D" uid="uid://bcwmhg663hch0" path="res://icon.svg" id="3_kwe0j"]
 [ext_resource type="Script" uid="uid://6vwe6umhongb" path="res://scripts/interaction/effects/sprite_shake_effect.gd" id="5_lnxyu"]
 [ext_resource type="Script" uid="uid://c0bv1bbihp4fw" path="res://scripts/interaction/effects/slow_mo_effect.gd" id="6_4yby4"]
 [ext_resource type="Script" uid="uid://2w5kpeidp04p" path="res://scripts/interaction/effects/empty_effect.gd" id="6_kkiew"]
@@ -157,7 +157,6 @@ radius = 175.82
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(834, 111)
-zoom = Vector2(1, 1)
 
 [node name="CameraTargeter" type="Node" parent="Camera2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("8_gyc27")

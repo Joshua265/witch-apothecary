@@ -57,26 +57,32 @@ layout_mode = 2
 
 [node name="Name" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "Name: x"
 
 [node name="Age" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Age: x"
 
 [node name="Occupation" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Occupation: x "
 
 [node name="Temperature" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Temperature: x"
 
 [node name="Heartrate" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Heartrate: x"
 
 [node name="Blood Pressure" type="Label" parent="frame/Main/Patient_Info"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Blood Pressure: X"
 
 [node name="History" type="TextEdit" parent="frame"]

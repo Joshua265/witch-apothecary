@@ -12,7 +12,7 @@ var patient_data : Dictionary = {
 	"name": "Helena",
 	"age": 29,
 	"occupation": "Seamstress",
-	"image_path": "res://sprites/characters/text.png",
+	"image_path": "res://sprites/characters/seamstress.png",
 	"temperature": "Not checked yet.", 
 	"heartrate": "Not checked yet.",
 	"history": "Helena described that she's been having bad headaches."

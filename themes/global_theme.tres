@@ -1,9 +1,23 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cg0cp5jantdbd"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cg0cp5jantdbd"]
 
+[ext_resource type="FontFile" uid="uid://bf7lt5xj6dp7k" path="res://fonts/more_to_choose/Simonetta-Italic.ttf" id="1_gqqud"]
 [ext_resource type="FontFile" uid="uid://cd2udo5msdo" path="res://fonts/Tagesschrift-Regular.ttf" id="1_xlh88"]
+[ext_resource type="FontFile" uid="uid://cnp1ejhs2stme" path="res://fonts/more_to_choose/Simonetta-Regular.ttf" id="2_nap7a"]
+[ext_resource type="FontFile" uid="uid://cenwdygoj145d" path="res://fonts/more_to_choose/Simonetta-BlackItalic.ttf" id="4_arykt"]
 
 [resource]
+default_font = ExtResource("1_gqqud")
 Label/colors/font_color = Color(0, 0, 0, 1)
-Label/fonts/font = ExtResource("1_xlh88")
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("2_nap7a")
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/fonts/font = ExtResource("1_gqqud")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/fonts/bold_font = ExtResource("1_xlh88")
 RichTextLabel/fonts/normal_font = ExtResource("1_xlh88")
+TabBar/fonts/font = ExtResource("2_nap7a")
+TextEdit/colors/font_color = Color(0, 0, 0, 1)
+TextEdit/fonts/font = ExtResource("1_gqqud")
+Tree/colors/font_color = Color(0, 0, 0, 1)
+Tree/fonts/font = ExtResource("4_arykt")
+Tree/fonts/title_button_font = ExtResource("2_nap7a")
