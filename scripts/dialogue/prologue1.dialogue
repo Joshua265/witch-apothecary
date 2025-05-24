@@ -18,8 +18,28 @@ Witch: I understand. Please — sit down over here, Helena. Let’s have a close
   => END
 
 ~ postcutsceneL1
-do get_node("/root/Cutscene").set_background("res://sprites/backgrounds/bg.png")
+do GameState.cutscene_scene.set_background("res://sprites/backgrounds/bg.png")
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/husband.png",GameState.cutscene_scene.get_position_from_keyword("left"))
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
 Helena: So I have {{GameState.current_illness}} ? 
+ =>< witch_illness_response
+Helena: Alright. Thank you so much I will do that!
  => END
+
+~ witch_illness_response
+match GameState.current_illness:
+	when "Food Poisoning":
+		Witch: Ah yes, classic Food Poisoning. Brew some chamomile tea and rest. Avoid anything greasy, dear.
+	when "Constipation":
+		Witch: Mhm, that's a blockage of the humors. Drink plenty of prune juice and take a brisk walk under the crescent moon.
+	when "Overexertion":
+		Witch: You've pushed yourself too far! A lavender-scented bath and a day of complete rest should mend you.
+	when "Dehydration":
+		Witch: Tsk, tsk. You've forgotten your water rituals! Drink pure spring water and nibble on some cucumbers.
+	when "Sprained Ankle":
+		Witch: A twisted joint? Wrap it in comfrey leaves and stay off your feet, lest the spirits grow cross.
+	when "Sinus Infection":
+		Witch: Ah, the sinuses are angry. Inhale steam with eucalyptus and burn sage to ward off the foul humors.
+	else:
+		Witch: Miau Miau Miau miau think of something to say lmao
+=> END

@@ -20,7 +20,6 @@ func use_action():
 		var icon_count = action_container.get_child_count()
 		if icon_count > 0:
 			action_container.get_child(icon_count - 1).queue_free()
-			print("Removing icon")
 		#todo: Info for user!
 		if GameState.actions_remaining == 0:
 			print("No more actions left — no more points can be earned.")
