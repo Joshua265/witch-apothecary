@@ -4,6 +4,7 @@ extends Node
 # More dynamic for different emotions bla bla but its okay like this for now
 var patients = {
 	1: {
+		"level_image_path": "res://sprites/characters/seamstress.png",
 		"precutsceneKey": "precutsceneL1",
 		"postcutsceneKey": "postcutsceneL1",
 		"questionsSetKey": "questionSetL1",
@@ -22,6 +23,7 @@ var patients = {
 		"history": "Helena described that she's been having bad headaches." #make this a array?
 	},
 	2: {
+		"level_image_path": "res://sprites/characters/husband.png",
 		"precutsceneKey": "precutsceneLevel2",
 		"postcutsceneKey": "postcutsceneLevel2",
 		"questionsSetKey": "questionSetL1",
@@ -38,5 +40,9 @@ var patients = {
 		"temperature": "Not checked yet.",
 		"heartrate": "Not checked yet.",
 		"history": "Jonathan mentions frequent dizziness after working in the sun."
+	},
+	"More": {
+		"level_image_path": "res://sprites/characters/witch_cool.png",
+		"name": "Comming Soon!",
 	}
 }

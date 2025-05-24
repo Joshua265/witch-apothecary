@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://clf7li1yvoked"]
+[gd_scene load_steps=12 format=3 uid="uid://clf7li1yvoked"]
 
 [ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="1_4b3o7"]
 [ext_resource type="Texture2D" uid="uid://b5kr6tlbbajag" path="res://sprites/ui/level_frame.png" id="1_ng2bm"]
-[ext_resource type="Script" uid="uid://crkpe3ic8xk0k" path="res://scripts/level_entry.gd" id="1_ts3ki"]
+[ext_resource type="Script" uid="uid://crkpe3ic8xk0k" path="res://scripts/level_select/level_entry.gd" id="1_ts3ki"]
 [ext_resource type="Texture2D" uid="uid://bcwmhg663hch0" path="res://icon.svg" id="2_57vh3"]
 [ext_resource type="Shader" uid="uid://dnbes1nfkkqn1" path="res://shaders/clip_circle.gdshader" id="2_i4n8g"]
+[ext_resource type="Texture2D" uid="uid://cmikqb8yxpejg" path="res://sprites/ui/locked.png" id="2_tnt1e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ts3ki"]
 shader = ExtResource("2_i4n8g")
@@ -74,6 +75,26 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("1_ts3ki")
+
+[node name="Lock" type="TextureRect" parent="."]
+visible = false
+z_index = 10
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tnt1e")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="Frame" type="TextureRect" parent="."]
 z_index = 2

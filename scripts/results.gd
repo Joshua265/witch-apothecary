@@ -72,5 +72,6 @@ func calculate_final_points() -> int:
 	return 100 + 50
 
 func _on_button_pressed() -> void:
+	GameState.unlock_level(GameState.current_level + 1)
 	var level_select_scene = preload("res://scenes/level_select.tscn")
 	SceneTransitionManager.change_scene(level_select_scene)
