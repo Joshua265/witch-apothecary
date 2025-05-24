@@ -21,6 +21,11 @@ func load_patient_data():
 var current_illness = null
 var action_log = []
 
+func change_level(new_level):
+	current_level = new_level
+	print("Changing to level %d..." % current_level)
+	load_patient_data()
+	
 func add_action_log(action: String):
 	if not action_log.has(action):
 		action_log.append(action)

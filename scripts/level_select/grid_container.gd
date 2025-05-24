@@ -28,7 +28,7 @@ var levels = [
 
 func _on_level_entry_pressed(button):
 	var scene_path = button.get_meta("scene_path")
-	GameState.current_level = button.get_meta("index") #setting level
+	GameState.change_level(button.get_meta("index")) #setting level
 	if scene_path:
 		get_tree().change_scene_to_file(scene_path)
 
