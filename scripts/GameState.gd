@@ -39,7 +39,7 @@ func change_level(new_level):
 	current_level = new_level
 	print("Changing to level %d..." % current_level)
 	load_patient_data()
-	# TODO: beckgrounds are not loaded
+	get_tree().change_scene_to_file("res://scenes/cutscene.tscn")
 	SceneTransitionManager.change_to_cutscene(
 		current_patient["cutscenescript"],
 		current_patient["precutsceneKey"],
