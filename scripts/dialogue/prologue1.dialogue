@@ -1,4 +1,4 @@
-~ level1
+~ precutsceneL1
 do get_node("/root/Cutscene").set_background("res://sprites/backgrounds/outside_hut.png")
 On a rainy night, the wind howled through the crooked trees of Eldervale.
 At the edge of the town, where the forest met the fog, an old hut sat hunched beneath the the thicketh of the forest.
@@ -17,7 +17,8 @@ Edgar: And her pulse… it races, even when she’s resting. I’ve seen it. I c
 Witch: I understand. Please — sit down over here, Helena. Let’s have a closer look.
   => END
 
-~ post_level1
+~ postcutsceneL1
+do get_node("/root/Cutscene").set_background("res://sprites/backgrounds/bg.png")
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/husband.png",GameState.cutscene_scene.get_position_from_keyword("left"))
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
 Helena: So I have {{GameState.current_illness}} ? 

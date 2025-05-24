@@ -12,7 +12,7 @@ extends Control
 @export var background: TextureRect
 @export var clipboard: Panel
 
-var resource = ResourceLoader.load("res://test_dialogue.dialogue")
+var resource = ResourceLoader.load(GameState.current_patient["questionSetScript"])
 
 func _ready():
 	#register to gamestate

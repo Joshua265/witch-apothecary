@@ -18,7 +18,6 @@ func _ready():
 func use_action():
 	if actions_remaining > 0:
 		actions_remaining -= 1
-		print("Actions remaining: ", actions_remaining)
 
 		# Remove the last icon
 		var icon_count = action_container.get_child_count()

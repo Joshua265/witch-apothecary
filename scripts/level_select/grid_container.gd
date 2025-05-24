@@ -2,6 +2,8 @@ extends GridContainer
 
 @onready var level_entry_scene = preload("res://scenes/level_entry.tscn")
 
+#todo: can we use gamestate for the image paths? scene_path always the same but disable the button for 3?
+# if disabled pop up that says "Not available yet?"
 var levels = [
 	{
 		"index": 1,
@@ -26,6 +28,7 @@ var levels = [
 
 func _on_level_entry_pressed(button):
 	var scene_path = button.get_meta("scene_path")
+	GameState.current_level = button.get_meta("index") #setting level
 	if scene_path:
 		get_tree().change_scene_to_file(scene_path)
 
@@ -46,6 +49,7 @@ func _ready():
 		title_label.text = level["title"]
 		
 		level_entry.set_meta("scene_path", level["scene_path"])
+		level_entry.set_meta("index", level["index"])
 		level_entry.pressed.connect(_on_level_entry_pressed.bind(level_entry))
 		
 		add_child(level_entry)

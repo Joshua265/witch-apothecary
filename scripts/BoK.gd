@@ -15,9 +15,10 @@ signal back_pressed  # Define a signal
 const ILLNESSES_PER_PAGE = 2
 var current_page : int = 0
 var illness_index  = 0
-#todo: maybe we should move popup stuff to its own script
 var diagnose_mode = false
+#todo: Move pop up to own script (Reuseable for other stuff too)
 
+#todo: Move to own script
 var illnesses = [
   {
 	"name": "Simple Cold/Flu",
@@ -148,7 +149,6 @@ func update_page():
 		# Determine the panel to add elements to
 		var target_panel = left_panel if i < ILLNESSES_PER_PAGE else right_panel
 		
-		
 		# Create name label
 		#todo: Only name is pickable right now- should we make a button, that just has both as their text?
 		#var name_label = create_label(illness["name"],24, true)
@@ -237,9 +237,8 @@ func _on_confirm_diagnosis() -> void:
 	##move on to post level scene
 	##todo: not dynamic yet, this sets level1!
 	SceneTransitionManager.change_to_cutscene(
-		"res://sprites/prologue1.dialogue",
-		"res://sprites/backgrounds/bg.png",
-		"post_level1",
+		GameState.current_patient["cutscenescript"],
+		GameState.current_patient["postcutsceneKey"],
 		"res://scenes/results.tscn"
 	)
 

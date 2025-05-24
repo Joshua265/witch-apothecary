@@ -25,9 +25,8 @@ func trigger_scene_changed_signal():
 	on_scene_changed.emit()
 	get_tree().tree_changed.disconnect(trigger_scene_changed_signal)
 	
-# added by us! unforuntately this adds ac hild to the tree no change the scene properly ahhh!
-func change_to_cutscene(cutscene_path: String, background_path: String,cutscene_name:String,next_scene_path:String):
+# added by us! todo: use change_to_scene instead?
+func change_to_cutscene(cutscene_path: String,cutscene_name:String,next_scene_path:String):
 	var cutscene_scene = preload("res://scenes/cutscene.tscn").instantiate()
 	get_tree().root.add_child(cutscene_scene)
-	#get_tree().change_scene_to(cutscene_scene)
-	cutscene_scene.start_cutscene(background_path, cutscene_path,cutscene_name,next_scene_path)
+	cutscene_scene.start_cutscene(cutscene_path,cutscene_name,next_scene_path)

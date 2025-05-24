@@ -3,14 +3,8 @@ extends TextureRect
 @export var patient_image : TextureRect 
 var image_path : String
 
-var patient_images = {
-	"helena": "res://sprites/characters/seamstress_sitting.png",  
-	"john": "res://john_image.png"
-}
-var current_patient : String = "helena" 
-
 func _ready():
-	image_path = patient_images.get(current_patient, "res://default_patient_image.png")
+	image_path = GameState.current_patient["sitting_sprite"]
 	update_patient_image()
 	
 func update_patient_image():

@@ -8,31 +8,22 @@ extends VBoxContainer
 @export var heartrate_label : Label  
 @export var history_text : TextEdit 
 
-var patient_data : Dictionary = {
-	"name": "Helena",
-	"age": 29,
-	"occupation": "Seamstress",
-	"image_path": "res://sprites/characters/seamstress.png",
-	"temperature": "Not checked yet.", 
-	"heartrate": "Not checked yet.",
-	"history": "Helena described that she's been having bad headaches."
-}
 
 func _ready():
 	# Set initial patient info
 	set_patient_info()
 
 	# Add some initial history text
-	add_history_text(patient_data["history"])
+	add_history_text(GameState.current_patient["history"])
 
 func set_patient_info():
 	# Load patient image and update the UI
-	patient_image.texture = load(patient_data["image_path"]) as Texture
-	name_label.text = patient_data["name"]
-	age_label.text = "Age: " + str(patient_data["age"])
-	occupation_label.text = "Occupation: " + patient_data["occupation"]
-	temperature_label.text = "Temperature: " + patient_data["temperature"]
-	heartrate_label.text = "Heart Rate: " + patient_data["heartrate"]
+	patient_image.texture = load(GameState.current_patient["image_path"]) as Texture
+	name_label.text = GameState.current_patient["name"]
+	age_label.text = "Age: " + str(GameState.current_patient["age"])
+	occupation_label.text = "Occupation: " +GameState.current_patient["occupation"]
+	temperature_label.text = "Temperature: " + GameState.current_patient["temperature"]
+	heartrate_label.text = "Heart Rate: " + GameState.current_patient["heartrate"]
 
 	#todo: Text size- if you can handle this with global please remove here
 	var theme_override = Theme.new()
@@ -47,8 +38,6 @@ func set_patient_info():
 
 #todo: Not sure if best idea to remove action here honestly but oh well at least in one place
 func add_history_text(text: String):
-	print("Adding history text: ", text)
-
 	var dialogue_scroll = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
 	var back_button = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Back_Button")
 	var clipboard = get_node_or_null("/root/Diagnosis/Interaction/Clipboard")
@@ -59,7 +48,6 @@ func add_history_text(text: String):
 		clipboard.show()
 
 	if text in history_text.text:
-		print("Text already in history, skipping.")
 		return
 
 	history_text.text += ("\n" if history_text.text != "" else "") + text
@@ -67,18 +55,18 @@ func add_history_text(text: String):
 	get_node("/root/Diagnosis/ActionCounter").use_action()
 
 func update_temperature(new_temp: String):
-	if  patient_data["temperature"] == new_temp:
+	if  GameState.current_patient["temperature"] == new_temp:
 		return
 		
-	patient_data["temperature"] = new_temp
+	GameState.current_patient["temperature"] = new_temp
 	temperature_label.text = "Temperature: " + new_temp 
 	# remove a action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
 
 func update_heartrate(new_heartrate: String):
-	if patient_data["heartrate"] == new_heartrate:
+	if GameState.current_patient["heartrate"] == new_heartrate:
 		return 
-	patient_data["heartrate"] = new_heartrate
+	GameState.current_patient["heartrate"] = new_heartrate
 	heartrate_label.text = "Heart Rate: " + new_heartrate 
 	# remove a action
 	get_node("/root/Diagnosis/ActionCounter").use_action()

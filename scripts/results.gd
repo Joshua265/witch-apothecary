@@ -22,7 +22,8 @@ func update_action_log() -> void:
 			label.text = action
 			action_list_node.add_child(label)
 
-#todo: Use this to navigate to Level overview
 func _on_button_pressed() -> void:
-	var main_menu_scene : PackedScene = load("res://scenes/samples/main_menu.tscn")
-	get_tree().change_scene_to_packed(main_menu_scene)
+	var level_select_scene = preload("res://scenes/level_select.tscn")
+	SceneTransitionManager.change_scene(level_select_scene)
+	#var main_menu_scene : PackedScene = load("res://scenes/samples/main_menu.tscn")
+	#get_tree().change_scene_to_packed(main_menu_scene)

@@ -4,7 +4,6 @@ func _ready():
 	_generate_inspect_buttons()
 
 func _generate_inspect_buttons():
-	print("Generating inspect buttons")
 	# Todo: Make this better
 	var button_data = [
 		{"text": "Pulse Check", "handler": Callable(self, "_on_pulse_check_pressed")},

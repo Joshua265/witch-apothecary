@@ -1,13 +1,11 @@
 extends VBoxContainer
 
 signal question_selected(question_text)
-#not ideal since we double load? eventually make it a autoload? 
-var resource = ResourceLoader.load("res://test_dialogue.dialogue")
+var resource = ResourceLoader.load(GameState.current_patient["questionSetScript"])
 
 func _ready():
-	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource, "start")
+	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource,GameState.current_patient["questionsSetKey"])
 	_generate_question_buttons(dialogue_line);
-
 
 func _generate_question_buttons(dialogue_line):
 	for res in dialogue_line.responses:

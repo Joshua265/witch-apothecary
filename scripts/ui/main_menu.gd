@@ -29,10 +29,10 @@ func _exit_tree():
 
 #starts initial cutscene
 func _on_start_button_pressed():
+	#todo: Pop up if thy wanna start a enw game? Not necessry tho
 	SceneTransitionManager.change_to_cutscene(
-		"res://sprites/prologue1.dialogue",
-		"res://sprites/backgrounds/bg.png",
-		"level1",
+		GameState.current_patient["cutscenescript"],
+		GameState.current_patient["precutsceneKey"],
 		"res://scenes/diagnosis.tscn"
 	)
 
