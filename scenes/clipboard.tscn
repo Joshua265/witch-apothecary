@@ -17,7 +17,7 @@ offset_right = 466.0
 offset_bottom = 560.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_js5ej")
 
-[node name="frame" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "history_text")]
+[node name="frame" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "bloodPressure_label", "breathing_label", "history_text")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,6 +39,8 @@ age_label = NodePath("Main/Patient_Info/Age")
 occupation_label = NodePath("Main/Patient_Info/Occupation")
 temperature_label = NodePath("Main/Patient_Info/Temperature")
 heartrate_label = NodePath("Main/Patient_Info/Heartrate")
+bloodPressure_label = NodePath("Main/Patient_Info/Blood Pressure")
+breathing_label = NodePath("Main/Patient_Info/Breathing")
 history_text = NodePath("History")
 
 [node name="Main" type="HBoxContainer" parent="frame"]
@@ -84,6 +86,11 @@ text = "Heartrate: x"
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Blood Pressure: X"
+
+[node name="Breathing" type="Label" parent="frame/Main/Patient_Info"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Breathing: X "
 
 [node name="History" type="TextEdit" parent="frame"]
 clip_contents = false

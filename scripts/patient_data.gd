@@ -1,7 +1,5 @@
 extends Node
 
-# todo: Image_path should be a folder to the images?
-# More dynamic for different emotions bla bla but its okay like this for now
 var patients = {
 	1: {
 		"level_image_path": "res://sprites/characters/seamstress.png",
@@ -18,8 +16,10 @@ var patients = {
 		"wrongdiagnosistext": "Helena died oof...",
 		"image_path": "res://sprites/characters/seamstress.png",
 		"sitting_sprite" : "res://sprites/characters/seamstress_sitting.png",
-		"temperature": "Not checked yet.",
-		"heartrate": "Not checked yet.",
+		"temperature": "36.8",
+		"heartrate": "75",
+		"breathing": "16",
+		"blood_pressure": "120/80",
 		"history": "Helena described that she's been having bad headaches." #make this a array?
 	},
 	2: {
@@ -37,8 +37,9 @@ var patients = {
 		"wrongdiagnosistext": "Helena died oof...",
 		"image_path": "res://sprites/characters/husband.png",
 		"sitting_sprite" : "res://sprites/characters/husband.png",
-		"temperature": "Not checked yet.",
-		"heartrate": "Not checked yet.",
+		"temperature": "36.8",
+		"heartrate": "75",
+		"breathing": "16",
 		"history": "Jonathan mentions frequent dizziness after working in the sun."
 	},
 	"More": {
