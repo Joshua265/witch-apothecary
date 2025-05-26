@@ -11,9 +11,9 @@ var result_scene = null
 var current_level = 1
 var current_patient = {}
 #TODO: Add these to patient data?
-var current_points = 250
-var current_level_point_margin = [100,200,300]
-
+var current_points = 0
+var current_level_point_margin = []
+var current_action_evaluation = {}
 
 #Storage
 var current_illness = null
@@ -30,7 +30,8 @@ func load_patient_data():
 	var patient_data_script = load("res://scripts/patient_data.gd")
 	patient_data_instance = patient_data_script.new()
 	current_patient = patient_data_instance.patients[current_level]
-
+	current_action_evaluation = current_patient["point_eval"]
+	current_level_point_margin = current_patient["point_margins"]
 
 func unlock_level(level_index: int):
 	if not unlocked_levels.has(level_index):
@@ -53,3 +54,12 @@ func change_level(new_level):
 func add_action_log(action: String):
 	if not action_log.has(action):
 		action_log.append(action)
+
+# TODO: Doesn't consider if Diagnosis is right yet		
+func calculate_points() -> int:
+	for action in action_log:
+		if current_action_evaluation.has(action):
+			current_points += current_action_evaluation[action]
+	
+	current_points += actions_remaining * 10
+	return current_points

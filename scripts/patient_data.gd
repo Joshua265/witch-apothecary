@@ -1,7 +1,7 @@
 extends Node
 
 var patients = {
-	1: {
+	1: {"point_achieved": 0, # for level select?
 		"level_image_path": "res://sprites/characters/seamstress.png",
 		"precutsceneKey": "precutsceneL1",
 		"postcutsceneKey": "postcutsceneL1",
@@ -20,9 +20,26 @@ var patients = {
 		"heartrate": "75",
 		"breathing": "16",
 		"blood_pressure": "120/80",
-		"history": "Helena described that she's been having bad headaches." #make this a array?
+		"history": "Helena described that she's been having bad headaches.", #make this a array?
+		"point_margins": [30,90,150],
+		"point_eval":  {
+			"You checked blood pressure.": 17,
+			"You checked temperature.": 6,
+			"You checked breathing.": 13,
+			"You asked Tell me more about your fatigue.": 10,
+			"You asked Have you been feeling feverish?": 3,
+			"You asked Have you experienced a sore throat or cough?": 19,
+			"You asked What did you eat today?": 8,
+			"You asked Tell me more about your headaches.": 14,
+			"You asked How long have you been feeling dizzy?": 2,
+			"You asked Have you noticed any changes in your heart rate?": 11,
+			"You asked Do you feel short of breath?": 16,
+			"You asked How much sleep are you getting?": 5,
+			"You asked Have you noticed any changes in your menstrual cycle?": 20,
+			"You asked Do you feel like you’re getting enough rest, even if it's just short breaks?": 9
+		}
 	},
-	2: {
+	2: {"point_achieved": 0, # for level select?
 		"level_image_path": "res://sprites/characters/husband.png",
 		"precutsceneKey": "precutsceneLevel2",
 		"postcutsceneKey": "postcutsceneLevel2",
@@ -40,7 +57,24 @@ var patients = {
 		"temperature": "36.8",
 		"heartrate": "75",
 		"breathing": "16",
-		"history": "Jonathan mentions frequent dizziness after working in the sun."
+		"history": "Jonathan mentions frequent dizziness after working in the sun.",
+		"point_margins": [100,200,300],
+		"point_eval":  {
+			"You checked blood pressure.": 17,
+			"You checked temperature.": 6,
+			"You checked breathing.": 13,
+			"You asked Tell me more about your fatigue.": 10,
+			"You asked Have you been feeling feverish?": 3,
+			"You asked Have you experienced a sore throat or cough?": 19,
+			"You asked What did you eat today?": 8,
+			"You asked Tell me more about your headaches.": 14,
+			"You asked How long have you been feeling dizzy?": 2,
+			"You asked Have you noticed any changes in your heart rate?": 11,
+			"You asked Do you feel short of breath?": 16,
+			"You asked How much sleep are you getting?": 5,
+			"You asked Have you noticed any changes in your menstrual cycle?": 20,
+			"You asked Do you feel like you’re getting enough rest, even if it's just short breaks?": 9
+		}
 	},
 	"More": {
 		"level_image_path": "res://sprites/characters/witch_cool.png",

@@ -19,10 +19,12 @@ func _ready():
 		self.add_child(hat)
 		hats.append(hat)
 
-	update_hats()
+	#update_hats()
 
 
 func update_hats():
+	print("Called")
+	print(GameState.current_points)
 	var points = GameState.current_points
 	var margins = GameState.current_level_point_margin
 

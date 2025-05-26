@@ -3,6 +3,7 @@ extends Control
 @export var action_list_node: VBoxContainer
 @export var background_panel: Panel
 @export var clipboard_panel: Panel
+@export var hats : HBoxContainer
 
 
 # Font size constants
@@ -25,6 +26,8 @@ func _ready() -> void:
 	update_action_log()
 	update_diagnosis_section()
 	add_label("Final Points: %d" % calculate_final_points(), FONT_SIZE_NORMAL)
+	hats.update_hats() # update hates visual
+	
 
 func set_panel_background(panel: Panel, texture_path: String) -> void:
 	var texture = load(texture_path)
@@ -68,7 +71,7 @@ func update_diagnosis_section() -> void:
 	add_label(outcome_text, FONT_SIZE_SMALL, true)
 
 func calculate_final_points() -> int:
-	return GameState.current_points
+	return GameState.calculate_points()
 
 func _on_button_pressed() -> void:
 	GameState.unlock_level(GameState.current_level + 1)

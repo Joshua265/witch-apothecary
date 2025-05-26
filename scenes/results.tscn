@@ -7,7 +7,7 @@
 
 [sub_resource type="Theme" id="Theme_qh7lt"]
 
-[node name="Result" type="Control" node_paths=PackedStringArray("action_list_node", "background_panel", "clipboard_panel")]
+[node name="Result" type="Control" node_paths=PackedStringArray("action_list_node", "background_panel", "clipboard_panel", "hats")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,7 @@ script = ExtResource("2_r4wmc")
 action_list_node = NodePath("Wrapper/VBoxContainer")
 background_panel = NodePath("Panel")
 clipboard_panel = NodePath("Wrapper")
+hats = NodePath("Wrapper/HBoxContainer")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -34,10 +35,10 @@ offset_bottom = 758.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Wrapper"]
 layout_mode = 0
-offset_left = 116.0
-offset_top = 141.0
-offset_right = 529.0
-offset_bottom = 598.0
+offset_left = 119.0
+offset_top = 107.0
+offset_right = 532.0
+offset_bottom = 430.0
 theme = SubResource("Theme_qh7lt")
 
 [node name="Button" type="Button" parent="Wrapper"]
