@@ -25,7 +25,7 @@ func prepare_book():
 			texture_rect.reset_pages()
 		elif texture_rect.has_method("update_page"):
 			texture_rect.current_page = 0
-			texture_rect.diagnose_mode = false
+			#texture_rect.diagnose_mode = false
 			texture_rect.update_page()
 		else:
 			push_warning("TextureRect node missing 'update_page' or 'reset_page_state'.")
