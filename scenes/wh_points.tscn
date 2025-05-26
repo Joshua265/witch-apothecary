@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj60o3ynketbo"]
+
+[ext_resource type="Script" uid="uid://demuw72f7vqlh" path="res://scripts/witch_hats_points.gd" id="1_suhdy"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 217.0
+offset_bottom = 63.0
+script = ExtResource("1_suhdy")

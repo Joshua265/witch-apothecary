@@ -10,6 +10,10 @@ var result_scene = null
 # Patient Control
 var current_level = 1
 var current_patient = {}
+#TODO: Add these to patient data?
+var current_points = 250
+var current_level_point_margin = [100,200,300]
+
 
 #Storage
 var current_illness = null

@@ -68,8 +68,7 @@ func update_diagnosis_section() -> void:
 	add_label(outcome_text, FONT_SIZE_SMALL, true)
 
 func calculate_final_points() -> int:
-	# Replace this logic later
-	return 100 + 50
+	return GameState.current_points
 
 func _on_button_pressed() -> void:
 	GameState.unlock_level(GameState.current_level + 1)
