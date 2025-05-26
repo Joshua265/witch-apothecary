@@ -117,7 +117,7 @@ var illnesses = [
 func _ready():
 	#hide popup initially
 	popup.hide()
-	
+
 	left_button.pressed.connect(_on_left_button_pressed)
 	right_button.pressed.connect(_on_right_button_pressed)
 	close_button.pressed.connect(_on_close_button_pressed)
@@ -131,8 +131,16 @@ func _ready():
 	# Update the display
 	update_page()
 
+func reset_pages():
+	current_page = 0
+	illness_index = 0
+
+
 # Function to update the current page with illness info
-func update_page():
+func update_page():	
+	# fix for consistancy 
+	illness_index = current_page * 2 * ILLNESSES_PER_PAGE
+	
 	# Remove all previous items from both panels
 	for child in left_panel.get_children():
 		child.queue_free()
@@ -167,7 +175,7 @@ func update_page():
 	
 	# Button visibility
 	left_button.visible = current_page > 0  
-	right_button.visible = (current_page * 2 * ILLNESSES_PER_PAGE) + (2 * ILLNESSES_PER_PAGE) < illnesses.size()
+	right_button.visible = (current_page + 1) * 2 * ILLNESSES_PER_PAGE < illnesses.size()
 
 func create_label_button(text: String, font_size: int, bold: bool = false) -> Button:
 	var button = Button.new()
@@ -176,7 +184,7 @@ func create_label_button(text: String, font_size: int, bold: bool = false) -> Bu
 	button.focus_mode = Control.FOCUS_NONE
 	button.add_theme_font_size_override("font_size", font_size)
 	button.add_theme_color_override("font_color", Color.BLACK)
-	button.add_theme_color_override("font_disabled_color", Color.DIM_GRAY)
+	button.add_theme_color_override("font_disabled_color", Color.BLACK)
 	button.autowrap_mode = true
 	if !diagnose_mode:
 		button.disabled = true
@@ -230,10 +238,8 @@ func _on_illness_pressed(illnessName:String):
 	#todo: Find a better place to do this
 	GameState.current_illness = illnessName 
 
-# ahh i got it -> maybe add a list of things done wrong or correctly??
 func _on_confirm_diagnosis() -> void:
 	diagnose_mode = false
-	#update_page()
 	##move on to post level scene
 	##todo: not dynamic yet, this sets level1!
 	SceneTransitionManager.change_to_cutscene(
