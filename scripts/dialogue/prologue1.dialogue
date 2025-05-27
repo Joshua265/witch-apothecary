@@ -17,15 +17,17 @@ Edgar: And her pulse… it races, even when she’s resting. I’ve seen it. I c
 Witch: I understand. Please — sit down over here, Helena. Let’s have a closer look.
   => END
 
+# todo lower case later
 ~ postcutsceneL1
 do GameState.cutscene_scene.set_background("res://sprites/backgrounds/bg.png")
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/husband.png",GameState.cutscene_scene.get_position_from_keyword("left"))
 do GameState.cutscene_scene.create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
-Helena: So I have {{GameState.current_illness}} ? 
+Helena: So I have {{GameState.current_illness }} ? 
  =>< witch_illness_response
 Helena: Alright. Thank you so much I will do that!
  => END
 
+#HERE responses - adjust 
 ~ witch_illness_response
 match GameState.current_illness:
 	when "Food Poisoning":

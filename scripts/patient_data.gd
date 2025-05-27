@@ -1,5 +1,5 @@
 extends Node
-
+#TODO: adjust and check
 var patients = {
 	1: {"point_achieved": 0, # for level select?
 		"level_image_path": "res://sprites/characters/seamstress.png",
