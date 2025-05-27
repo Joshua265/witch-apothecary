@@ -51,9 +51,9 @@ text = "Close"
 
 [node name="HBoxContainer" parent="Wrapper" instance=ExtResource("2_21kdr")]
 layout_mode = 0
-offset_left = 115.0
-offset_top = 423.0
-offset_right = 335.0
-offset_bottom = 479.0
+offset_left = 216.0
+offset_top = 436.0
+offset_right = 436.0
+offset_bottom = 492.0
 
 [connection signal="pressed" from="Wrapper/Button" to="." method="_on_button_pressed"]

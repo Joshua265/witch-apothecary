@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://clf7li1yvoked"]
+[gd_scene load_steps=13 format=3 uid="uid://clf7li1yvoked"]
 
 [ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="1_4b3o7"]
 [ext_resource type="Texture2D" uid="uid://b5kr6tlbbajag" path="res://sprites/ui/level_frame.png" id="1_ng2bm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bcwmhg663hch0" path="res://icon.svg" id="2_57vh3"]
 [ext_resource type="Shader" uid="uid://dnbes1nfkkqn1" path="res://shaders/clip_circle.gdshader" id="2_i4n8g"]
 [ext_resource type="Texture2D" uid="uid://cmikqb8yxpejg" path="res://sprites/ui/locked.png" id="2_tnt1e"]
+[ext_resource type="PackedScene" uid="uid://cj60o3ynketbo" path="res://scenes/wh_points.tscn" id="7_gpeum"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ts3ki"]
 shader = ExtResource("2_i4n8g")
@@ -181,6 +182,22 @@ stretch_mode = 5
 libraries = {
 &"": SubResource("AnimationLibrary_gpeum")
 }
+
+[node name="HBoxContainer" parent="." instance=ExtResource("7_gpeum")]
+z_index = 12
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

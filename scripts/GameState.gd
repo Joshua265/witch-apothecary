@@ -8,7 +8,7 @@ var cutscene_scene = null
 var result_scene = null
 
 # Patient Control
-var current_level = 1
+var current_level = "1"
 var current_patient = {}
 #TODO: Add these to patient data?
 var current_points = 0
@@ -21,7 +21,8 @@ var action_log = []
 var actions_remaining = 11 #todo: Make dependant on Level
 
 # Game State
-var unlocked_levels = [1]  # Start with level 1 unlocked
+var unlocked_levels = ["1"]  # Start with level 1 unlocked
+var level_scores = {}
 
 func _ready():
 	load_patient_data()
@@ -33,7 +34,7 @@ func load_patient_data():
 	current_action_evaluation = current_patient["point_eval"]
 	current_level_point_margin = current_patient["point_margins"]
 
-func unlock_level(level_index: int):
+func unlock_level(level_index: String):
 	if not unlocked_levels.has(level_index):
 		unlocked_levels.append(level_index)
 		print("Level %d unlocked!" % level_index)
@@ -42,7 +43,7 @@ func unlock_level(level_index: int):
 
 func change_level(new_level):
 	current_level = new_level
-	print("Changing to level %d..." % current_level)
+	print("Changing to level %s..." % current_level)
 	load_patient_data()
 	get_tree().change_scene_to_file("res://scenes/cutscene.tscn")
 	SceneTransitionManager.change_to_cutscene(
@@ -55,11 +56,13 @@ func add_action_log(action: String):
 	if not action_log.has(action):
 		action_log.append(action)
 
-# TODO: Doesn't consider if Diagnosis is right yet		
 func calculate_points() -> int:
-	for action in action_log:
-		if current_action_evaluation.has(action):
-			current_points += current_action_evaluation[action]
-	
+	if current_illness != current_patient["illness"]:
+		current_points = 0
+	else:
+		for action in action_log:
+			if current_action_evaluation.has(action):
+				current_points += current_action_evaluation[action]
 	current_points += actions_remaining * 10
+	level_scores[current_level] = current_points
 	return current_points

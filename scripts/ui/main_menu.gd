@@ -30,7 +30,7 @@ func _exit_tree():
 #starts initial cutscene
 func _on_start_button_pressed():
 	#todo: Pop up if thy wanna start a enw game? Not necessry tho
-	GameState.change_level(1)
+	GameState.change_level("1")
 
 func _on_exit_pressed():
 	get_tree().quit()

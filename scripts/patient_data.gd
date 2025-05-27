@@ -1,7 +1,7 @@
 extends Node
 
 var patients = {
-	1: {"point_achieved": 0, # for level select?
+	"1": {"point_achieved": 0, # for level select?
 		"level_image_path": "res://sprites/characters/seamstress.png",
 		"precutsceneKey": "precutsceneL1",
 		"postcutsceneKey": "postcutsceneL1",
@@ -39,7 +39,7 @@ var patients = {
 			"You asked Do you feel like you’re getting enough rest, even if it's just short breaks?": 9
 		}
 	},
-	2: {"point_achieved": 0, # for level select?
+	"2": {"point_achieved": 0, # for level select?
 		"level_image_path": "res://sprites/characters/husband.png",
 		"precutsceneKey": "precutsceneLevel2",
 		"postcutsceneKey": "postcutsceneLevel2",

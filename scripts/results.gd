@@ -26,7 +26,7 @@ func _ready() -> void:
 	update_action_log()
 	update_diagnosis_section()
 	add_label("Final Points: %d" % calculate_final_points(), FONT_SIZE_NORMAL)
-	hats.update_hats() # update hates visual
+	hats.update_hats(GameState.current_level) # update hates visual
 	
 
 func set_panel_background(panel: Panel, texture_path: String) -> void:
@@ -74,7 +74,7 @@ func calculate_final_points() -> int:
 	return GameState.calculate_points()
 
 func _on_button_pressed() -> void:
-	GameState.current_patient["points_achieved"] = GameState.current_points
-	GameState.unlock_level(GameState.current_level + 1)
+	if GameState.level_scores[GameState.current_level] > GameState.patient_data_instance.patients[GameState.current_level]["point_margins"][2]:
+		GameState.unlock_level(str(int(GameState.current_level) + 1))
 	var level_select_scene = preload("res://scenes/level_select.tscn")
 	SceneTransitionManager.change_scene(level_select_scene)
