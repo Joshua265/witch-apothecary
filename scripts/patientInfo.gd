@@ -66,6 +66,9 @@ func update_temperature(new_temp: String):
 	# remove an action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
 
+	## here tester
+	#GameState.add_revealed_info("temperature")
+
 
 func update_heartrate(new_heartrate: String):
 	if heartrate_label.text != "Heart Rate: Not checked yet":

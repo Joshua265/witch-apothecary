@@ -43,7 +43,7 @@ var illnesses = [
 			"inadequate hydration": true,
 			"sore": true,
 			"lightheaded": true,
-			'diziness': true,
+			'dizziness': true,
 			"fatigue": true,
 			"experiences shortness of breath": true,
 			"breathing": {"min": "20 br/min"} # elevated breathing rate

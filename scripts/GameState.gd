@@ -19,6 +19,11 @@ var current_action_evaluation = {}
 var current_illness = null
 var action_log = []
 var actions_remaining = 11 #todo: Make dependant on Level
+#added 
+#var revealed_info: Array = []
+#var revealed_vitals: Dictionary = {}
+
+
 
 # Game State
 var unlocked_levels = [1]  # Start with level 1 unlocked
@@ -32,6 +37,13 @@ func load_patient_data():
 	current_patient = patient_data_instance.patients[current_level]
 	current_action_evaluation = current_patient["point_eval"]
 	current_level_point_margin = current_patient["point_margins"]
+
+	#TODO: check if that is used somewhere else and the information is deleted when not supposed to
+	print("check for reseting the revealed info")
+	# Reset per-patient runtime info
+	revealed_info.clear()
+	revealed_vitals.clear()
+	
 
 func unlock_level(level_index: int):
 	if not unlocked_levels.has(level_index):
@@ -63,3 +75,19 @@ func calculate_points() -> int:
 	
 	current_points += actions_remaining * 10
 	return current_points
+
+
+func add_revealed_info(text: String) -> void:
+	var keywords = BoKHighlighter.extract_keywords(text)
+	var vitals = BoKHighlighter.extract_vitals(text)
+
+	for keyword in keywords:
+		if not revealed_info.has(keyword):
+			revealed_info.append(keyword)
+
+	for vital_key in vitals.keys():
+		revealed_vitals[vital_key] = vitals[vital_key]
+		if not revealed_info.has(vital_key):
+			revealed_info.append(vital_key)
+
+
