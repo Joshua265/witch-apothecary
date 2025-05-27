@@ -68,7 +68,7 @@ func _on_question_selected(next_id:String):
 func _on_diagnose_pressed():
 	#todo: Prolly better way to do this but I'm tired oof
 	get_node("/root/Diagnosis/Book_of_Knowledge/TextureRect").diagnose_mode = true
-	#todo: acting weird, not sure if we should call ready instead or make sep function?
+	#todo: Now it should work correctly
 	get_node("/root/Diagnosis/Book_of_Knowledge/TextureRect").update_page()
 	get_node("/root/Diagnosis/Book_of_Knowledge")._on_bok_pressed()
 	

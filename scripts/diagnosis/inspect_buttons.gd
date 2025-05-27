@@ -1,5 +1,6 @@
 extends VBoxContainer
-
+# todo: fixes + highlight new values
+# inlcudes example for action_log
 func _ready():
 	_generate_inspect_buttons()
 

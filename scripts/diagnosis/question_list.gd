@@ -16,6 +16,8 @@ func _generate_question_buttons(dialogue_line):
 		add_child(button)
 
 func _on_question_pressed(next_id: String, question:String):
+	# save the answer for highlighting -- maybe here not need idk
 	question_selected.emit(next_id)  # Emit signal to DialogueBox
 	# add the string to the action log!
 	get_node("/root/Diagnosis/ActionCounter").add_action_log("You asked" + str(question))
+

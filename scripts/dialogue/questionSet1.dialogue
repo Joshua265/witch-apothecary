@@ -1,10 +1,15 @@
+# TODO: use a variable that can be added to the gamestate as answers_from questions
 ~ questionSetL1
 - Tell me more about your fatigue.
 	Witch: Can you tell me more about the fatigue? How long have you been feeling this way?
 	Helena: It all started a couple of weeks ago. I’ve been feeling drained, especially after work. I just can’t shake off the tiredness.
 	Witch: How long has the fatigue been persistent? Did anything change recently to make it worse?
 	Helena: It's been this way for a few weeks now, and I think it's been getting worse with my long hours of work. I’m always sewing and don’t really take breaks.
-	do get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text("Helena reports persistent fatigue over the past few weeks, worsened by long working hours with minimal breaks.")
+	#need to check if that is allowed
+	#var line = "Helena reports a slight rise in temperature over the last few days, along with occasional dizziness."
+	#GameState.add_revealed_info(line)
+	#get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text(line)
+
 	=> END
 - Have you been feeling feverish?
 	Witch: Have you been feeling feverish lately?
