@@ -2,6 +2,9 @@ extends Node
 
 var patient_data_instance: Node
 
+# add class 
+const BoKHighlighter = preload("res://scripts/Bok_Highlighter.gd")
+
 #Scenes
 var diagnosis_scene = null
 var cutscene_scene = null
@@ -20,10 +23,8 @@ var current_illness = null
 var action_log = []
 var actions_remaining = 11 #todo: Make dependant on Level
 #added 
-#var revealed_info: Array = []
-#var revealed_vitals: Dictionary = {}
-
-
+var revealed_info = []
+var revealed_vitals = {}
 
 # Game State
 var unlocked_levels = [1]  # Start with level 1 unlocked
@@ -81,6 +82,9 @@ func add_revealed_info(text: String) -> void:
 	var keywords = BoKHighlighter.extract_keywords(text)
 	var vitals = BoKHighlighter.extract_vitals(text)
 
+	var revealed_info = GameState.current_patient["revealed_info"]
+	var revealed_vitals = GameState.current_patient["revealed_vitals"]
+
 	for keyword in keywords:
 		if not revealed_info.has(keyword):
 			revealed_info.append(keyword)
@@ -89,5 +93,3 @@ func add_revealed_info(text: String) -> void:
 		revealed_vitals[vital_key] = vitals[vital_key]
 		if not revealed_info.has(vital_key):
 			revealed_info.append(vital_key)
-
-

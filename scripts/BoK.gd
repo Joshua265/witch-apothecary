@@ -20,7 +20,8 @@ var diagnose_mode = false
 
 #todo: Move to own script [Done]
 var illnesses = BoKIllnesses.illnesses
-# + get the highlighter class
+const BoKHighlighter = preload("res://scripts/Bok_Highlighter.gd")
+
 
 func _ready():
 	#hide popup initially
@@ -78,11 +79,12 @@ func update_page():
 		for section in illness["info"]:
 
 		# Highlight only the Symptoms section
+			var text = illness["info"][section]
 			if section == "Symptoms":
-                var revealed = GameState.current_patient["revealed_info"]
-                var matched = BoKHighlighter.match_symptoms(illness, revealed)
-                text = BoKHighlighter.highlight_symptoms_text(text, matched)
-			
+				var revealed = GameState.current_patient["revealed_info"]
+				print("the infor revealed " + str(revealed))
+				var matched = BoKHighlighter.match_symptoms(illness, revealed)
+				text = BoKHighlighter.highlight_symptoms_text(text, matched)
 			var lbl = create_label("[b]" + section + "[/b]: " + text, 14)
 			target_panel.add_child(lbl)
 		

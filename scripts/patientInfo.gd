@@ -67,7 +67,7 @@ func update_temperature(new_temp: String):
 	get_node("/root/Diagnosis/ActionCounter").use_action()
 
 	## here tester
-	#GameState.add_revealed_info("temperature")
+	GameState.add_revealed_info(new_temp + " °C")
 
 
 func update_heartrate(new_heartrate: String):
