@@ -80,11 +80,11 @@ func update_page():
 
 		# Highlight only the Symptoms section
 			var text = illness["info"][section]
-			if section == "Symptoms":
-				var revealed = GameState.current_patient["revealed_info"]
-				print("the infor revealed " + str(revealed))
-				var matched = BoKHighlighter.match_symptoms(illness, revealed)
-				text = BoKHighlighter.highlight_symptoms_text(text, matched)
+			#if section == "Symptoms":
+				#var revealed = GameState.current_patient["revealed_info"]
+				#print("the infor revealed " + str(revealed))
+				#var matched = BoKHighlighter.match_symptoms(illness, revealed)
+				#text = BoKHighlighter.highlight_symptoms_text(text, matched)
 			var lbl = create_label("[b]" + section + "[/b]: " + text, 14)
 			target_panel.add_child(lbl)
 		

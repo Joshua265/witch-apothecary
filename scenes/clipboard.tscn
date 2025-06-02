@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://fxror64qsc4a" path="res://sprites/ui/clipboard.png" id="1_js5ej"]
 [ext_resource type="Script" uid="uid://xcfiuweqgoqm" path="res://scripts/patientInfo.gd" id="1_u1xd4"]
-[ext_resource type="FontFile" uid="uid://86wja8jkiqhr" path="res://fonts/more_to_choose/OoohBaby-Regular.ttf" id="3_8y8vx"]
+[ext_resource type="FontFile" uid="uid://bv1fguut13n4r" path="res://fonts/more_to_choose/IndieFlower-Regular.ttf" id="3_8y8vx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_js5ej"]
 texture = ExtResource("1_js5ej")

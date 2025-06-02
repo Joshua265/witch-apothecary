@@ -42,6 +42,7 @@ func set_patient_info():
 
 #todo: Not sure if best idea to remove action here honestly but oh well at least in one place
 func add_history_text(text: String):
+	print("for the love of god - work")
 	var dialogue_scroll = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
 	var back_button = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Back_Button")
 	var clipboard = get_node_or_null("/root/Diagnosis/Interaction/Clipboard")

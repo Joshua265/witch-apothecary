@@ -1,10 +1,8 @@
 extends VBoxContainer
 
-signal question_selected(question_text)
-
 # load the dialogue resource
+signal question_selected(question_text)
 var resource = ResourceLoader.load(GameState.current_patient["questionSetScript"])
-var current_question_id: String  # tracks where we are in the dialogue
 
 
 # TODO: needs to change for the second level- maybe also another file - add to the patient.. file
@@ -23,36 +21,45 @@ var question_summaries := {
 }
 
 func _ready():
-	current_question_id = GameState.current_patient["questionsSetKey"]
-	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource, current_question_id)
-	_generate_question_buttons(dialogue_line);	#_generate_question_buttons(dialogue_line)
+	var dialogue_line = await DialogueManager.get_next_dialogue_line(
+		resource,
+		GameState.current_patient["questionsSetKey"]
+		)
+	_generate_question_buttons(dialogue_line)
 
 func _generate_question_buttons(dialogue_line) -> void:
-	#for child in get_children():
-	#	child.queue_free()
-
 	for res in dialogue_line.responses:
 		var button := Button.new()
 		button.text = res.text
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
 		button.pressed.connect(func(): _on_question_pressed(res.next_id,res.text))
 		add_child(button)
 
-		
 func _on_question_pressed(next_id: String, question: String) -> void:
-	#print("id: " + next_id)
-	#if question_summaries.has(next_id):
-	#	var summary: String = question_summaries[next_id]
-	#	GameState.add_revealed_info(summary)
-	#	print("-------------saves for highlighting")
-	#	get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text(summary)
-
-	# 4) update our tracker, then fetch & display the next questions
-	#current_question_id = next_id
-	#var next_dialogue = await DialogueManager.get_next_dialogue_line(resource, current_question_id)
-	print("check here ....")
-	#_generate_question_buttons(next_dialogue)
-	
 	question_selected.emit(next_id)
-	get_node("/root/Diagnosis/ActionCounter").add_action_log("You asked: " + question)
+	print("id: " + next_id)
+	# i kept the original action log line
+	get_node("/root/Diagnosis/ActionCounter").add_action_log("You asked " + str(question))
+
+	# i added the following lines so that after the player clicks, we fetch the next
+	# dialogue line and regenerate buttons automatically.
+	var next_dialogue = await DialogueManager.get_next_dialogue_line(resource, next_id)
+	_generate_question_buttons(next_dialogue)
+	
+	
+	
+
+func getcorrectSummary(summary_id: String) -> void:
+	if not question_summaries.has(summary_id):
+		push_error("getcorrectSummary(): No summary found for key '" + summary_id + "'")
+		return
+
+	var summary_text = question_summaries[summary_id]
+
+	# i did that because we still want to store the revealed info in GameState
+	GameState.add_revealed_info(summary_text)
+	#check maybe this is a problem
+	get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text(summary_text)
+
+
+	print("getcorrectSummary(): saved summary #" + summary_id + " → " + summary_text)
