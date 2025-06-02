@@ -4,6 +4,16 @@ class_name ContentLoader
 
 signal content_loaded(content_type: String, data)
 
+func load_level_data(levelIndex: int) -> LevelData:
+	# Return static level data example, ignoring index for now
+	var level = LevelData.levels[levelIndex - 1]
+	emit_signal("content_loaded", "level", level)
+	return level
+
+func load_character_data(characterKey: String) -> CharacterData:
+	var character = CharacterData.characters[characterKey]
+	emit_signal("content_loaded", "character", character)
+	return character
 
 func load_patient_data(patientIndex: int) -> PatientData:
 	# Return static patient data example, ignoring level for now

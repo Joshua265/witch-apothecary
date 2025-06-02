@@ -8,10 +8,10 @@ func change_scene(scene: PackedScene):
 
 func change_scene_with_transition(scene: PackedScene, transition: PackedScene):
 	var transition_instance: Transition = transition.instantiate()
-	
+
 	transition_instance.on_fade_out.connect(_on_fade_out.bind(scene, transition_instance))
 	transition_instance.on_fade_in.connect(_on_fade_in.bind(transition_instance))
-	
+
 	add_child(transition_instance)
 
 func _on_fade_out(new_scene: PackedScene, transition_instance: Transition):
@@ -24,9 +24,9 @@ func _on_fade_in(transition_instance: Transition):
 func trigger_scene_changed_signal():
 	on_scene_changed.emit()
 	get_tree().tree_changed.disconnect(trigger_scene_changed_signal)
-	
+
 # added by us! todo: use change_to_scene instead?
-func change_to_cutscene(cutscene_path: String,cutscene_name:String,next_scene_path:String):
+func change_to_cutscene(cutscene_path: String,cutscene_name:String):
 	var cutscene_scene = preload("res://scenes/cutscene.tscn").instantiate()
 	get_tree().root.add_child(cutscene_scene)
-	cutscene_scene.start_cutscene(cutscene_path,cutscene_name,next_scene_path)
+	cutscene_scene.start_cutscene(cutscene_path,cutscene_name)

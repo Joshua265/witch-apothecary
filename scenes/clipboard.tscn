@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://clcfwpf777qly"]
 
 [ext_resource type="Texture2D" uid="uid://fxror64qsc4a" path="res://sprites/ui/clipboard.png" id="1_js5ej"]
-[ext_resource type="Script" uid="uid://xcfiuweqgoqm" path="res://scripts/patientInfo.gd" id="1_u1xd4"]
+[ext_resource type="Script" uid="uid://cfylfgmhp6un1" path="res://scripts/diagnosis/clipboard.gd" id="2_8y8vx"]
 [ext_resource type="FontFile" uid="uid://c6nec1ej45ox7" path="res://fonts/Gorck Helozat Trial.ttf" id="3_8y8vx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_js5ej"]
@@ -16,8 +16,9 @@ offset_top = -90.0
 offset_right = 466.0
 offset_bottom = 560.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_js5ej")
+script = ExtResource("2_8y8vx")
 
-[node name="frame" type="VBoxContainer" parent="." node_paths=PackedStringArray("patient_image", "name_label", "age_label", "occupation_label", "temperature_label", "heartrate_label", "bloodPressure_label", "breathing_label", "history_text")]
+[node name="frame" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,16 +33,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
-script = ExtResource("1_u1xd4")
-patient_image = NodePath("Main/Patient_Picture")
-name_label = NodePath("Main/Patient_Info/Name")
-age_label = NodePath("Main/Patient_Info/Age")
-occupation_label = NodePath("Main/Patient_Info/Occupation")
-temperature_label = NodePath("Main/Patient_Info/Temperature")
-heartrate_label = NodePath("Main/Patient_Info/Heartrate")
-bloodPressure_label = NodePath("Main/Patient_Info/Blood Pressure")
-breathing_label = NodePath("Main/Patient_Info/Breathing")
-history_text = NodePath("History")
 
 [node name="Main" type="HBoxContainer" parent="frame"]
 layout_mode = 2

@@ -1,67 +1,77 @@
+class_name BookOfKnowledge
+
 extends TextureRect
 
-@export var left_button : TextureButton
-@export var right_button : TextureButton
-@export var left_panel : VBoxContainer
-@export var right_panel : VBoxContainer
-@export var close_button: TextureButton
-@export var popup : Panel
-@export var popup_text : Label
-@export var popup_yes_button: Button
-@export var popup_no_button: Button
 
-signal back_pressed  # Define a signal
+var illnesses: Array[IllnessData]
+var diagnose_mode: bool
+var currentIllness: String
+
+func _init(
+	_illnesses : Array[IllnessData] = [],
+	_diagnose_mode: bool = false
+):
+	illnesses = _illnesses
+	diagnose_mode = _diagnose_mode
+
+
+# Book UI and Animation
+@export var animation_player: AnimationPlayer
+@export var bok_button: Button
+
+# Signals
+signal back_pressed
 signal illness_selected(illness_name: String)
 
+# Book logic variables
 const ILLNESSES_PER_PAGE = 2
 var current_page : int = 0
 var illness_index  = 0
-var diagnose_mode = false
 
-var illnesses = []
 var bok_manager = null
 
-func _ready():
-	popup.hide()
-
-	left_button.pressed.connect(Callable(self, "_on_left_button_pressed"))
-	right_button.pressed.connect(Callable(self, "_on_right_button_pressed"))
-	close_button.pressed.connect(Callable(self, "_on_close_button_pressed"))
-	popup_yes_button.pressed.connect(Callable(self, "_on_confirm_diagnosis"))
-	popup_no_button.pressed.connect(Callable(self, "_on_no_pressed"))
+func _ready() -> void:
+	$Left_Flip.pressed.connect(Callable(self, "_on_left_button_pressed"))
+	$Right_Flip.pressed.connect(Callable(self, "_on_right_button_pressed"))
+	$Close_Button.pressed.connect(Callable(self, "_on_close_button_pressed"))
 
 	var button_texture = preload("res://sprites/ui/arrow.png")
-	left_button.texture_normal = button_texture
-	right_button.texture_normal = button_texture
-	right_button.flip_h = true
+	$Left_Flip.texture_normal = button_texture
+	$Right_Flip.texture_normal = button_texture
+	$Right_Flip.flip_h = true
 
-	# Get reference to BoKManager node
-	bok_manager = get_node("/root/BoKManager")
-	if bok_manager:
-		bok_manager.connect("illness_changed", self, "_on_illnesses_changed")
+func _on_bok_pressed():
+	open_book()
 
-func _on_illnesses_changed(new_illnesses):
-	illnesses = []
-	current_page = 0
-	illness_index = 0
-	if typeof(new_illnesses) == TYPE_DICTIONARY and "illnesses" in new_illnesses:
-		illnesses = new_illnesses["illnesses"]
-	elif typeof(new_illnesses) == TYPE_ARRAY:
-		illnesses = new_illnesses
+func _on_back_button_pressed():
+	close_book()
+
+func open_book():
+	animation_player.play("show")
+
+func close_book():
+	animation_player.play_backwards("show")
+	# Reset diagnose mode and update page
+	update_page()
+
+func _on_illnesses_changed(new_illnesses: Array[IllnessData]):
+	illnesses.append(new_illnesses)
 	update_page()
 
 func update_page():
-	for child in left_panel.get_children():
+	for child in $Left_VBox.get_children():
 		child.queue_free()
-	for child in right_panel.get_children():
+	for child in $Right_VBox.get_children():
 		child.queue_free()
+
+	illness_index = current_page * 2 * ILLNESSES_PER_PAGE
 
 	for i in range(0, ILLNESSES_PER_PAGE * 2):
 		if illness_index >= illnesses.size():
 			break
 		var illness = illnesses[illness_index]
 
-		var target_panel = left_panel if i < ILLNESSES_PER_PAGE else right_panel
+		var target_panel = $Left_VBox if i < ILLNESSES_PER_PAGE else $Right_VBox
 
 		var name_label = create_label_button(illness["name"], 24, true)
 		target_panel.add_child(name_label)
@@ -75,8 +85,8 @@ func update_page():
 
 		illness_index += 1
 
-	left_button.visible = current_page > 0
-	right_button.visible = (current_page * 2 * ILLNESSES_PER_PAGE) + (2 * ILLNESSES_PER_PAGE) < illnesses.size()
+	$Left_Flip.visible = current_page > 0
+	$Right_Flip.visible = (current_page * 2 * ILLNESSES_PER_PAGE) + (2 * ILLNESSES_PER_PAGE) < illnesses.size()
 
 func create_label_button(text: String, font_size: int, bold: bool = false) -> Button:
 	var button = Button.new()
@@ -124,18 +134,16 @@ func _on_right_button_pressed():
 	update_page()
 
 func _on_close_button_pressed():
+	close_book()
 	back_pressed.emit()
 
 func _on_illness_pressed(illness_name: String):
-	popup.show()
-	popup_text.text = "Do you want to confirm?\n" + illness_name
-	emit_signal("illness_selected", illness_name)
+	currentIllness = illness_name
+	emit_signal("open_confirmation_dialog", "Do you want to select %s".format(illness_name))
 
-func _on_confirm_diagnosis() -> void:
-	diagnose_mode = false
-	popup.hide()
-	# Emit signal or call method to proceed with diagnosis confirmation
-	# This can be connected externally to handle scene transition or other logic
 
-func _on_no_pressed() -> void:
-	popup.hide()
+func _on_bo_k_button_pressed() -> void:
+	open_book()
+
+func _on_confirmation_diagnosis() -> void:
+	emit_signal("diagnsis_selected", currentIllness)

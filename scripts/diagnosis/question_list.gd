@@ -1,10 +1,17 @@
 extends VBoxContainer
 
 signal question_selected(question_text)
-var resource = ResourceLoader.load(GameState.current_patient["questionSetScript"])
+signal load_questions(question_set_script: String, question_set_key: String)
+
+var resource = null
 
 func _ready():
-	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource,GameState.current_patient["questionsSetKey"])
+	connect("load_questions", Callable(self, "_on_load_questions"))
+
+
+func _on_load_questions(question_set_script: String, question_set_key: String):
+	resource = ResourceLoader.load(question_set_script)
+	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource,question_set_key)
 	_generate_question_buttons(dialogue_line);
 
 func _generate_question_buttons(dialogue_line):

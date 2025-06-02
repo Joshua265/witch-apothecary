@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://tijht5a55vl0"]
+
+[ext_resource type="Script" uid="uid://dm2c1urfs2wfw" path="res://scripts/confirmation_dialog.gd" id="1_yrm0k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5nou"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 0.890196)
+
+[node name="ConfirmationDialog" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.5
+offset_top = -84.5
+offset_right = 194.5
+offset_bottom = 84.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b5nou")
+script = ExtResource("1_yrm0k")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 41.0
+offset_right = 329.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.986752, 0.986752, 0.986752, 1)
+text = "Testing"
+autowrap_mode = 2
+
+[node name="yes" type="Button" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 107.0
+offset_right = 138.0
+offset_bottom = 138.0
+text = "Yes"
+
+[node name="no" type="Button" parent="."]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 106.0
+offset_right = 256.0
+offset_bottom = 137.0
+text = "No"

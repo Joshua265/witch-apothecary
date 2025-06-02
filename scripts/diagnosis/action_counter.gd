@@ -6,7 +6,7 @@ signal action_used
 
 func _ready():
 	if action_container:
-		for i in range(GameState.actions_remaining):
+		for i in range(GameState.inspection_manager.actions_remaining):
 			var icon = TextureRect.new()
 			icon.texture = action_icon_texture
 			icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL

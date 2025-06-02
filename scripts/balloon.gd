@@ -149,6 +149,10 @@ func _on_mutated(_mutation: Dictionary) -> void:
 
 func _on_balloon_gui_input(event: InputEvent) -> void:
 	# See if we need to skip typing of the dialogue
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ESCAPE:
+			get_viewport().set_input_as_handled()
+			await next(dialogue_line.next_id)
+			return
 	if dialogue_label.is_typing:
 		var mouse_was_clicked: bool = event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
 		var skip_button_was_pressed: bool = event.is_action_pressed(skip_action)

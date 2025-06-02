@@ -3,8 +3,8 @@ extends Node
 signal action_log_updated(action_log)
 signal actions_remaining_changed(actions_remaining)
 
-var action_log: Array = []
-var actions_remaining: int = 11  # TODO: Make dependent on level
+@export var action_log: Array = []
+@export var actions_remaining: int = 11  # TODO: Make dependent on level
 
 func add_action_log(action: String) -> void:
 	if not action_log.has(action):
