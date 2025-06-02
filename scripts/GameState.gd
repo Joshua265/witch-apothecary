@@ -1,68 +1,88 @@
 extends Node
 
-var patient_data_instance: Node
+var level_manager: Node
+var patient_manager: Node
+var score_manager: Node
+var inspection_manager: Node
+var bok_manager: Node
 
-#Scenes
+# Scenes
 var diagnosis_scene = null
 var cutscene_scene = null
 var result_scene = null
 
-# Patient Control
-var current_level = "1"
-var current_patient = {}
-#TODO: Add these to patient data?
-var current_points = 0
-var current_level_point_margin = []
-var current_action_evaluation = {}
+func _ready() -> void:
+	# Instantiate managers
+	level_manager = preload("res://scripts/LevelManager.gd").new()
+	patient_manager = preload("res://scripts/PatientManager.gd").new()
+	score_manager = preload("res://scripts/ScoreManager.gd").new()
+	inspection_manager = preload("res://scripts/InspectionManager.gd").new()
+	bok_manager = preload("res://scripts/BoKManager.gd").new()
 
-#Storage
-var current_illness = null
-var action_log = []
-var actions_remaining = 11 #todo: Make dependant on Level
+	# Add managers as children for lifecycle management
+	add_child(level_manager)
+	add_child(patient_manager)
+	add_child(score_manager)
+	add_child(inspection_manager)
+	add_child(bok_manager)
 
-# Game State
-var unlocked_levels = ["1"]  # Start with level 1 unlocked
-var level_scores = {}
+	# Connect signals
+	level_manager.connect("level_changed", Callable(self, "_on_level_changed"))
+	patient_manager.connect("patient_changed", Callable(self, "_on_patient_changed"))
+	inspection_manager.connect("action_log_updated", Callable(self, "_on_action_log_updated"))
+	inspection_manager.connect("actions_remaining_changed", Callable(self, "_on_actions_remaining_changed"))
+	bok_manager.connect("illness_changed", Callable(self, "_on_illness_changed"))
 
-func _ready():
-	load_patient_data()
+	# Initialize patient data for current level
+	patient_manager.load_patient_data(level_manager.current_level)
 
-func load_patient_data():
-	var patient_data_script = load("res://scripts/patient_data.gd")
-	patient_data_instance = patient_data_script.new()
-	current_patient = patient_data_instance.patients[current_level]
-	current_action_evaluation = current_patient["point_eval"]
-	current_level_point_margin = current_patient["point_margins"]
-
-func unlock_level(level_index: String):
-	if not unlocked_levels.has(level_index):
-		unlocked_levels.append(level_index)
-		print("Level %d unlocked!" % level_index)
-	else:
-		print("Level %d is already unlocked." % level_index)
-
-func change_level(new_level):
-	current_level = new_level
-	print("Changing to level %s..." % current_level)
-	load_patient_data()
+func _on_level_changed(new_level: String) -> void:
+	patient_manager.load_patient_data(new_level)
+	# Change scene to cutscene and diagnosis as before
 	get_tree().change_scene_to_file("res://scenes/cutscene.tscn")
 	SceneTransitionManager.change_to_cutscene(
-		current_patient["cutscenescript"],
-		current_patient["precutsceneKey"],
+		patient_manager.current_patient.get("cutscenescript"),
+		patient_manager.current_patient.get("precutsceneKey"),
 		"res://scenes/diagnosis.tscn"
 	)
 
-func add_action_log(action: String):
-	if not action_log.has(action):
-		action_log.append(action)
+func _on_patient_changed(current_patient: Dictionary) -> void:
+	# Reset or update state as needed when patient changes
+	pass
+
+func _on_action_log_updated(action_log: Array) -> void:
+	# Handle action log updates if needed
+	pass
+
+func _on_actions_remaining_changed(actions_remaining: int) -> void:
+	# Handle actions remaining updates if needed
+	pass
+
+func _on_illness_changed(new_illness: String) -> void:
+	# Handle illness changes if needed
+	pass
+
+# Facade methods to delegate to managers
+
+func change_level(new_level: String) -> void:
+	level_manager.change_level(new_level)
+
+func unlock_level(level_index: String) -> void:
+	level_manager.unlock_level(level_index)
+
+func add_action_log(action: String) -> void:
+	inspection_manager.add_action_log(action)
+
+func use_action() -> void:
+	inspection_manager.use_action()
 
 func calculate_points() -> int:
-	if current_illness != current_patient["illness"]:
-		current_points = 0
-	else:
-		for action in action_log:
-			if current_action_evaluation.has(action):
-				current_points += current_action_evaluation[action]
-	current_points += actions_remaining * 10
-	level_scores[current_level] = current_points
-	return current_points
+	return score_manager.calculate_points(
+		bok_manager.current_illness,
+		patient_manager.current_patient,
+		inspection_manager.action_log,
+		inspection_manager.actions_remaining
+	)
+
+func set_illness(new_illness: String) -> void:
+	bok_manager.set_illness(new_illness)
