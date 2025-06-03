@@ -28,7 +28,7 @@
 - Tell me more about your headaches.
 	Witch: Can you describe the headaches you’ve been having?
 	Helena: They usually start around my forehead and temples. It feels like a dull, constant pressure.
-	,Witch: How often do these headaches occur, and have they been getting worse?
+	Witch: How often do these headaches occur, and have they been getting worse?
 	Helena: They’ve been happening almost every day, and they seem to get worse when I don’t take a break from sewing.
 	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("5")
 	=> END
