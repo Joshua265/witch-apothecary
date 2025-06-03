@@ -78,6 +78,8 @@ func update_heartrate(new_heartrate: String):
 	heartrate_label.text = "Heart Rate: " + new_heartrate + " bpm"
 	# remove an action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
+	## here tester
+	GameState.add_revealed_info(new_heartrate + " bpm")
 
 func update_bp(new_bp: String):
 	if bloodPressure_label.text != "Blood Pressure: Not checked yet":
@@ -86,6 +88,8 @@ func update_bp(new_bp: String):
 	bloodPressure_label.text = "Blood Pressure: " + new_bp + " mmHg"
 	# remove an action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
+	## here tester
+	GameState.add_revealed_info(new_bp + " mmHg")
 
 func update_breathing(new_breathing: String):
 	if breathing_label.text != "Breathing: Not checked yet":
@@ -94,3 +98,5 @@ func update_breathing(new_breathing: String):
 	breathing_label.text = "Breathing: " + new_breathing + " br/min"
 	# remove an action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
+	## here tester
+	GameState.add_revealed_info(new_breathing + " br/min")

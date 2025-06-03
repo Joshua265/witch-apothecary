@@ -18,20 +18,6 @@ var illnesses = [
 		}
 	},
 	{
-		"name": "Food Poisoning",
-		"info": {
-			"Symptoms": "Nausea, abdominal pain, dizziness, and occasional vomiting.",
-			"Diagnosis": "Likely due to ingestion of contaminated food resulting in foodborne illness.",
-			"Treatment": "Supportive care with oral rehydration and electrolyte replacement; complementary options include ginger tea (for nausea), peppermint tea (to ease stomach discomfort), and chamomile tea (to soothe gastrointestinal irritation)."
-		},
-		"matching_rules": {
-			"nausea": true,
-			"abdominal pain": true,
-			"dizziness": true,
-			"vomiting": true
-		}
-	},
-	{
 		"name": "Overexertion",
 		"info": {
 			"Symptoms": "Muscle soreness, fatigue, lightheadedness, and occasional shortness of breath.",
@@ -47,6 +33,20 @@ var illnesses = [
 			"fatigue": true,
 			"experiences shortness of breath": true,
 			"breathing": {"min": "20 br/min"} # elevated breathing rate
+		}
+	},
+	{
+		"name": "Food Poisoning",
+		"info": {
+			"Symptoms": "Nausea, abdominal pain, dizziness, and occasional vomiting.",
+			"Diagnosis": "Likely due to ingestion of contaminated food resulting in foodborne illness.",
+			"Treatment": "Supportive care with oral rehydration and electrolyte replacement; complementary options include ginger tea (for nausea), peppermint tea (to ease stomach discomfort), and chamomile tea (to soothe gastrointestinal irritation)."
+		},
+		"matching_rules": {
+			"nausea": true,
+			"abdominal pain": true,
+			"dizziness": true,
+			"vomiting": true
 		}
 	},
 	{
