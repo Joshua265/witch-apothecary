@@ -22,7 +22,6 @@ func _generate_inspect_buttons():
 func _on_pulse_check_pressed():
 	get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_heartrate(GameState.current_patient["heartrate"])
 	get_node("/root/Diagnosis/ActionCounter").add_action_log("You checked pulse.")
-	#here add revealed action or at the gamestate add idk
 
 func _on_bp_check_pressed():
 	get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_bp(GameState.current_patient["blood_pressure"])

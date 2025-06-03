@@ -22,7 +22,7 @@ var current_action_evaluation = {}
 var current_illness = null
 var action_log = []
 var actions_remaining = 11 #todo: Make dependant on Level
-#added 
+#added for highlighting
 var revealed_info = []
 var revealed_vitals = {}
 
@@ -40,11 +40,16 @@ func load_patient_data():
 	current_level_point_margin = current_patient["point_margins"]
 
 	#TODO: check if that is used somewhere else and the information is deleted when not supposed to
-	print("check for reseting the revealed info")
+	print("check for reseting the revealed info") #works for this - maybe a problem if we add that the user can edit a level
 	# Reset per-patient runtime info
 	revealed_info.clear()
 	revealed_vitals.clear()
-	
+	# add the first info from the clipboard
+	revealed_info.clear()
+	var history = current_patient.get("history", "")
+	if history != "":
+		add_revealed_info(history)
+
 
 func unlock_level(level_index: int):
 	if not unlocked_levels.has(level_index):
@@ -78,18 +83,21 @@ func calculate_points() -> int:
 	return current_points
 
 
+# needed for the highlighting
 func add_revealed_info(text: String) -> void:
+	# preprocessing done - based on input
 	var keywords = BoKHighlighter.extract_keywords(text)
-	var vitals = BoKHighlighter.extract_vitals(text)
+	var vitals   = BoKHighlighter.extract_vitals(text)
 
-	var revealed_info = GameState.current_patient["revealed_info"]
-	var revealed_vitals = GameState.current_patient["revealed_vitals"]
+	# but saves it as added in the view
+	var revealed_info   = GameState.current_patient["revealed_info"]    # should be an Array
+	var revealed_vitals = GameState.current_patient["revealed_vitals"]  # should be a Dictionary
 
+	# Add each keyword into the Array if it’s not already there
 	for keyword in keywords:
 		if not revealed_info.has(keyword):
 			revealed_info.append(keyword)
-
+			
+	# Add each numeric vital into the Dictionary (overwrites if already exists)
 	for vital_key in vitals.keys():
 		revealed_vitals[vital_key] = vitals[vital_key]
-		if not revealed_info.has(vital_key):
-			revealed_info.append(vital_key)
