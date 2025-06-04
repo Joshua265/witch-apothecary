@@ -1,5 +1,5 @@
 extends Node
-
+#TODO: adjust and check
 var patients = {
 	"1": {"point_achieved": 0, # for level select?
 		"level_image_path": "res://sprites/characters/seamstress.png",
@@ -17,9 +17,11 @@ var patients = {
 		"image_path": "res://sprites/characters/seamstress.png",
 		"sitting_sprite" : "res://sprites/characters/seamstress_sitting.png",
 		"temperature": "36.8",
-		"heartrate": "75",
+		"heartrate": "101",
 		"breathing": "16",
 		"blood_pressure": "120/80",
+		"revealed_info": [],
+		"revealed_vitals": {},
 		"history": "Helena described that she's been having bad headaches.", #make this a array?
 		"point_margins": [30,90,150],
 		"point_eval":  {
@@ -57,6 +59,8 @@ var patients = {
 		"temperature": "36.8",
 		"heartrate": "75",
 		"breathing": "16",
+		"revealed_info": [],
+		"revealed_vitals": {},
 		"history": "Jonathan mentions frequent dizziness after working in the sun.",
 		"point_margins": [100,200,300],
 		"point_eval":  {

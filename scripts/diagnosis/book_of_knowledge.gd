@@ -17,6 +17,20 @@ func _ready():
 	else:
 		push_warning("TextureRect node is missing the 'back_pressed' signal.")
 
+
+func prepare_book():
+	var texture_rect = bok.get_node("TextureRect")
+	if texture_rect:
+		if texture_rect.has_method("reset_page_state"):
+			texture_rect.reset_pages()
+		elif texture_rect.has_method("update_page"):
+			texture_rect.current_page = 0
+			#texture_rect.diagnose_mode = false
+			texture_rect.update_page()
+		else:
+			push_warning("TextureRect node missing 'update_page' or 'reset_page_state'.")
+
+
 func _on_bok_pressed():
 	open_book()
 
@@ -24,6 +38,7 @@ func _on_back_button_pressed():
 	close_book()
 
 func open_book():
+	prepare_book()  # Prepare page state BEFORE showing
 	animation_player.play("show")
 
 func close_book():
@@ -39,3 +54,6 @@ func close_book():
 			push_warning("TextureRect node is missing 'update_page' method.")
 	else:
 		push_error("TextureRect not found under bok.")
+	# Reset page state AFTER closing
+	await get_tree().create_timer(2.0).timeout
+	prepare_book()  

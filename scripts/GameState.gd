@@ -2,6 +2,9 @@ extends Node
 
 var patient_data_instance: Node
 
+# add class 
+const BoKHighlighter = preload("res://scripts/Bok_Highlighter.gd")
+
 #Scenes
 var diagnosis_scene = null
 var cutscene_scene = null
@@ -19,6 +22,9 @@ var current_action_evaluation = {}
 var current_illness = null
 var action_log = []
 var actions_remaining = 11 #todo: Make dependant on Level
+#added for highlighting
+var revealed_info = []
+var revealed_vitals = {}
 
 # Game State
 var unlocked_levels = ["1"]  # Start with level 1 unlocked
@@ -66,3 +72,23 @@ func calculate_points() -> int:
 	current_points += actions_remaining * 10
 	level_scores[current_level] = current_points
 	return current_points
+
+
+# needed for the highlighting
+func add_revealed_info(text: String) -> void:
+	# preprocessing done - based on input
+	var keywords = BoKHighlighter.extract_keywords(text)
+	var vitals   = BoKHighlighter.extract_vitals(text)
+
+	# but saves it as added in the view
+	var revealed_info   = GameState.current_patient["revealed_info"]    # should be an Array
+	var revealed_vitals = GameState.current_patient["revealed_vitals"]  # should be a Dictionary
+
+	# Add each keyword into the Array if it’s not already there
+	for keyword in keywords:
+		if not revealed_info.has(keyword):
+			revealed_info.append(keyword)
+			
+	# Add each numeric vital into the Dictionary (overwrites if already exists)
+	for vital_key in vitals.keys():
+		revealed_vitals[vital_key] = vitals[vital_key]

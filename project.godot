@@ -28,6 +28,7 @@ SaveManager="*res://scenes/preloads/save_manager.tscn"
 CameraShakeManager="*res://scenes/preloads/camera_shake_manager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameState="*res://scripts/GameState.gd"
+BoKIllnesses="*res://scripts/BoK_illnesses.gd"
 
 [dialogue_manager]
 

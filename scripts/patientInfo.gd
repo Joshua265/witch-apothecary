@@ -42,6 +42,7 @@ func set_patient_info():
 
 #todo: Not sure if best idea to remove action here honestly but oh well at least in one place
 func add_history_text(text: String):
+	print("for the love of god - work")
 	var dialogue_scroll = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer")
 	var back_button = get_node_or_null("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Back_Button")
 	var clipboard = get_node_or_null("/root/Diagnosis/Interaction/Clipboard")
@@ -66,6 +67,9 @@ func update_temperature(new_temp: String):
 	# remove an action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
 
+	## here tester
+	GameState.add_revealed_info(new_temp + " °C")
+
 
 func update_heartrate(new_heartrate: String):
 	if heartrate_label.text != "Heart Rate: Not checked yet":
@@ -74,6 +78,8 @@ func update_heartrate(new_heartrate: String):
 	heartrate_label.text = "Heart Rate: " + new_heartrate + " bpm"
 	# remove an action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
+	## here tester
+	GameState.add_revealed_info(new_heartrate + " bpm")
 
 func update_bp(new_bp: String):
 	if bloodPressure_label.text != "Blood Pressure: Not checked yet":
@@ -82,6 +88,8 @@ func update_bp(new_bp: String):
 	bloodPressure_label.text = "Blood Pressure: " + new_bp + " mmHg"
 	# remove an action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
+	## here tester
+	GameState.add_revealed_info(new_bp + " mmHg")
 
 func update_breathing(new_breathing: String):
 	if breathing_label.text != "Breathing: Not checked yet":
@@ -90,3 +98,5 @@ func update_breathing(new_breathing: String):
 	breathing_label.text = "Breathing: " + new_breathing + " br/min"
 	# remove an action
 	get_node("/root/Diagnosis/ActionCounter").use_action()
+	## here tester
+	GameState.add_revealed_info(new_breathing + " br/min")
