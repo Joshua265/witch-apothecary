@@ -13,13 +13,12 @@ func _init(
 @export var patient_image : TextureRect
 
 func _ready():
-	print(GameState.character_manager.has_signal("character_loaded"))
 	GameState.character_manager.connect("character_loaded", Callable(self, "update_patient_image"))
 
 
 func update_patient_image(character_data: CharacterData):
 	print("character_loaded received")
-	var image_path = character_data.image_path
+	var image_path = character_data.sitting_sprite
 	var loaded_texture = load(image_path)
 	if loaded_texture:
 		self.texture = loaded_texture

@@ -1,26 +1,20 @@
+class_name BoKManager
+
 extends Node
 
-signal illness_changed(new_illness)
-signal load_bok(illnessIndices: Array[int], diagnose_mode: bool)
-
-@export var bookOfKnowledge: BookOfKnowledge
 var content_loader: ContentLoader = ContentLoader.new()
 
 var current_illness: String= ""
 var illnesses: Array[IllnessData] = []
 
+signal bok_loaded(illnesses: Array[IllnessData])
+
 func _ready() -> void:
-	connect("load_bok", Callable(self, "_on_load_bok"))
+	GameState.connect("load_bok", Callable(self, "_on_load_bok"))
 
-func _on_load_bok(illnessesIndices: Array[int], diagnose_mode: bool) -> void:
+func _on_load_bok(illnessesIndices: Array[int]) -> void:
 	illnesses = content_loader.load_bok_data(illnessesIndices);
-	initialize_bok(diagnose_mode)
-
-func initialize_bok(diagnose_mode: bool) -> void:
-	bookOfKnowledge = BookOfKnowledge.new(
-		illnesses,
-		diagnose_mode
-	)
+	emit_signal("bok_loaded", illnesses)
 
 
 func set_illness(new_illness: String) -> void:

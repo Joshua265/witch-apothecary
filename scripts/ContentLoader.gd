@@ -23,7 +23,7 @@ func load_patient_data(patientIndex: int) -> PatientData:
 
 func load_bok_data(illnessIndices: Array[int]) -> Array[IllnessData]:
 	# Return static illness data as array of dictionaries
-	var illnesses = []
+	var illnesses: Array[IllnessData] = []
 	if illnessIndices.size() > 0:
 		illnesses = []
 		for index in illnessIndices:

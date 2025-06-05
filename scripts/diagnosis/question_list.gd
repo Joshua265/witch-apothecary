@@ -6,7 +6,7 @@ signal load_questions(question_set_script: String, question_set_key: String)
 var resource = null
 
 func _ready():
-	connect("load_questions", Callable(self, "_on_load_questions"))
+	GameState.connect("load_questions", Callable(self, "_on_load_questions"))
 
 
 func _on_load_questions(question_set_script: String, question_set_key: String):
@@ -25,4 +25,4 @@ func _generate_question_buttons(dialogue_line):
 func _on_question_pressed(next_id: String, question:String):
 	question_selected.emit(next_id)  # Emit signal to DialogueBox
 	# add the string to the action log!
-	get_node("/root/Diagnosis/ActionCounter").add_action_log("You asked" + str(question))
+	GameState.use_action("You asked" + str(question))

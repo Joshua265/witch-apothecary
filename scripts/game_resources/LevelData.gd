@@ -7,12 +7,13 @@ var precutsceneKey: String
 var postcutsceneKey: String
 var characterKey: String
 var patient_data_index: int
-var illnessesIndex: Array[int]
+var illnessesIndices: Array[int]
 var questionsSetKey: String
 var questionSetScript: String
 var cutscenescript: String
 var point_margins: Array
 var point_eval: Dictionary
+var available_actions: int
 
 func _init(
 	_level_image_path: String,
@@ -20,23 +21,26 @@ func _init(
 	_postcutsceneKey: String,
 	_characterKey: String,
 	_patient_data_index: int,
-	_illnessesIndex: Array[int],
+	_illnessesIndices: Array[int],
 	_questionsSetKey: String,
 	_questionSetScript: String,
 	_cutscenescript: String,
 	_point_margins: Array,
-	_point_eval: Dictionary) -> void:
+	_point_eval: Dictionary,
+	_available_actions: int
+	) -> void:
 	self.level_image_path = _level_image_path
 	self.precutsceneKey = _precutsceneKey
 	self.postcutsceneKey = _postcutsceneKey
 	self.characterKey = _characterKey
 	self.patient_data_index = _patient_data_index
-	self.illnessesIndex = _illnessesIndex
+	self.illnessesIndices = _illnessesIndices
 	self.questionsSetKey = _questionsSetKey
 	self.questionSetScript = _questionSetScript
 	self.cutscenescript = _cutscenescript
 	self.point_margins = _point_margins
 	self.point_eval = _point_eval
+	self.available_actions = _available_actions
 
 static var levels = [
 	LevelData.new(
@@ -45,12 +49,13 @@ static var levels = [
 		"postcutsceneL1",
 		"Helena",
 		0,  # Patient data index
-		[0, 1, 2, 3, 4],  # Illness indices
+		[0, 1, 2, 3, 4, 7],  # Illness indices
 		"questionsSetL1",
 		"res://scripts/dialogue/questionSet1.dialogue",
 		"res://scripts/dialogue/prologue1.dialogue",
 		[10, 20, 30],  # Point margins
-		{"min_points": 10, "max_points": 100}  # Point evaluation
+		{"min_points": 10, "max_points": 100},  # Point evaluation
+		9
 	)
 ]
 

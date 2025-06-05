@@ -1,31 +1,30 @@
 class_name PatientData
 
-var patient_name: String
-var age: int
-var occupation: String
-var image_path: String
-var sitting_sprite: String
+var illness: String
+var temperature: float
+var heartrate: int
+var blood_pressure: String
+var breathing: String
 
 func _init(
-	_patient_name: String,
-	_age: int,
-	_occupation: String,
-	_image_path: String,
-	_sitting_sprite: String,
-):
-	self.patient_name = _patient_name
-	self.age = _age
-	self.occupation = _occupation
-	self.image_path = _image_path
-	self.sitting_sprite = _sitting_sprite
-
+	_initial_illness: String = "",
+	_initial_temperature: float = 0.0,
+	_initial_heartrate: int = 0,
+	_initial_blood_pressure: String = "",
+	_initial_breathing: String = ""
+) -> void:
+	illness = _initial_illness
+	temperature = _initial_temperature
+	heartrate = _initial_heartrate
+	blood_pressure = _initial_blood_pressure
+	breathing = _initial_breathing
 
 static var patients = [
 	PatientData.new(
-		"Helena",
-		29,
-		"Seamstress",
-		"res://sprites/characters/seamstress.png",
-		"res://sprites/characters/seamstress_sitting.png",
+		"Constipation",
+		36.8,
+		75,
+		"120/80",
+		"Normal"
 	)
 ]

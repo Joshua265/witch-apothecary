@@ -4,24 +4,16 @@ extends TextureRect
 
 
 var illnesses: Array[IllnessData]
-var diagnose_mode: bool
+
 var currentIllness: String
 
-func _init(
-	_illnesses : Array[IllnessData] = [],
-	_diagnose_mode: bool = false
-):
-	illnesses = _illnesses
-	diagnose_mode = _diagnose_mode
-
-
 # Book UI and Animation
-@export var animation_player: AnimationPlayer
-@export var bok_button: Button
+@export var diagnose_mode: bool
 
 # Signals
 signal back_pressed
-signal illness_selected(illness_name: String)
+signal diagnosis_selected(illness_name: String)
+signal open_confirmation_dialog(text: String)
 
 # Book logic variables
 const ILLNESSES_PER_PAGE = 2
@@ -31,6 +23,8 @@ var illness_index  = 0
 var bok_manager = null
 
 func _ready() -> void:
+	connect("open_confirmation_dialog", Callable($ConfirmationDialog, "_on_confirmation_diagnosis"))
+	GameState.bok_manager.connect("bok_loaded", Callable(self, "_on_bok_loaded"))
 	$Left_Flip.pressed.connect(Callable(self, "_on_left_button_pressed"))
 	$Right_Flip.pressed.connect(Callable(self, "_on_right_button_pressed"))
 	$Close_Button.pressed.connect(Callable(self, "_on_close_button_pressed"))
@@ -40,6 +34,12 @@ func _ready() -> void:
 	$Right_Flip.texture_normal = button_texture
 	$Right_Flip.flip_h = true
 
+func _on_bok_loaded(_illnesses: Array[IllnessData]) -> void:
+	illnesses = _illnesses
+	illness_index = 0
+	current_page = 0
+	update_page()
+
 func _on_bok_pressed():
 	open_book()
 
@@ -47,10 +47,10 @@ func _on_back_button_pressed():
 	close_book()
 
 func open_book():
-	animation_player.play("show")
+	$AnimationPlayer.play("show")
 
 func close_book():
-	animation_player.play_backwards("show")
+	$AnimationPlayer.play_backwards("show")
 	# Reset diagnose mode and update page
 	update_page()
 
@@ -59,9 +59,9 @@ func _on_illnesses_changed(new_illnesses: Array[IllnessData]):
 	update_page()
 
 func update_page():
-	for child in $Left_VBox.get_children():
+	for child in $HBoxContainer/Left_VBox.get_children():
 		child.queue_free()
-	for child in $Right_VBox.get_children():
+	for child in $HBoxContainer/Right_VBox.get_children():
 		child.queue_free()
 
 	illness_index = current_page * 2 * ILLNESSES_PER_PAGE
@@ -71,7 +71,7 @@ func update_page():
 			break
 		var illness = illnesses[illness_index]
 
-		var target_panel = $Left_VBox if i < ILLNESSES_PER_PAGE else $Right_VBox
+		var target_panel = $HBoxContainer/Left_VBox if i < ILLNESSES_PER_PAGE else $HBoxContainer/Right_VBox
 
 		var name_label = create_label_button(illness["name"], 24, true)
 		target_panel.add_child(name_label)
@@ -146,4 +146,4 @@ func _on_bo_k_button_pressed() -> void:
 	open_book()
 
 func _on_confirmation_diagnosis() -> void:
-	emit_signal("diagnsis_selected", currentIllness)
+	emit_signal("diagnosis_selected", currentIllness)
