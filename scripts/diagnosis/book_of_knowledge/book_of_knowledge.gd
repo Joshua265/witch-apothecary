@@ -23,8 +23,10 @@ var illness_index  = 0
 var bok_manager = null
 
 func _ready() -> void:
-	connect("open_confirmation_dialog", Callable($ConfirmationDialog, "_on_confirmation_diagnosis"))
+	connect("open_confirmation_dialog", Callable($ConfirmationDialog, "_on_open_dialog"))
+	$ConfirmationDialog.connect("yes_confirmation_dialog", Callable(self, "_on_confirmation_diagnosis"))
 	GameState.bok_manager.connect("bok_loaded", Callable(self, "_on_bok_loaded"))
+	connect("diagnosis_selected", Callable(GameState.bok_manager, "_on_diagnosis_selected"))
 	$Left_Flip.pressed.connect(Callable(self, "_on_left_button_pressed"))
 	$Right_Flip.pressed.connect(Callable(self, "_on_right_button_pressed"))
 	$Close_Button.pressed.connect(Callable(self, "_on_close_button_pressed"))
@@ -138,12 +140,11 @@ func _on_close_button_pressed():
 	back_pressed.emit()
 
 func _on_illness_pressed(illness_name: String):
-	currentIllness = illness_name
-	emit_signal("open_confirmation_dialog", "Do you want to select %s".format(illness_name))
+	emit_signal("open_confirmation_dialog", "Do you want to select " + illness_name + " as the diagnosis?")
 
 
 func _on_bo_k_button_pressed() -> void:
 	open_book()
 
 func _on_confirmation_diagnosis() -> void:
-	emit_signal("diagnosis_selected", currentIllness)
+	GameState.select_diagnosis(currentIllness)

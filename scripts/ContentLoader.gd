@@ -36,3 +36,14 @@ func load_bok_data(illnessIndices: Array[int]) -> Array[IllnessData]:
 		illnesses = IllnessData.illnesses
 	emit_signal("content_loaded", "bok", illnesses)
 	return illnesses
+
+# Load action data (actions, their IDs, etc.)
+func load_action_data() -> Dictionary[String, ActionData]:
+	var action_data = preload("res://scripts/game_resources/ActionData.gd").ACTIONS
+	return action_data
+
+func load_result_data(levelIndex: int) -> ResultData:
+	var result_data = preload("res://scripts/game_resources/ResultData.gd").results
+	var level_result = result_data[levelIndex]
+	emit_signal("content_loaded", "result", level_result)
+	return level_result

@@ -8,12 +8,12 @@ var postcutsceneKey: String
 var characterKey: String
 var patient_data_index: int
 var illnessesIndices: Array[int]
-var questionsSetKey: String
+var questionSetKey: String
 var questionSetScript: String
 var cutscenescript: String
-var point_margins: Array
-var point_eval: Dictionary
-var available_actions: int
+var max_actions: int
+var available_actions: Array[String] = []
+var result_preset_index: int
 
 func _init(
 	_level_image_path: String,
@@ -22,12 +22,12 @@ func _init(
 	_characterKey: String,
 	_patient_data_index: int,
 	_illnessesIndices: Array[int],
-	_questionsSetKey: String,
+	_questionSetKey: String,
 	_questionSetScript: String,
 	_cutscenescript: String,
-	_point_margins: Array,
-	_point_eval: Dictionary,
-	_available_actions: int
+	_max_actions: int,
+	_available_actions: Array[String],
+	_result_preset_index: int
 	) -> void:
 	self.level_image_path = _level_image_path
 	self.precutsceneKey = _precutsceneKey
@@ -35,12 +35,12 @@ func _init(
 	self.characterKey = _characterKey
 	self.patient_data_index = _patient_data_index
 	self.illnessesIndices = _illnessesIndices
-	self.questionsSetKey = _questionsSetKey
+	self.questionSetKey = _questionSetKey
 	self.questionSetScript = _questionSetScript
 	self.cutscenescript = _cutscenescript
-	self.point_margins = _point_margins
-	self.point_eval = _point_eval
+	self.max_actions = _max_actions
 	self.available_actions = _available_actions
+	self.result_preset_index = _result_preset_index
 
 static var levels = [
 	LevelData.new(
@@ -50,12 +50,28 @@ static var levels = [
 		"Helena",
 		0,  # Patient data index
 		[0, 1, 2, 3, 4, 7],  # Illness indices
-		"questionsSetL1",
+		"questionSetL1",
 		"res://scripts/dialogue/questionSet1.dialogue",
 		"res://scripts/dialogue/prologue1.dialogue",
-		[10, 20, 30],  # Point margins
-		{"min_points": 10, "max_points": 100},  # Point evaluation
-		9
+		9,
+		[
+			"check_blood_pressure",
+			"check_temperature",
+			"check_breathing",
+			"check_heart_rate",
+			"ask_fatigue",
+			"ask_feverish",
+			"ask_sore_throat",
+			"ask_eat_today",
+			"ask_headaches",
+			"ask_dizzy_duration",
+			"ask_heart_rate",
+			"ask_short_breath",
+			"ask_sleep",
+			"ask_menstrual_cycle",
+			"ask_enough_rest",
+		],
+		0
 	)
 ]
 

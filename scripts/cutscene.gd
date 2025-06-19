@@ -8,7 +8,6 @@ signal cutscene_finished()
 const DEFAULT_SPRITE_SIZE = Vector2(500, 1000)
 
 func _ready():
-	GameState.cutscene_scene= self
 	connect("cutscene_finished", Callable(GameState, "_on_cutscene_finished"))
 	$Button.connect("pressed", Callable(self, "_on_skip_button_pressed"))
 

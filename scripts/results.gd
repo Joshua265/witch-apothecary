@@ -25,7 +25,7 @@ func _ready() -> void:
 	add_label("Actions remaining: %d" % GameState.actions_remaining, FONT_SIZE_SMALL)
 	update_action_log()
 	update_diagnosis_section()
-	add_label("Final Points: %d" % calculate_final_points(), FONT_SIZE_NORMAL)
+	add_label("Final Points: %d" % GameState.level_scores[GameState.level_manager.current_level], FONT_SIZE_NORMAL)
 	hats.update_hats(GameState.current_level) # update hates visual
 	
 

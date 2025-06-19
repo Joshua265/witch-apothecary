@@ -12,29 +12,36 @@ var inspection_fields = {}
 func _ready():
 	GameState.clipboard_manager.connect("clipboard_loaded", Callable(self, "_on_clipboard_loaded"))
 	GameState.clipboard_manager.connect("show_inspected_field", Callable(self, "_on_show_inspected_field"))
+	GameState.clipboard_manager.connect("history_text_added", Callable(self, "_on_history_text_added"))
 
-	inspection_fields = {
-		"heartrate": {
-			"label": "Heartrate",
-			"component": $frame/Main/Patient_Info/Heartrate,
-			"unit": "bpm"
-		},
-		"blood_pressure": {
-			"label": "Blood Pressure",
-			"component": $frame/Main/Patient_Info/BloodPressure,
-			"unit": "mmHg"
-		},
-		"temperature": {
-			"label": "Temperature",
-			"component": $frame/Main/Patient_Info/Temperature,
-			"unit": "°C"
-		},
-		"breathing": {
-			"label": "Breathing",
-			"component": $frame/Main/Patient_Info/Breathing,
-			"unit": ""
-		}
+	# Dynamically generate inspection fields as Labels inside Patient_Info VBoxContainer
+	var patient_info = $frame/Main/Patient_Info
+	# Remove any previously generated inspection labels (keep static fields)
+	for child in patient_info.get_children():
+		if child is Label and child.name.begins_with("inspection_"):
+			patient_info.remove_child(child)
+			child.queue_free()
+
+	inspection_fields = {}
+	var unit_map = {
+		"check_blood_pressure": "mmHg",
+		"check_temperature": "°C",
+		"check_breathing": "",
+		"check_heart_rate": "bpm"
 	}
+	for action_id in ActionData.ACTIONS.keys(): #TODO: use GameState.action_manager.get_available_actions() instead
+		var action = ActionData.ACTIONS[action_id]
+		if action.type == "inspection":
+			var label_node = Label.new()
+			label_node.name = "inspection_" + action_id
+			label_node.text = action_id.replace("check_", "").capitalize() + ": Not Inspected"
+			label_node.add_theme_font_size_override("font_size", 12)
+			patient_info.add_child(label_node)
+			inspection_fields[action_id] = {
+				"label": action.button_text,
+				"component": label_node,
+				"unit": unit_map[action_id] if unit_map.has(action_id) else ""
+			}
 
 
 func _process(_delta):
@@ -89,7 +96,10 @@ func _on_show_inspected_field(field_name: String, field_value: String):
 	print("Showing inspected field:", field_name, "with value:", field_value)
 	if field_name in inspection_fields:
 		var field_info = inspection_fields[field_name]
-		field_info["component"].text = field_value + " " + field_info["unit"]
+		field_info["component"].text = field_info["label"] + ": " + field_value + " " + field_info["unit"]
 		$frame/History.text += "\n" + field_info["label"] + ": " + field_value + " " + field_info["unit"]
 	else:
 		print("Field name not recognized:", field_name)
+
+func _on_history_text_added(text: String):
+	$frame/History.text += "\n" + text

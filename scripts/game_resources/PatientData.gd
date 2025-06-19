@@ -1,27 +1,23 @@
 class_name PatientData
 
-var illness: String
-var temperature: float
-var heartrate: int
-var blood_pressure: String
-var breathing: String
+var check_temperature: float
+var check_heartrate: int
+var check_blood_pressure: String
+var check_breathing: String
 
 func _init(
-	_initial_illness: String = "",
-	_initial_temperature: float = 0.0,
-	_initial_heartrate: int = 0,
-	_initial_blood_pressure: String = "",
-	_initial_breathing: String = ""
+	_temperature: float = 0.0,
+	_heartrate: int = 0,
+	_blood_pressure: String = "",
+	_breathing: String = ""
 ) -> void:
-	illness = _initial_illness
-	temperature = _initial_temperature
-	heartrate = _initial_heartrate
-	blood_pressure = _initial_blood_pressure
-	breathing = _initial_breathing
+	check_temperature = _temperature
+	check_heartrate = _heartrate
+	check_blood_pressure = _blood_pressure
+	check_breathing = _breathing
 
 static var patients = [
 	PatientData.new(
-		"Constipation",
 		36.8,
 		75,
 		"120/80",

@@ -17,7 +17,7 @@ func _on_load_bok(illnessesIndices: Array[int]) -> void:
 	emit_signal("bok_loaded", illnesses)
 
 
-func set_illness(new_illness: String) -> void:
+func _on_diagnosis_selected(new_illness: String) -> void:
 	if current_illness != new_illness:
 		current_illness = new_illness
 		emit_signal("illness_changed", new_illness)

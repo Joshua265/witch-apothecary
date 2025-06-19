@@ -8,6 +8,9 @@ var content_loader: ContentLoader = ContentLoader.new()
 
 signal clipboard_loaded(character_data: CharacterData, patient_data: PatientData)
 signal show_inspected_field(field_name: String, field_value: String)
+signal history_text_added(text: String)
+
+var history: Array[String] = []
 
 func _ready():
 	GameState.connect("load_clipboard",Callable(self, "_on_load_clipboard"))
@@ -21,4 +24,11 @@ func _on_load_clipboard(character_key: String, patient_data_index: int):
 	emit_signal("clipboard_loaded", character_data, patient_data)
 
 func inspect_field(field_name: String):
-	emit_signal("show_inspected_field", field_name, str(patient_data.get(field_name)))
+	if ActionData.ACTIONS.has(field_name) and ActionData.ACTIONS[field_name].type == "inspection":
+		emit_signal("show_inspected_field", field_name, str(patient_data.get(field_name)))
+	else:
+		print("inspect_field: Ignored non-inspection or unknown field: ", field_name)
+
+func add_history_text(text: String):
+	history.append(text)
+	emit_signal("history_text_added", text)
