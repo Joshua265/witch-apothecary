@@ -15,7 +15,7 @@ func _enter_tree():
 	start_button.pressed.connect(_on_start_button_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
 	exit_button.pressed.connect(_on_exit_pressed)
-	
+
 func _exit_tree():
 	start_button.pressed.disconnect(_on_start_button_pressed)
 	settings_button.pressed.disconnect(_on_settings_pressed)
@@ -30,7 +30,7 @@ func _exit_tree():
 #starts initial cutscene
 func _on_start_button_pressed():
 	#todo: Pop up if thy wanna start a enw game? Not necessry tho
-	GameState.change_level(1)
+	GameState.change_level(0)
 
 func _on_exit_pressed():
 	get_tree().quit()

@@ -27,4 +27,11 @@ static var characters: Dictionary[String, CharacterData] = {
     "res://sprites/characters/seamstress.png",
 		"res://sprites/characters/seamstress_sitting.png",
   ),
+  "Husband": CharacterData.new(
+    "Husband",
+    32,
+    "Carpenter",
+    "res://sprites/characters/husband.png",
+    "res://sprites/characters/husband_sitting.png",
+  ),
 }

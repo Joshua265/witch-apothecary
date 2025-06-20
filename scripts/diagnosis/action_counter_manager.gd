@@ -9,7 +9,7 @@ signal action_counter_updated(available: int, remaining: int)
 
 func _ready():
   # Connect to the GameState signal to update actions when they change
-  GameState.connect("load_action_counter", Callable(self, "_on_action_counter_loaded"))
+  GameState.action_manager.connect("load_action_counter", Callable(self, "_on_action_counter_loaded"))
 
 func _on_action_counter_loaded(available: int, remaining: int) -> void:
   print("ActionCounterManager: Loaded action counter with available:", available, "remaining:", remaining)

@@ -31,8 +31,8 @@ signal load_patient(load_patient_index: int)
 signal load_bok(illnesses_indices: Array[int])
 signal load_character(character_key: String)
 signal load_clipboard(character_key: String, patient_data_index: int)
-signal load_action_counter(max_actions: int, remaining_actions: int)
 signal load_available_actions(available_actions: Array[String])
+signal load_max_actions(max_actions: int)
 
 # state
 @export var remaining_actions = 0;
@@ -73,16 +73,11 @@ func _on_diagnosis_scene_ready() -> void:
 	emit_signal("load_bok", level_manager.current_level_data.get("illnessesIndices"))
 	emit_signal("load_character", level_manager.current_level_data.get("characterKey"))
 	emit_signal("load_clipboard", level_manager.current_level_data.get("characterKey"), level_manager.current_level_data.get("patient_data_index"))
-	emit_signal("load_action_counter", level_manager.current_level_data.get("max_actions"), level_manager.current_level_data.get("max_actions"))
 	emit_signal("load_available_actions", level_manager.current_level_data.available_actions)
+	emit_signal("load_max_actions", level_manager.current_level_data.max_actions)
 
 func unlock_level(level_index: int) -> void:
 	level_manager.unlock_level(level_index)
-
-func use_action(action: String) -> void:
-	action_log.append(action)
-	remaining_actions -= 1
-	action_counter_manager.update(remaining_actions)
 
 func select_diagnosis(current_illness: String) -> void:
 	var points = level_manager.calculate_points(current_illness)

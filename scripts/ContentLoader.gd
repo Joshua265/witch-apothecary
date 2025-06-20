@@ -6,9 +6,12 @@ signal content_loaded(content_type: String, data)
 
 func load_level_data(levelIndex: int) -> LevelData:
 	# Return static level data example, ignoring index for now
-	var level = LevelData.levels[levelIndex - 1]
+	var level = LevelData.levels[levelIndex]
 	emit_signal("content_loaded", "level", level)
 	return level
+
+func load_all_levels() -> Array[LevelData]:
+	return LevelData.levels
 
 func load_character_data(characterKey: String) -> CharacterData:
 	var character = CharacterData.characters[characterKey]

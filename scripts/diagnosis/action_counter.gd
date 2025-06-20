@@ -1,4 +1,5 @@
 extends HBoxContainer
+class_name AcionCounter
 
 var action_icon_texture = preload("res://sprites/ui/action.png")
 

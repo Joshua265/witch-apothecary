@@ -29,7 +29,7 @@ static var results: Dictionary[int, ResultData] = {
 					"ask_menstrual_cycle": 20,
 					"ask_enough_rest": 9
 				},
-				 "anemia",
+				 "constipation",
 			[20, 40, 60]),
 	1: ResultData.new(
 			{

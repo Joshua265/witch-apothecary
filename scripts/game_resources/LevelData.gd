@@ -42,7 +42,7 @@ func _init(
 	self.available_actions = _available_actions
 	self.result_preset_index = _result_preset_index
 
-static var levels = [
+static var levels: Array[LevelData] = [
 	LevelData.new(
 		"res://sprites/characters/seamstress.png",
 		"precutsceneL1",
@@ -53,7 +53,7 @@ static var levels = [
 		"questionSetL1",
 		"res://scripts/dialogue/questionSet1.dialogue",
 		"res://scripts/dialogue/prologue1.dialogue",
-		9,
+		9, # Max actions
 		[
 			"check_blood_pressure",
 			"check_temperature",
@@ -72,6 +72,66 @@ static var levels = [
 			"ask_enough_rest",
 		],
 		0
+	),
+	LevelData.new(
+		"res://sprites/characters/husband.png",
+		"precutsceneL2",
+		"postcutsceneL2",
+		"Husband",
+		1,  # Patient data index
+		[5, 6, 8, 9, 10, 11],  # Illness indices
+		"questionSetL2",
+		"res://scripts/dialogue/questionSet2.dialogue",
+		"res://scripts/dialogue/prologue2.dialogue",
+		10, # Max actions
+		[
+			"check_blood_pressure",
+			"check_temperature",
+			"check_breathing",
+			"check_heart_rate",
+			"ask_fatigue",
+			"ask_feverish",
+			"ask_sore_throat",
+			"ask_eat_today",
+			"ask_headaches",
+			"ask_dizzy_duration",
+			"ask_heart_rate",
+			"ask_short_breath",
+			"ask_sleep",
+			"ask_menstrual_cycle",
+			"ask_enough_rest"
+		],
+		1
+	),
+	LevelData.new(
+		"res://sprites/characters/witch.png",
+		"precutsceneL3",
+		"postcutsceneL3",
+		"Coming Soon",
+		2,  # Patient data index
+		[12, 13, 14, 15, 16, 17],  # Illness indices
+		"questionSetL3",
+		"res://scripts/dialogue/questionSet3.dialogue",
+		"res://scripts/dialogue/prologue3.dialogue",
+		11, # Max actions
+		[
+			"check_blood_pressure",
+			"check_temperature",
+			"check_breathing",
+			"check_heart_rate",
+			"ask_fatigue",
+			"ask_feverish",
+			"ask_sore_throat",
+			"ask_eat_today",
+			"ask_headaches",
+			"ask_dizzy_duration",
+			"ask_heart_rate",
+			"ask_short_breath",
+			"ask_sleep",
+			"ask_menstrual_cycle",
+			"ask_enough_rest"
+		],
+		2
 	)
 ]
 

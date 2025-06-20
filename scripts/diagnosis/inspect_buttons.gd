@@ -29,5 +29,6 @@ func _generate_inspect_buttons():
 			func() -> void:
 				GameState.action_manager.use_action(action)
 				GameState.clipboard_manager.inspect_field(action)
+				GameState.set_diagnosis_state(GameState.DiagnosisState.DEFAULT) # Here is prop the place to add any animations
 		)
 		button.tooltip_text = GameState.action_manager.get_action(action).button_text

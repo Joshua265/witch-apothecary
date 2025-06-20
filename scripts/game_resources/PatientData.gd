@@ -22,5 +22,11 @@ static var patients = [
 		75,
 		"120/80",
 		"Normal"
-	)
+	),
+	PatientData.new(
+		37.5,
+		80,
+		"130/85",
+		"Normal"
+	),
 ]

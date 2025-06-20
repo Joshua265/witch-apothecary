@@ -9,7 +9,7 @@ func _ready():
 	DialogueManager.connect("dialogue_ended", Callable(self, "_on_dialogue_finished"))
 
 
-func _on_load_questions(question_set_script: String, question_set_key: String):
+func _on_load_questions(question_set_script: String):
 	resource = ResourceLoader.load(question_set_script)
 	print("Loaded resource lines keys:", resource.lines.keys())
 	print("Loaded resource titles:", resource.titles)
@@ -36,18 +36,18 @@ func _generate_question_buttons():
 		button.text = action_data.button_text
 		button.tooltip_text = action_data.button_text
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.pressed.connect(func(): _on_question_pressed(action_id, action_data.button_text))
+		button.pressed.connect(func(): _on_question_pressed(action_id))
 		add_child(button)
 
-func _on_question_pressed(action_id: String, question: String):
-	GameState.set_diagnosis_state(GameState.DiagnosisState.ASKING)
+func _on_question_pressed(action_id: String):
+	GameState.set_diagnosis_state(GameState.DiagnosisState.DIALOGUE)
 	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource, action_id)
 	DialogueManager.show_dialogue_balloon(
 		resource,
 		dialogue_line.next_id,
 	)
 	# add the string to the action log!
-	GameState.use_action("You asked: '" + str(question) + "'")
+	GameState.action_manager.use_action(action_id)
 	question_selected.emit(action_id)  # Emit signal to Diagnosis to hide UI
 
 # This should be called when the dialogue balloon is finished/closed

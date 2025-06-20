@@ -9,6 +9,7 @@ var inspect_list: ScrollContainer
 var main_action_container: HBoxContainer
 var background: TextureRect
 var clipboard: Clipboard
+var action_counter: HBoxContainer
 
 signal ask_pressed
 signal inspect_pressed
@@ -36,6 +37,7 @@ func _ready():
 	main_action_container = $Interaction/ScrollContainer/ActionButtonsContainer/MainActions
 	background = $Background
 	clipboard = $Interaction/Clipboard
+	action_counter = $ActionCounter
 
 
 	# Connect buttons safely
@@ -99,11 +101,13 @@ func _on_diagnosis_state_changed(new_state):
 		inspect_list.hide()
 		back_button.hide()
 		clipboard.show()
+		action_counter.show()
 	elif new_state == GameState.DiagnosisState.DIALOGUE:
 		# Hide question list and back button
 		question_list.hide()
 		back_button.hide()
 		clipboard.hide()
+		action_counter.hide()
 	elif new_state == GameState.DiagnosisState.INSPECTING:
 		main_action_container.hide()
 		inspect_list.show()

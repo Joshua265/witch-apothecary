@@ -1,8 +1,9 @@
 extends Node
 class_name ActionManager
 
-signal load_questions(question_set_script: String, question_set_key: String)
+signal load_questions(question_set_script: String)
 signal load_inspections
+signal load_action_counter(max_actions: int, remaining_actions: int)
 
 var content_loader: ContentLoader = preload("res://scripts/ContentLoader.gd").new()
 var actions: Dictionary[String, ActionData] = {}
@@ -23,21 +24,25 @@ func _ready():
 	actions = content_loader.load_action_data()
 	GameState.connect("load_available_actions", Callable(self, "_on_load_available_actions"))
 	GameState.connect("load_action_counter", Callable(self, "_on_load_action_counter"))
+	GameState.connect("load_max_actions", Callable(self, "_on_load_max_actions"))
 
-func _on_load_action_counter(_max_actions: int, _remaining_actions: int) -> void:
-	# Initialize action counter
-	remaining_actions = _max_actions
+func _on_load_max_actions(max_actions: int) -> void:
+	print("[ActionManager] _on_load_max_actions called with: ", max_actions)
+	# Initialize remaining actions
+	remaining_actions = max_actions
+	update_available_actions()
+
 
 func _on_load_available_actions(_available_actions: Array[String]) -> void:
 	print("[ActionManager] _on_load_available_actions called with: ", _available_actions)
 	# Load actions for the current level
 	available_actions = _available_actions
-	print("Available actions loaded: ", available_actions)
 	update_available_actions()
 
 func update_available_actions() -> void:
-	emit_signal("load_questions", GameState.level_manager.current_level_data.get("questionSetScript"), GameState.level_manager.current_level_data.get("questionSetKey"))
+	emit_signal("load_questions", GameState.level_manager.current_level_data.questionSetScript)
 	emit_signal("load_inspections")
+	emit_signal("load_action_counter", GameState.level_manager.current_level_data.max_actions, remaining_actions)
 
 # Check if an action is available
 func is_action_available(action_id: String) -> bool:

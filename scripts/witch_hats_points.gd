@@ -23,14 +23,16 @@ func _ready():
 	#update_hats()
 
 
-func update_hats(level: String):
-	print("Called")
-	print(GameState.current_points)
-	var points = GameState.level_scores[level]
-	var margins = GameState.patient_data_instance.patients[level]["point_margins"]
+func update_hats(level: int):
+	if not GameState.level_manager.level_scores.has(level):
+		for i in range(hats.size()):
+			hats[i].texture = load(EMPTY_HAT_PATH)
+		return
+	var level_score = GameState.level_manager.level_scores.get(level)
+	var margins = GameState.level_manager.result_data.star_margins
 
 	for i in range(hats.size()):
-		if points >= margins[i]:
+		if level_score.points >= margins[i]:
 			hats[i].texture = load(FILLED_HAT_PATH)
 		else:
 			hats[i].texture = load(EMPTY_HAT_PATH)

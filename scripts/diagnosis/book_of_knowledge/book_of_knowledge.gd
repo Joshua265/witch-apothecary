@@ -5,8 +5,6 @@ extends TextureRect
 
 var illnesses: Array[IllnessData]
 
-var currentIllness: String
-
 # Book UI and Animation
 @export var diagnose_mode: bool
 
@@ -140,6 +138,7 @@ func _on_close_button_pressed():
 	back_pressed.emit()
 
 func _on_illness_pressed(illness_name: String):
+	emit_signal("diagnosis_selected", illness_name)
 	emit_signal("open_confirmation_dialog", "Do you want to select " + illness_name + " as the diagnosis?")
 
 
@@ -147,4 +146,4 @@ func _on_bo_k_button_pressed() -> void:
 	open_book()
 
 func _on_confirmation_diagnosis() -> void:
-	GameState.select_diagnosis(currentIllness)
+	GameState.select_diagnosis(GameState.bok_manager.current_illness)
