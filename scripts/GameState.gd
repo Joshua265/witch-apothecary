@@ -38,6 +38,7 @@ func set_diagnosis_state(new_state: DiagnosisState) -> void:
 		current_diagnosis_state = new_state
 		emit_signal("diagnosis_state_changed", new_state)
 
+
 signal load_patient(load_patient_index: int)
 signal load_bok(illnesses_indices: Array[int])
 signal load_character(character_key: String)
