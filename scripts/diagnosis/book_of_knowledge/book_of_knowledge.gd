@@ -47,11 +47,11 @@ func _on_back_button_pressed():
 	close_book()
 
 func open_book():
+	update_page()
 	$AnimationPlayer.play("show")
 
 func close_book():
 	$AnimationPlayer.play_backwards("show")
-	# Reset diagnose mode and update page
 	update_page()
 
 func _on_illnesses_changed(new_illnesses: Array[IllnessData]):
@@ -80,8 +80,14 @@ func update_page():
 		target_panel.add_child(separator)
 
 		for section in illness["info"]:
-			var section_label = create_label("[b]" + section + "[/b]: " + illness["info"][section], 14)
-			target_panel.add_child(section_label)
+			# Highlight only the Symptoms section
+			var text = illness["info"][section]
+			if section == "Symptoms":
+				var matched = GameState.bok_highlighter.match_symptoms(illness)
+				print("Matched symptoms: ", matched)
+				text = GameState.bok_highlighter.highlight_symptoms_text(text, matched)
+			var lbl = create_label("[b]" + section + "[/b]: " + text, 14)
+			target_panel.add_child(lbl)
 
 		illness_index += 1
 

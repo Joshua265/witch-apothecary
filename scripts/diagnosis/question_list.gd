@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+# load the dialogue resource
 signal question_selected(question_text)
 
 var resource = null

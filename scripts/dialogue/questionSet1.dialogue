@@ -44,7 +44,7 @@ Helena: No, I’ve been so caught up in my work that I sometimes forget to drink
 do GameState.clipboard_manager.add_history_text("Helena reports dizziness occurring after standing up or long hours of work, possibly linked to dehydration.")
 => END
 
-~ ask_heart_rate
+~ ask_heartrate
 Witch: You mentioned feeling stressed. Have you noticed any changes in your heart rate, like it beating faster than usual?
 Helena: Yes, I feel my heart racing sometimes, especially when I’m stressed or when I work too much.
 Witch: Elevated heart rate can be a sign of stress or anxiety. It could also be related to overworking yourself.

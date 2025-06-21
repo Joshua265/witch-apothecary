@@ -4,10 +4,11 @@ class_name ActionManager
 signal load_questions(question_set_script: String)
 signal load_inspections
 signal load_action_counter(max_actions: int, remaining_actions: int)
+signal action_used(action_id: String)
 
 var content_loader: ContentLoader = preload("res://scripts/ContentLoader.gd").new()
 var actions: Dictionary[String, ActionData] = {}
-var available_actions: Array[String] = []
+var available_actions: Array[String] = [] # List of available action IDs for the current level
 var remaining_actions: int = 0
 
 class ActionLogItem:
@@ -23,7 +24,6 @@ var action_log: Array[ActionLogItem] = []
 func _ready():
 	actions = content_loader.load_action_data()
 	GameState.connect("load_available_actions", Callable(self, "_on_load_available_actions"))
-	GameState.connect("load_action_counter", Callable(self, "_on_load_action_counter"))
 	GameState.connect("load_max_actions", Callable(self, "_on_load_max_actions"))
 
 func _on_load_max_actions(max_actions: int) -> void:
@@ -32,6 +32,12 @@ func _on_load_max_actions(max_actions: int) -> void:
 	remaining_actions = max_actions
 	update_available_actions()
 
+func was_inspected(action_id: String) -> bool:
+	# Check if the action was already used
+	for log_item in action_log:
+		if log_item.action_id == action_id:
+			return true
+	return false
 
 func _on_load_available_actions(_available_actions: Array[String]) -> void:
 	print("[ActionManager] _on_load_available_actions called with: ", _available_actions)
@@ -56,6 +62,7 @@ func use_action(action_id: String) -> bool:
 		available_actions.erase(action_id)  # Remove the action from available actions
 		action_log.append(ActionLogItem.new(action_id, actions.get(action_id).log_text))
 		update_available_actions()
+		emit_signal("action_used", action_id)  # Notify that an action was used
 		return true
 	return false
 

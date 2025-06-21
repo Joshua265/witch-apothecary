@@ -17,17 +17,19 @@ Edgar: And her pulse… it races, even when she’s resting. I’ve seen it. I c
 Witch: I understand. Please — sit down over here, Helena. Let’s have a closer look.
   => END
 
+# todo lower case later
 ~ postcutsceneL1
 do get_node("/root/Cutscene").set_background("res://sprites/backgrounds/bg.png")
 do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/husband.png",get_node("/root/Cutscene").get_position_from_keyword("left"))
 do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
-Helena: So I have {{GameState.current_illness}} ?
+Helena: So I have {{GameState.level_manager.level_scores[GameState.level_manager.current_level].diagnosis}} ?
  =>< witch_illness_response
 Helena: Alright. Thank you so much I will do that!
  => END
 
+#HERE responses - adjust
 ~ witch_illness_response
-match GameState.current_illness:
+match GameState.level_manager.level_scores[GameState.level_manager.current_level].diagnosis:
 	when "Food Poisoning":
 		Witch: Ah yes, classic Food Poisoning. Brew some chamomile tea and rest. Avoid anything greasy, dear.
 	when "Constipation":

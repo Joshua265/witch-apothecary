@@ -7,6 +7,7 @@ var bok_manager: BoKManager
 var clipboard_manager: ClipboardManager
 var content_loader: ContentLoader = ContentLoader.new()
 var action_manager: ActionManager = ActionManager.new()
+var bok_highlighter: BoKHighlighter = BoKHighlighter.new()
 
 var action_log = []
 
@@ -19,6 +20,16 @@ enum DiagnosisState {
 }
 
 var current_diagnosis_state: DiagnosisState = DiagnosisState.DEFAULT
+
+enum CurrentScene {
+	PRECUTSCENE,
+	DIAGNOSIS,
+	POSTCUTSCENE,
+	RESULTS,
+	LEVEL_SELECT
+}
+
+var current_scene: CurrentScene
 
 signal diagnosis_state_changed(new_state)
 
@@ -52,12 +63,14 @@ func _ready() -> void:
 	add_child(clipboard_manager)
 	add_child(character_manager)
 	add_child(action_manager)
+	add_child(bok_highlighter)
 
 func change_level(new_level: int) -> void:
 	print("GameState CHANGE LEVEL")
 	level_manager.change_level(new_level)
 	print(level_manager.current_level_data)
 
+	current_scene = CurrentScene.PRECUTSCENE
 	get_tree().change_scene_to_file("res://scenes/cutscene.tscn")
 	SceneTransitionManager.change_to_cutscene(
 		level_manager.current_level_data.get("cutscenescript"),
@@ -66,7 +79,21 @@ func change_level(new_level: int) -> void:
 
 func _on_cutscene_finished() -> void:
 	print("GameState CUTSCENE FINISHED")
-	get_tree().change_scene_to_file("res://scenes/diagnosis.tscn")
+	if current_scene == CurrentScene.PRECUTSCENE:
+		current_scene = CurrentScene.DIAGNOSIS
+		get_tree().change_scene_to_file("res://scenes/diagnosis.tscn")
+	elif current_scene == CurrentScene.POSTCUTSCENE:
+		current_scene = CurrentScene.LEVEL_SELECT
+		get_tree().change_scene_to_file("res://scenes/level_select.tscn")
+
+func show_post_cutscene() -> void:
+	print("GameState SHOW POST CUTSCENE")
+	current_scene = CurrentScene.POSTCUTSCENE
+	get_tree().change_scene_to_file("res://scenes/cutscene.tscn")
+	SceneTransitionManager.change_to_cutscene(
+		level_manager.current_level_data.cutscenescript,
+		level_manager.current_level_data.postcutsceneKey,
+	)
 
 func _on_diagnosis_scene_ready() -> void:
 	emit_signal("load_patient", level_manager.current_level_data.get("patient_data_index"))
@@ -75,6 +102,7 @@ func _on_diagnosis_scene_ready() -> void:
 	emit_signal("load_clipboard", level_manager.current_level_data.get("characterKey"), level_manager.current_level_data.get("patient_data_index"))
 	emit_signal("load_available_actions", level_manager.current_level_data.available_actions)
 	emit_signal("load_max_actions", level_manager.current_level_data.max_actions)
+	bok_highlighter.reset()
 
 func unlock_level(level_index: int) -> void:
 	level_manager.unlock_level(level_index)

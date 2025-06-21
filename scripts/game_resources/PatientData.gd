@@ -1,32 +1,32 @@
 class_name PatientData
 
-var check_temperature: float
-var check_heartrate: int
-var check_blood_pressure: String
-var check_breathing: String
+var temperature: float
+var heartrate: int
+var blood_pressure: String
+var breathing: int
 
 func _init(
-	_temperature: float = 0.0,
-	_heartrate: int = 0,
-	_blood_pressure: String = "",
-	_breathing: String = ""
+	_temperature: float,
+	_heartrate: int,
+	_blood_pressure: String ,
+	_breathing: int
 ) -> void:
-	check_temperature = _temperature
-	check_heartrate = _heartrate
-	check_blood_pressure = _blood_pressure
-	check_breathing = _breathing
+	temperature = _temperature
+	heartrate = _heartrate
+	blood_pressure = _blood_pressure
+	breathing = _breathing
 
 static var patients = [
 	PatientData.new(
-		36.8,
-		75,
-		"120/80",
-		"Normal"
+		39,
+		200,
+		"150/100",
+		200
 	),
 	PatientData.new(
 		37.5,
 		80,
 		"130/85",
-		"Normal"
+		25
 	),
 ]

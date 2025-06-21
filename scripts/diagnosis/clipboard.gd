@@ -8,12 +8,19 @@ var is_hovered : bool = false
 
 var inspection_fields = {}
 
+var unit_map = {
+		"blood_pressure": "mmHg",
+		"temperature": "°C",
+		"breathing": "breaths/min",
+		"heartrate": "bpm"
+	}
 
 func _ready():
 	GameState.clipboard_manager.connect("clipboard_loaded", Callable(self, "_on_clipboard_loaded"))
 	GameState.clipboard_manager.connect("show_inspected_field", Callable(self, "_on_show_inspected_field"))
 	GameState.clipboard_manager.connect("history_text_added", Callable(self, "_on_history_text_added"))
 
+func _generate_inspection_fields():
 	# Dynamically generate inspection fields as Labels inside Patient_Info VBoxContainer
 	var patient_info = $frame/Main/Patient_Info
 	# Remove any previously generated inspection labels (keep static fields)
@@ -23,18 +30,13 @@ func _ready():
 			child.queue_free()
 
 	inspection_fields = {}
-	var unit_map = {
-		"check_blood_pressure": "mmHg",
-		"check_temperature": "°C",
-		"check_breathing": "",
-		"check_heart_rate": "bpm"
-	}
-	for action_id in ActionData.ACTIONS.keys(): #TODO: use GameState.action_manager.get_available_actions() instead
+
+	for action_id in GameState.clipboard_manager.level_inspection_fields:
 		var action = ActionData.ACTIONS[action_id]
 		if action.type == "inspection":
 			var label_node = Label.new()
 			label_node.name = "inspection_" + action_id
-			label_node.text = action_id.replace("check_", "").capitalize() + ": Not Inspected"
+			label_node.text = action_id.capitalize() + ": Not Inspected"
 			label_node.add_theme_font_size_override("font_size", 12)
 			patient_info.add_child(label_node)
 			inspection_fields[action_id] = {
@@ -86,6 +88,7 @@ func _on_clipboard_loaded(character_data: CharacterData, _patient_data: PatientD
 		var component = inspection_fields[field_name]["component"]
 		component.text = label + ": Not Inspected"
 	$frame/History.text = ""
+	_generate_inspection_fields()
 
 func _gui_input(event):
 	if event is InputEventMouseButton:

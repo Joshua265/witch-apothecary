@@ -48,13 +48,13 @@ func update_action_log() -> void:
 
 	add_label("Actions Taken", FONT_SIZE_SUBHEADING)
 
-	var action_log = GameState.action_log
+	var action_log = GameState.action_manager.action_log
 
 	if action_log.is_empty():
 		add_label("No actions taken", FONT_SIZE_SMALL)
 	else:
 		for action in action_log:
-			add_label(action, FONT_SIZE_SMALL)
+			add_label(action.text, FONT_SIZE_SMALL)
 
 func update_diagnosis_section() -> void:
 	var diagnosis = GameState.level_manager.level_scores[GameState.level_manager.current_level].diagnosis
@@ -72,5 +72,4 @@ func update_diagnosis_section() -> void:
 	add_label(outcome_text, FONT_SIZE_SMALL, true)
 
 func _on_button_pressed() -> void:
-	var level_select_scene = preload("res://scenes/level_select.tscn")
-	SceneTransitionManager.change_scene(level_select_scene)
+	GameState.show_post_cutscene()
