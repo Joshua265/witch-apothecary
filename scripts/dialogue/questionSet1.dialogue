@@ -1,74 +1,83 @@
-~ questionSetL1
-- Tell me more about your fatigue.
-	Witch: Can you tell me more about the fatigue? How long have you been feeling this way?
-	Helena: It all started a couple of weeks ago. I’ve been feeling drained, especially after work. I just can’t shake off the tiredness.
-	Witch: How long has the fatigue been persistent? Did anything change recently to make it worse?
-	Helena: It's been this way for a few weeks now, and I think it's been getting worse with my long hours of work. I’m always sewing and don’t really take breaks.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("1")
-	=> END
-- Have you been feeling feverish?
-	Witch: Have you been feeling feverish lately?
-	Helena: Actually, sometimes I feel dizzy, especially when I stand up too fast.
-	Witch: A mild fever could be a sign of something viral. Have you noticed any changes in your body temperature recently?
-	Helena: Yes, I think so. It's not too high, just a slight rise, but it’s been there for a few days now.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("2")
-	=> END
-- Have you experienced a sore throat or cough?
-	Witch: Have you had any sore throat or cough lately? This could give us more insight into your condition.
-	Helena: No, I haven’t had any sore throat or cough. It's mostly the dizziness and headaches.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("3")
-	=> END
-- What did you eat today?
-	Witch: Your diet might also contribute to how you're feeling. Have you been eating enough?
-	Helena: Oh, just some bread and vegetables. It’s been a busy day, so I didn’t get to eat much else.
-	Witch: I see. Lack of variety in your diet could be adding to your fatigue. Have you been getting enough hydration too?
-	Helena: I haven’t really been drinking enough water. I’ve been so focused on my work that I forget to take breaks and hydrate.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("4")
-	=> END
-- Tell me more about your headaches.
-	Witch: Can you describe the headaches you’ve been having?
-	Helena: They usually start around my forehead and temples. It feels like a dull, constant pressure.
-	Witch: How often do these headaches occur, and have they been getting worse?
-	Helena: They’ve been happening almost every day, and they seem to get worse when I don’t take a break from sewing.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("5")
-	=> END
-- How long have you been feeling dizzy?
-	Witch: You mentioned dizziness earlier. How long has that been happening?
-	Helena: The dizziness started around the same time as the fatigue. It’s mostly when I stand up too quickly or after working for a while.
-	Witch: Dizziness can sometimes indicate a lack of hydration or fatigue. Have you been drinking enough water?
-	Helena: No, I’ve been so caught up in my work that I sometimes forget to drink.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("6")
-	=> END
-- Have you noticed any changes in your heart rate?
-	Witch: You mentioned feeling stressed. Have you noticed any changes in your heart rate, like it beating faster than usual?
-	Helena: Yes, I feel my heart racing sometimes, especially when I’m stressed or when I work too much.
-	Witch: Elevated heart rate can be a sign of stress or anxiety. It could also be related to overworking yourself.
-	Helena: That could be it. I’ve been pushing myself a lot lately.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("7")
-	=> END
-- Do you feel short of breath?
-	Witch: Have you been feeling short of breath lately? This can sometimes accompany stress or a viral infection.
-	Helena: I don’t think I’ve noticed that, no. I feel tired, but not like I can’t breathe.
-	Witch: Good to hear. It might rule out some more serious issues like a respiratory infection.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("8")
-	=> END
-- How much sleep are you getting?
-	Witch: How much sleep are you getting each night? Fatigue can be worsened by lack of rest.
-	Helena: I don’t sleep much. I usually get around 4-5 hours a night.
-	Witch: That’s definitely on the low side. Your body might be struggling to recover with such little rest.
-	Helena: Yeah, I don’t have time for more sleep with all the work I need to finish.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("9")
-	=> END
-- Have you noticed any changes in your menstrual cycle?
-	Witch: This might be a bit personal, but have you noticed any changes in your menstrual cycle lately?
-	Helena: No, everything has been normal in that regard.
-	Witch: Alright, just ruling out anything hormonal.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("10")
-	=> END
-- Do you feel like you’re getting enough rest, even if it's just short breaks?
-	Witch: Do you manage to take short breaks throughout your workday? Even small moments of rest could help with your fatigue.
-	Helena: Not really, I get so caught up that I forget to take breaks.
-	Witch: That could be contributing to your fatigue. You might want to consider setting reminders to take breaks.
-	Helena: I’ll try to do that.
-	do get_node("/root/Diagnosis/Interaction/ScrollContainer/ActionButtonsContainer/Dialogue_Section/ScrollContainer/QuestionList").getcorrectSummary("11")
-	=> END
+~ ask_fatigue
+Witch: Can you tell me more about the fatigue? How long have you been feeling this way?
+Helena: It all started a couple of weeks ago. I’ve been feeling drained, especially after work. I just can’t shake off the tiredness.
+Witch: How long has the fatigue been persistent? Did anything change recently to make it worse?
+Helena: It's been this way for a few weeks now, and I think it's been getting worse with my long hours of work. I’m always sewing and don’t really take breaks.
+do GameState.clipboard_manager.add_history_text("Helena reports persistent fatigue over the past few weeks, worsened by long working hours with minimal breaks.")
+=> END
+
+~ ask_feverish
+Witch: Have you been feeling feverish lately?
+Helena: Actually, sometimes I feel dizzy, especially when I stand up too fast.
+Witch: A mild fever could be a sign of something viral. Have you noticed any changes in your body temperature recently?
+Helena: Yes, I think so. It's not too high, just a slight rise, but it’s been there for a few days now.
+do GameState.clipboard_manager.add_history_text("Helena reports a slight rise in temperature over the last few days, along with occasional dizziness.")
+=> END
+
+~ ask_sore_throat
+Witch: Have you had any sore throat or cough lately? This could give us more insight into your condition.
+Helena: No, I haven’t had any sore throat or cough. It's mostly the dizziness and headaches.
+do GameState.clipboard_manager.add_history_text("Helena has not experienced sore throat or cough, but reports dizziness and headaches.")
+=> END
+
+~ ask_eat_today
+Witch: Your diet might also contribute to how you're feeling. Have you been eating enough?
+Helena: Oh, just some bread and vegetables. It’s been a busy day, so I didn’t get to eat much else.
+Witch: I see. Lack of variety in your diet could be adding to your fatigue. Have you been getting enough hydration too?
+Helena: I haven’t really been drinking enough water. I’ve been so focused on my work that I forget to take breaks and hydrate.
+do GameState.clipboard_manager.add_history_text("Helena reports inadequate hydration and limited diet, which could be contributing to her symptoms of fatigue and dizziness.")
+=> END
+
+~ ask_headaches
+Witch: Can you describe the headaches you’ve been having?
+Helena: They usually start around my forehead and temples. It feels like a dull, constant pressure.
+Witch: How often do these headaches occur, and have they been getting worse?
+Helena: They’ve been happening almost every day, and they seem to get worse when I don’t take a break from sewing.
+do GameState.clipboard_manager.add_history_text("Helena reports recurring headaches around her forehead and temples, which worsen with prolonged work without breaks.")
+=> END
+
+~ ask_dizzy_duration
+Witch: You mentioned dizziness earlier. How long has that been happening?
+Helena: The dizziness started around the same time as the fatigue. It’s mostly when I stand up too quickly or after working for a while.
+Witch: Dizziness can sometimes indicate a lack of hydration or fatigue. Have you been drinking enough water?
+Helena: No, I’ve been so caught up in my work that I sometimes forget to drink.
+do GameState.clipboard_manager.add_history_text("Helena reports dizziness occurring after standing up or long hours of work, possibly linked to dehydration.")
+=> END
+
+~ ask_heartrate
+Witch: You mentioned feeling stressed. Have you noticed any changes in your heart rate, like it beating faster than usual?
+Helena: Yes, I feel my heart racing sometimes, especially when I’m stressed or when I work too much.
+Witch: Elevated heart rate can be a sign of stress or anxiety. It could also be related to overworking yourself.
+Helena: That could be it. I’ve been pushing myself a lot lately.
+do GameState.clipboard_manager.add_history_text("Helena reports an elevated heart rate, especially under stress or prolonged work, which could indicate stress-induced tachycardia.")
+=> END
+
+~ ask_short_breath
+Witch: Have you been feeling short of breath lately? This can sometimes accompany stress or a viral infection.
+Helena: I don’t think I’ve noticed that, no. I feel tired, but not like I can’t breathe.
+Witch: Good to hear. It might rule out some more serious issues like a respiratory infection.
+do GameState.clipboard_manager.add_history_text("Helena denies experiencing shortness of breath, which helps rule out some respiratory conditions.")
+=> END
+
+~ ask_sleep
+Witch: How much sleep are you getting each night? Fatigue can be worsened by lack of rest.
+Helena: I don’t sleep much. I usually get around 4-5 hours a night.
+Witch: That’s definitely on the low side. Your body might be struggling to recover with such little rest.
+Helena: Yeah, I don’t have time for more sleep with all the work I need to finish.
+do GameState.clipboard_manager.add_history_text("Helena reports getting only 4-5 hours of sleep each night, which could be contributing to her fatigue and overall condition.")
+=> END
+
+~ ask_menstrual_cycle
+Witch: This might be a bit personal, but have you noticed any changes in your menstrual cycle lately?
+Helena: No, everything has been normal in that regard.
+Witch: Alright, just ruling out anything hormonal.
+do GameState.clipboard_manager.add_history_text("Helena reports no changes in her menstrual cycle, ruling out hormonal imbalances as a factor.")
+=> END
+
+~ ask_enough_rest
+Witch: Do you manage to take short breaks throughout your workday? Even small moments of rest could help with your fatigue.
+Helena: Not really, I get so caught up that I forget to take breaks.
+Witch: That could be contributing to your fatigue. You might want to consider setting reminders to take breaks.
+Helena: I’ll try to do that.
+do GameState.clipboard_manager.add_history_text("Helena admits to not taking regular breaks during work, which could be contributing to her fatigue.")
+=> END

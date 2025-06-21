@@ -1,37 +1,34 @@
 extends VBoxContainer
-# todo: fixes + highlight new values
-# inlcudes example for action_log
+
 func _ready():
+	GameState.action_manager.connect("load_inspections", Callable(self, "_on_load_inspections"))
+
+func _on_load_inspections():
+	print("Generating inspection buttons...")
+	# Clear existing buttons
+	for child in get_children():
+		if child is Button:
+			child.queue_free()
+
+	# Generate inspection buttons
 	_generate_inspect_buttons()
 
+
 func _generate_inspect_buttons():
-	# Todo: Make this better
-	var button_data = [
-		{"text": "Pulse Check", "handler": Callable(self, "_on_pulse_check_pressed")},
-		{"text": "Blood Pressure Check", "handler": Callable(self, "_on_bp_check_pressed")},
-		{"text": "Temperature Check", "handler": Callable(self, "_on_temperature_check_pressed")},
-		{"text": "Breathing Check", "handler": Callable(self, "_on_breathing_check_pressed")}
-	]
+	var actions = GameState.action_manager.get_available_actions()
+	actions = actions.filter(
+		func(action_id: String) -> bool:
+			return GameState.action_manager.get_action(action_id).type == "inspection"
+	)
 
-	for data in button_data:
+	for action in actions:
 		var button = Button.new()
-		button.text = data["text"]
+		button.text = GameState.action_manager.get_action(action).button_text
 		add_child(button)
-		button.pressed.connect(data["handler"])
-		
-func _on_pulse_check_pressed():
-	get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_heartrate(GameState.current_patient["heartrate"])
-	get_node("/root/Diagnosis/ActionCounter").add_action_log("You checked pulse.")
-
-func _on_bp_check_pressed():
-	get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_bp(GameState.current_patient["blood_pressure"])
-	get_node("/root/Diagnosis/ActionCounter").add_action_log("You checked blood pressure.")
-	
-func _on_temperature_check_pressed():
-	get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_temperature(GameState.current_patient["temperature"])
-	get_node("/root/Diagnosis/ActionCounter").add_action_log("You checked temperature.")
-
-#todo: Add breathing section in clipboard? or just use add info
-func _on_breathing_check_pressed():
-	get_node("/root/Diagnosis/Interaction/Clipboard/frame").update_breathing(GameState.current_patient["breathing"])
-	get_node("/root/Diagnosis/ActionCounter").add_action_log("You checked breathing.")
+		button.pressed.connect(
+			func() -> void:
+				GameState.action_manager.use_action(action)
+				GameState.clipboard_manager.inspect_field(action)
+				GameState.set_diagnosis_state(GameState.DiagnosisState.DEFAULT) # Here is prop the place to add any animations
+		)
+		button.tooltip_text = GameState.action_manager.get_action(action).button_text

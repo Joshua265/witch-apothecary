@@ -2,64 +2,55 @@ extends VBoxContainer
 
 # load the dialogue resource
 signal question_selected(question_text)
-var resource = ResourceLoader.load(GameState.current_patient["questionSetScript"])
 
-
-# TODO: needs to change for the second level- maybe also another file - add to the patient.. file
-var question_summaries := {
-	"1": "Helena reports persistent fatigue over the past few weeks, worsened by long working hours with minimal breaks.",
-	"2": "Helena reports a slight rise in temperature over the last few days, along with occasional dizziness.",
-	"3": "Helena has not experienced sore throat or cough, but reports dizziness and headaches.",
-	"4": "Helena reports inadequate hydration and limited diet, which could be contributing to her symptoms of fatigue and dizziness.",
-	"5": "Helena reports recurring headaches around her forehead and temples, which worsen with prolonged work without breaks.",
-	"6": "Helena reports dizziness occurring after standing up or long hours of work, possibly linked to dehydration.",
-	"7": "Helena reports an elevated heart rate, especially under stress or prolonged work, which could indicate stress-induced tachycardia.",
-	"8": "Helena denies experiencing shortness of breath, which helps rule out some respiratory conditions.",
-	"9": "Helena reports getting only 4-5 hours of sleep each night, which could be contributing to her fatigue and overall condition.",
-	"10": "Helena reports no changes in her menstrual cycle, ruling out hormonal imbalances as a factor.",
-	"11": "Helena admits to not taking regular breaks during work, which could be contributing to her fatigue."
-}
+var resource = null
 
 func _ready():
-	var dialogue_line = await DialogueManager.get_next_dialogue_line(
-		resource,
-		GameState.current_patient["questionsSetKey"]
-		)
-	_generate_question_buttons(dialogue_line)
+	GameState.action_manager.connect("load_questions", Callable(self, "_on_load_questions"))
+	DialogueManager.connect("dialogue_ended", Callable(self, "_on_dialogue_finished"))
 
-func _generate_question_buttons(dialogue_line) -> void:
-	for res in dialogue_line.responses:
+
+func _on_load_questions(question_set_script: String):
+	resource = ResourceLoader.load(question_set_script)
+	print("Loaded resource lines keys:", resource.lines.keys())
+	print("Loaded resource titles:", resource.titles)
+	clear_questions()
+	_generate_question_buttons();
+
+func clear_questions():
+	# Clear existing buttons
+	for child in get_children():
+		if child is Button:
+			child.queue_free()
+
+func _generate_question_buttons():
+	var actions = GameState.action_manager.get_available_actions()
+	print("Generating question buttons with actions:", actions)
+	actions = actions.filter(
+		func(action_id: String) -> bool:
+			return GameState.action_manager.get_action(action_id).type == "question"
+	)
+	print("Filtered question actions:", actions)
+	for action_id in actions:
+		var action_data: ActionData = GameState.action_manager.get_action(action_id)
 		var button := Button.new()
-		button.text = res.text
+		button.text = action_data.button_text
+		button.tooltip_text = action_data.button_text
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.pressed.connect(func(): _on_question_pressed(res.next_id,res.text))
+		button.pressed.connect(func(): _on_question_pressed(action_id))
 		add_child(button)
 
-func _on_question_pressed(next_id: String, question: String) -> void:
-	question_selected.emit(next_id)
-	print("id: " + next_id)
-	# i kept the original action log line
-	get_node("/root/Diagnosis/ActionCounter").add_action_log("You asked " + str(question))
+func _on_question_pressed(action_id: String):
+	GameState.set_diagnosis_state(GameState.DiagnosisState.DIALOGUE)
+	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource, action_id)
+	DialogueManager.show_dialogue_balloon(
+		resource,
+		dialogue_line.next_id,
+	)
+	# add the string to the action log!
+	GameState.action_manager.use_action(action_id)
+	question_selected.emit(action_id)  # Emit signal to Diagnosis to hide UI
 
-	# i added the following lines so that after the player clicks, we fetch the next
-	# dialogue line and regenerate buttons automatically.
-	var next_dialogue = await DialogueManager.get_next_dialogue_line(resource, next_id)
-	_generate_question_buttons(next_dialogue)
-	
-	
-	
-
-func getcorrectSummary(summary_id: String) -> void:
-	if not question_summaries.has(summary_id):
-		push_error("getcorrectSummary(): No summary found for key '" + summary_id + "'")
-		return
-
-	var summary_text = question_summaries[summary_id]
-
-	# i did that because we still want to store the revealed info in GameState
-	GameState.add_revealed_info(summary_text)
-	#check maybe this is a problem
-	get_node("/root/Diagnosis/Interaction/Clipboard/frame").add_history_text(summary_text)
-
-
-	print("getcorrectSummary(): saved summary #" + summary_id + " → " + summary_text)
+# This should be called when the dialogue balloon is finished/closed
+func _on_dialogue_finished(_resource: DialogueResource):
+	GameState.set_diagnosis_state(GameState.DiagnosisState.DEFAULT)

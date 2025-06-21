@@ -1,29 +1,21 @@
-extends Node
+extends HBoxContainer
+class_name AcionCounter
 
-@export var action_container : HBoxContainer
-@export var action_icon_texture : Texture2D
-signal action_used
+var action_icon_texture = preload("res://sprites/ui/action.png")
 
 func _ready():
-	if action_container:
-		for i in range(GameState.actions_remaining):
-			var icon = TextureRect.new()
-			icon.texture = action_icon_texture
-			icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-			action_container.add_child(icon)
+	GameState.action_counter_manager.connect("action_counter_updated", Callable(self, "_on_action_counter_updated"))
 
-func use_action():
-	if GameState.actions_remaining > 0:
-		GameState.actions_remaining -= 1
 
-		# Remove the last icon
-		var icon_count = action_container.get_child_count()
-		if icon_count > 0:
-			action_container.get_child(icon_count - 1).queue_free()
-		#todo: Info for user!
-		if GameState.actions_remaining == 0:
-			print("No more actions left — no more points can be earned.")
-				
-func add_action_log(action: String):
-	GameState.add_action_log(action)
-	
+func _on_action_counter_updated(_available: int, remaining: int):
+	print("ActionCounter: Available actions:", _available, "Remaining actions:", remaining)
+	for child in get_children():
+		if child is TextureRect:
+			child.queue_free()  # Remove existing iconsw
+
+	for i in range(remaining):
+		var icon = TextureRect.new()
+		icon.texture = action_icon_texture
+		icon.expand_mode = TextureRect.ExpandMode.EXPAND_FIT_WIDTH
+		icon.stretch_mode = TextureRect.StretchMode.STRETCH_SCALE
+		self.add_child(icon)

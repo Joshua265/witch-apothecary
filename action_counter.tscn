@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bka3vulrqb3pe"]
+
+[ext_resource type="Script" uid="uid://bun7nf0mm1ist" path="res://scripts/diagnosis/action_counter.gd" id="1_antqs"]
+
+[node name="ActionCounter" type="HBoxContainer"]
+offset_right = 300.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+script = ExtResource("1_antqs")

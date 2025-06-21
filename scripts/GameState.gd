@@ -1,94 +1,116 @@
 extends Node
 
-var patient_data_instance: Node
+var level_manager: LevelManager
+var character_manager: CharacterManager
+var action_counter_manager: ActionCounterManager
+var bok_manager: BoKManager
+var clipboard_manager: ClipboardManager
+var content_loader: ContentLoader = ContentLoader.new()
+var action_manager: ActionManager = ActionManager.new()
+var bok_highlighter: BoKHighlighter = BoKHighlighter.new()
 
-# add class 
-const BoKHighlighter = preload("res://scripts/Bok_Highlighter.gd")
-
-#Scenes
-var diagnosis_scene = null
-var cutscene_scene = null
-var result_scene = null
-
-# Patient Control
-var current_level = "1"
-var current_patient = {}
-#TODO: Add these to patient data?
-var current_points = 0
-var current_level_point_margin = []
-var current_action_evaluation = {}
-
-#Storage
-var current_illness = null
 var action_log = []
-var actions_remaining = 11 #todo: Make dependant on Level
-#added for highlighting
-var revealed_info = []
-var revealed_vitals = {}
 
-# Game State
-var unlocked_levels = ["1"]  # Start with level 1 unlocked
-var level_scores = {}
+enum DiagnosisState {
+	DEFAULT,
+	ASKING,
+	DIALOGUE,
+	INSPECTING,
+	DIAGNOSING,
+}
 
-func _ready():
-	load_patient_data()
+var current_diagnosis_state: DiagnosisState = DiagnosisState.DEFAULT
 
-func load_patient_data():
-	var patient_data_script = load("res://scripts/patient_data.gd")
-	patient_data_instance = patient_data_script.new()
-	current_patient = patient_data_instance.patients[current_level]
-	current_action_evaluation = current_patient["point_eval"]
-	current_level_point_margin = current_patient["point_margins"]
+enum CurrentScene {
+	PRECUTSCENE,
+	DIAGNOSIS,
+	POSTCUTSCENE,
+	RESULTS,
+	LEVEL_SELECT
+}
 
-func unlock_level(level_index: String):
-	if not unlocked_levels.has(level_index):
-		unlocked_levels.append(level_index)
-		print("Level %d unlocked!" % level_index)
-	else:
-		print("Level %d is already unlocked." % level_index)
+var current_scene: CurrentScene
 
-func change_level(new_level):
-	current_level = new_level
-	print("Changing to level %s..." % current_level)
-	load_patient_data()
+signal diagnosis_state_changed(new_state)
+
+func set_diagnosis_state(new_state: DiagnosisState) -> void:
+	if current_diagnosis_state != new_state:
+		current_diagnosis_state = new_state
+		emit_signal("diagnosis_state_changed", new_state)
+
+
+signal load_patient(load_patient_index: int)
+signal load_bok(illnesses_indices: Array[int])
+signal load_character(character_key: String)
+signal load_clipboard(character_key: String, patient_data_index: int)
+signal load_available_actions(available_actions: Array[String])
+signal load_max_actions(max_actions: int)
+
+# state
+@export var remaining_actions = 0;
+
+func _ready() -> void:
+	# Instantiate managers
+	level_manager = preload("res://scripts/LevelManager.gd").new()
+	action_counter_manager = preload("res://scripts/diagnosis/action_counter_manager.gd").new()
+	bok_manager = preload("res://scripts/diagnosis/book_of_knowledge/BoKManager.gd").new()
+	clipboard_manager = preload("res://scripts/diagnosis/clipboard_manager.gd").new()
+	character_manager = preload("res://scripts/diagnosis/CharacterManager.gd").new()
+	action_manager = preload("res://scripts/diagnosis/ActionManager.gd").new()
+
+	add_child(level_manager)
+	add_child(action_counter_manager)
+	add_child(bok_manager)
+	add_child(clipboard_manager)
+	add_child(character_manager)
+	add_child(action_manager)
+	add_child(bok_highlighter)
+
+func change_level(new_level: int) -> void:
+	print("GameState CHANGE LEVEL")
+	level_manager.change_level(new_level)
+	print(level_manager.current_level_data)
+
+	current_scene = CurrentScene.PRECUTSCENE
 	get_tree().change_scene_to_file("res://scenes/cutscene.tscn")
 	SceneTransitionManager.change_to_cutscene(
-		current_patient["cutscenescript"],
-		current_patient["precutsceneKey"],
-		"res://scenes/diagnosis.tscn"
+		level_manager.current_level_data.get("cutscenescript"),
+		level_manager.current_level_data.get("precutsceneKey"),
 	)
 
-func add_action_log(action: String):
-	if not action_log.has(action):
-		action_log.append(action)
+func _on_cutscene_finished() -> void:
+	print("GameState CUTSCENE FINISHED")
+	if current_scene == CurrentScene.PRECUTSCENE:
+		current_scene = CurrentScene.DIAGNOSIS
+		get_tree().change_scene_to_file("res://scenes/diagnosis.tscn")
+	elif current_scene == CurrentScene.POSTCUTSCENE:
+		current_scene = CurrentScene.LEVEL_SELECT
+		get_tree().change_scene_to_file("res://scenes/level_select.tscn")
 
-func calculate_points() -> int:
-	if current_illness != current_patient["illness"]:
-		current_points = 0
-	else:
-		for action in action_log:
-			if current_action_evaluation.has(action):
-				current_points += current_action_evaluation[action]
-	current_points += actions_remaining * 10
-	level_scores[current_level] = current_points
-	return current_points
+func show_post_cutscene() -> void:
+	print("GameState SHOW POST CUTSCENE")
+	current_scene = CurrentScene.POSTCUTSCENE
+	get_tree().change_scene_to_file("res://scenes/cutscene.tscn")
+	SceneTransitionManager.change_to_cutscene(
+		level_manager.current_level_data.cutscenescript,
+		level_manager.current_level_data.postcutsceneKey,
+	)
 
+func _on_diagnosis_scene_ready() -> void:
+	emit_signal("load_patient", level_manager.current_level_data.get("patient_data_index"))
+	emit_signal("load_bok", level_manager.current_level_data.get("illnessesIndices"))
+	emit_signal("load_character", level_manager.current_level_data.get("characterKey"))
+	emit_signal("load_clipboard", level_manager.current_level_data.get("characterKey"), level_manager.current_level_data.get("patient_data_index"))
+	emit_signal("load_available_actions", level_manager.current_level_data.available_actions)
+	emit_signal("load_max_actions", level_manager.current_level_data.max_actions)
+	bok_highlighter.reset()
 
-# needed for the highlighting
-func add_revealed_info(text: String) -> void:
-	# preprocessing done - based on input
-	var keywords = BoKHighlighter.extract_keywords(text)
-	var vitals   = BoKHighlighter.extract_vitals(text)
+func unlock_level(level_index: int) -> void:
+	level_manager.unlock_level(level_index)
 
-	# but saves it as added in the view
-	var revealed_info   = GameState.current_patient["revealed_info"]    # should be an Array
-	var revealed_vitals = GameState.current_patient["revealed_vitals"]  # should be a Dictionary
+func select_diagnosis(current_illness: String) -> void:
+	var points = level_manager.calculate_points(current_illness)
+	print("Points for diagnosis:", points)
+	level_manager.check_unlock_next_level()
 
-	# Add each keyword into the Array if it’s not already there
-	for keyword in keywords:
-		if not revealed_info.has(keyword):
-			revealed_info.append(keyword)
-			
-	# Add each numeric vital into the Dictionary (overwrites if already exists)
-	for vital_key in vitals.keys():
-		revealed_vitals[vital_key] = vitals[vital_key]
+	get_tree().change_scene_to_file("res://scenes/results.tscn")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjwefw4x3ecis"]
+[gd_scene load_steps=3 format=3 uid="uid://bjwefw4x3ecis"]
 
 [ext_resource type="Script" uid="uid://i3cxutcl3w2n" path="res://scripts/cutscene.gd" id="1_edmg7"]
+[ext_resource type="Theme" uid="uid://cg0cp5jantdbd" path="res://themes/global_theme.tres" id="2_a320b"]
 
 [node name="Cutscene" type="Control" node_paths=PackedStringArray("background")]
 layout_mode = 3
@@ -16,3 +17,15 @@ background = NodePath("Background")
 layout_mode = 0
 offset_right = 1161.0
 offset_bottom = 653.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -35.0
+offset_bottom = 29.0
+grow_horizontal = 0
+theme = ExtResource("2_a320b")
+theme_type_variation = &"FlatButton"
+text = "Hold [ESC] to skip"

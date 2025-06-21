@@ -1,7 +1,16 @@
 extends Node
 
+class_name BoKHighlighter
+
+var revealed_info = []
+var revealed_vitals = {}
+
+func _ready() -> void:
+	# Connect to signals from GameState to reset revealed info
+	GameState.action_manager.connect("action_used", Callable(self, "_on_action_used"))
+
 # Extract literal symptom keywords + ignore negations
-static func extract_keywords(text: String) -> Array:
+func extract_keywords(text: String) -> Array:
 	var symptom_keywords = [ "sore throat", "shortness of breath", "fatigue",
 		"tired", "dizzy", "dizziness", "headaches", "headache", "congestion",
 		"nausea", "rash", "pain", "sore", "cough", "stress", "anxiety", "nausea",
@@ -24,12 +33,12 @@ static func extract_keywords(text: String) -> Array:
 	return found
 
 # Extract vitals now only for temp, breathing, pulse, blood pressure
-static func extract_vitals(text: String) -> Dictionary:
+func extract_vitals(text: String) -> Dictionary:
 	var vitals = {}
 	var lower = text.to_lower()
 	var re = RegEx.new()
 
-	# Temperature 
+	# Temperature
 	re.compile(r"(\d+(?:\.\d+)?)\s*(°c|celsius)")
 	var m_temp = re.search(lower)
 	if m_temp:
@@ -43,15 +52,15 @@ static func extract_vitals(text: String) -> Dictionary:
 		vitals["heartrate"] = int(m_hr.get_string(1))
 		print("[extract_vitals] heartrate → ", vitals["heartrate"])
 
-	# Blood Pressure 
+	# Blood Pressure
 	re.compile(r"(\d+)\s*/\s*(\d+)\s*mmhg")
 	var m_bp = re.search(lower)
 	if m_bp:
 		vitals["blood_pressure_systolic"]  = int(m_bp.get_string(1))
 		vitals["blood_pressure_diastolic"] = int(m_bp.get_string(2))
 		print("[extract_vitals] bp → ", vitals["blood_pressure_systolic"], "/", vitals["blood_pressure_diastolic"])
-		
-	# Breathing 
+
+	# Breathing
 	re.compile(r"(\d+)\s*(br/min|breaths per minute)")
 	var m_breath = re.search(lower)
 	if m_breath:
@@ -62,14 +71,14 @@ static func extract_vitals(text: String) -> Dictionary:
 
 
 # Escaping needed for highlighting the word
-static func escape_regex(text: String) -> String:
+func escape_regex(text: String) -> String:
 	var specials := ["\\", ".", "+", "*", "?", "^", "$", "(", ")", "[", "]", "{", "}", "|"]
 	for c in specials:
 		text = text.replace(c, "\\" + c)
 	return text
 
 # fixes the lower case and upper case problems i had
-static func match_phrase_from_symptoms(symptoms: String, keyword: String) -> String:
+func match_phrase_from_symptoms(symptoms: String, keyword: String) -> String:
 	var lower_symptoms = symptoms.to_lower()
 	var lower_keyword = keyword.to_lower()
 
@@ -80,18 +89,10 @@ static func match_phrase_from_symptoms(symptoms: String, keyword: String) -> Str
 
 
 # mathcing based on the information saved
-static func match_symptoms(illness: Dictionary) -> Array:
+func match_symptoms(illness: IllnessData) -> Array:
 	var matched := []
-	var rules = illness.get("matching_rules", {})
+	var rules = illness.matching_rules
 
-	# fetch from gamestate
-	var keywords: Array = []
-	if GameState.current_patient.has("revealed_info"):
-		keywords = GameState.current_patient["revealed_info"].duplicate()
-
-	var vitals: Dictionary = {}
-	if GameState.current_patient.has("revealed_vitals"):
-		vitals = GameState.current_patient["revealed_vitals"].duplicate()
 
 # loop through the matching_rules for each illness
 	for key in rules.keys():
@@ -99,17 +100,19 @@ static func match_symptoms(illness: Dictionary) -> Array:
 
 		# highlight based on the history revealed by user
 		if typeof(rule) == TYPE_BOOL and rule:
-			if key in keywords:
+			if key in revealed_info:
 				matched.append(key)
 			continue
 
 		#highlighting based on inspections + specific word mapping inplicit
 		elif typeof(rule) == TYPE_DICTIONARY:
 
+			# Use patient data and check if inspection was performed
+			var patient_data = GameState.clipboard_manager.patient_data
+
 			if key == "temperature" and rule.has("min"):
-				var min_val = float(String(rule["min"]).split(" ")[0])
-				if vitals.has("temperature"):
-					var tv = vitals["temperature"]
+				if GameState.action_manager.was_inspected("temperature"):
+					var tv = patient_data.temperature
 					var sym_text = illness["info"]["Symptoms"].to_lower()
 					if tv >= 39.5:
 						var match = match_phrase_from_symptoms(sym_text, "high fever")
@@ -123,30 +126,33 @@ static func match_symptoms(illness: Dictionary) -> Array:
 				continue
 
 			if key == "breathing" and rule.has("min"):
-				var min_b = float(String(rule["min"]).split(" ")[0])
-				if vitals.has("breathing"):
-					var bv = vitals["breathing"]
+				if GameState.action_manager.was_inspected("breathing"):
+					var bv = float(patient_data.breathing)
+					var min_b = float(String(rule["min"]).split(" ")[0])
 					var sym_text_b = illness["info"]["Symptoms"]
 					var match_b = match_phrase_from_symptoms(sym_text_b, "shortness of breath")
-					if bv >= min_b and match_b != "": 
+					if bv >= min_b and match_b != "":
 						matched.append(match_b)
 				continue
 
 			if key == "heartrate" and rule.has("min"):
-				var min_hr = float(String(rule["min"]).split(" ")[0])
-				if vitals.has("heartrate"):
-					var hv = vitals["heartrate"]
+				if GameState.action_manager.was_inspected("heartrate"):
+					var hv = patient_data.heartrate
+					var min_hr = float(String(rule["min"]).split(" ")[0])
 					var sym_text_h = illness["info"]["Symptoms"]
 					var match_h = match_phrase_from_symptoms(sym_text_h, "racing heartbeat")
-					if hv >= min_hr and match_h != "": 
+					if hv >= min_hr and match_h != "":
 						matched.append(match_h)
 				continue
 
 			# added but not used as of now
 			if key == "blood_pressure" and rule.has("min_sys"):
-				var min_sys = float(String(rule["min_sys"]).split(" ")[0])
-				if vitals.has("blood_pressure_systolic"):
-					var sys_val = vitals["blood_pressure_systolic"]
+				if GameState.action_manager.was_inspected("blood_pressure"):
+					# PatientData stores blood pressure as "sys/dia"
+					var sys_val = 0.0
+					if patient_data.blood_pressure.find("/") != -1:
+						sys_val = float(patient_data.blood_pressure.split("/")[0])
+					var min_sys = float(String(rule["min_sys"]).split(" ")[0])
 					var sym_text_bp = illness["info"]["Symptoms"]
 					var match_bp = match_phrase_from_symptoms(sym_text_bp, "high blood pressure")
 					# only match if the book’s symptom text contains “high blood pressure”
@@ -158,8 +164,8 @@ static func match_symptoms(illness: Dictionary) -> Array:
 
 
 
-# just highlights the words specifically 
-static func highlight_symptoms_text(original: String, matched: Array) -> String:
+# just highlights the words specifically
+func highlight_symptoms_text(original: String, matched: Array) -> String:
 	var out := original
 
 	for sym in matched:
@@ -187,3 +193,30 @@ static func highlight_symptoms_text(original: String, matched: Array) -> String:
 			result += out.substr(last_end)
 			out = result
 	return out
+
+func _on_action_used(action_id: String) -> void:
+	var action_log_idx = GameState.action_manager.action_log.find(
+		func(item): return item.action_id == action_id
+	)
+	var action_log_item = GameState.action_manager.action_log[action_log_idx]
+	add_revealed_info(action_log_item.text)
+
+# neededdd for the highlighting
+func add_revealed_info(text: String) -> void:
+	# preprocessing done - based on input
+	var keywords = extract_keywords(text)
+	var vitals   = extract_vitals(text)
+
+	# Add each keyword into the Array if it’s not already there
+	for keyword in keywords:
+		if not revealed_info.has(keyword):
+			revealed_info.append(keyword)
+
+	# Add each numeric vital into the Dictionary (overwrites if already exists)
+	for vital_key in vitals.keys():
+		revealed_vitals[vital_key] = vitals[vital_key]
+
+func reset() -> void:
+	# Reset the revealed info and vitals
+	revealed_info.clear()
+	revealed_vitals.clear()
