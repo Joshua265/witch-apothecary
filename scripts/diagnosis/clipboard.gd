@@ -39,6 +39,7 @@ func _generate_inspection_fields():
 			label_node.text = action_id.capitalize() + ": Not Inspected"
 			label_node.add_theme_font_size_override("font_size", 12)
 			patient_info.add_child(label_node)
+
 			inspection_fields[action_id] = {
 				"label": action.button_text,
 				"component": label_node,
@@ -81,8 +82,8 @@ func _on_clipboard_loaded(character_data: CharacterData, _patient_data: PatientD
 	else:
 		print("Failed to load texture:", character_data.image_path)
 	$frame/Main/Patient_Info/Name.text = character_data.name
-	$frame/Main/Patient_Info/Age.text = str(character_data.age)
-	$frame/Main/Patient_Info/Occupation.text = character_data.occupation
+	$frame/Main/Patient_Info/Age.text = "Age: " + str(character_data.age)
+	$frame/Main/Patient_Info/Occupation.text = "Occupation: " + character_data.occupation
 	for field_name in inspection_fields.keys():
 		var label = inspection_fields[field_name]["label"]
 		var component = inspection_fields[field_name]["component"]
@@ -95,6 +96,8 @@ func _gui_input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			_on_clipboard_pressed();
 
+"""
+
 func _on_show_inspected_field(field_name: String, field_value: String):
 	print("Showing inspected field:", field_name, "with value:", field_value)
 	if field_name in inspection_fields:
@@ -103,6 +106,7 @@ func _on_show_inspected_field(field_name: String, field_value: String):
 		$frame/History.text += "\n" + field_info["label"] + ": " + field_value + " " + field_info["unit"]
 	else:
 		print("Field name not recognized:", field_name)
+"""
 
 func _on_history_text_added(text: String):
 	$frame/History.text += "\n" + text

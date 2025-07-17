@@ -46,6 +46,7 @@ func change_level(new_level: int) -> void:
 	current_level_data = content_loader.load_level_data(new_level)
 	emit_signal("level_changed", new_level)
 	print("Changing to level %s..." % current_level)
+	# TODO: maybe centralise the reseting stuff here 
 
 
 func unlock_level(level_index: int) -> void:

@@ -73,7 +73,7 @@ func update_page():
 
 		var target_panel = $HBoxContainer/Left_VBox if i < ILLNESSES_PER_PAGE else $HBoxContainer/Right_VBox
 
-		var name_label = create_label_button(illness["name"], 24, true)
+		var name_label = create_label_button(illness["name"], 20, true)
 		target_panel.add_child(name_label)
 
 		var separator = HSeparator.new()
@@ -86,7 +86,7 @@ func update_page():
 				var matched = GameState.bok_highlighter.match_symptoms(illness)
 				print("Matched symptoms: ", matched)
 				text = GameState.bok_highlighter.highlight_symptoms_text(text, matched)
-			var lbl = create_label("[b]" + section + "[/b]: " + text, 14)
+			var lbl = create_label("[b]" + section + "[/b]: " + text, 12)
 			target_panel.add_child(lbl)
 
 		illness_index += 1

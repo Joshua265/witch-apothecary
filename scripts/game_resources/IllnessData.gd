@@ -73,17 +73,6 @@ static var illnesses = [
 			"slight temperature": true,
 			"temperature": {"min": "37.5 °C"}
 		}),
-		IllnessData.new("Anxiety / Stress-Induced Symptoms", {
-			"Symptoms": "Racing heartbeat, shortness of breath, sweating, and restlessness.",
-			"Diagnosis": "Symptoms consistent with anxiety or stress-related conditions.",
-			"Treatment": "Along with standard stress management practices (e.g., deep breathing, mindfulness), consider herbal support such as lemon balm tea, chamomile, valerian root, and optionally passionflower or lavender (via teas or aromatherapy) to promote relaxation."
-		}, {
-			"heartrate": {"min": "100 bpm"},
-			"experiences shortness of breath": true,
-			"sweating": true,
-			"restlessness": true,
-			"stress": true
-		}),
 		IllnessData.new("Rash / Skin Irritation", {
 			"Symptoms": "Redness, itching, and possible bumps or welts on the skin.",
 			"Diagnosis": "Likely a localized allergic reaction or contact irritation.",
@@ -95,6 +84,17 @@ static var illnesses = [
 			"welts": true,
 			"skin": true,
 			"irritation": true
+		}),
+		IllnessData.new("Anxiety / Stress-Induced Symptoms", {
+			"Symptoms": "Racing heartbeat, shortness of breath, sweating, and restlessness.",
+			"Diagnosis": "Symptoms consistent with anxiety or stress-related conditions.",
+			"Treatment": "Along with standard stress management practices (e.g., deep breathing, mindfulness), consider herbal support such as lemon balm tea, chamomile, valerian root, and optionally passionflower or lavender (via teas or aromatherapy) to promote relaxation."
+		}, {
+			"heartrate": {"min": "100 bpm"},
+			"experiences shortness of breath": true,
+			"sweating": true,
+			"restlessness": true,
+			"stress": true
 		}),
 		IllnessData.new("Dehydration", {
 			"Symptoms": "Dry mouth, dizziness, episodes of fainting, and fatigue.",
