@@ -27,7 +27,9 @@ func _generate_inspect_buttons():
 		add_child(button)
 		button.pressed.connect(
 			func() -> void:
-				GameState.action_manager.use_action(action)
+				var action_available = GameState.action_manager.use_action(action)
+				if not action_available:
+					return
 				GameState.clipboard_manager.inspect_field(action)
 				GameState.set_diagnosis_state(GameState.DiagnosisState.DEFAULT) # Here is prop the place to add any animations
 		)

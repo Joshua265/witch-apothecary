@@ -41,6 +41,9 @@ func _generate_question_buttons():
 		add_child(button)
 
 func _on_question_pressed(action_id: String):
+	var action_available = GameState.action_manager.use_action(action_id)
+	if not action_available:
+		return
 	GameState.set_diagnosis_state(GameState.DiagnosisState.DIALOGUE)
 	var dialogue_line = await DialogueManager.get_next_dialogue_line(resource, action_id)
 	DialogueManager.show_dialogue_balloon(
@@ -48,7 +51,7 @@ func _on_question_pressed(action_id: String):
 		dialogue_line.next_id,
 	)
 	# add the string to the action log!
-	GameState.action_manager.use_action(action_id)
+
 	question_selected.emit(action_id)  # Emit signal to Diagnosis to hide UI
 
 # This should be called when the dialogue balloon is finished/closed
