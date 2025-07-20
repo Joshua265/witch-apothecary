@@ -30,7 +30,7 @@ static var illnesses = [
 			"nasal congestion": true,
 			"facial pressure": true,
 			"headaches": true,
-			"cough": true,
+			"coughing": true,
 			"rise in temperature": true,
 			"temperature": {"min": "38.5 °C"}
 		}),
@@ -68,7 +68,7 @@ static var illnesses = [
 			"Treatment": "Support with warm saltwater gargles and fluid intake; herbal options include teas made from sage and thyme (for their antimicrobial and anti-inflammatory properties), marshmallow root or slippery elm (to soothe mucous membranes), licorice root, and chamomile tea."
 		}, {
 			"sore throat": true,
-			"cough": true,
+			"coughing": true,
 			"rise in temperature": true,
 			"slight temperature": true,
 			"temperature": {"min": "37.5 °C"}

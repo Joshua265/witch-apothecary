@@ -95,18 +95,23 @@ func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			_on_clipboard_pressed();
-
-"""
+			
+func pull_up_for_new_info():
+	if !is_open or is_hovered:
+		$AnimationPlayer.play("open")
+		is_open = true
 
 func _on_show_inspected_field(field_name: String, field_value: String):
 	print("Showing inspected field:", field_name, "with value:", field_value)
 	if field_name in inspection_fields:
 		var field_info = inspection_fields[field_name]
 		field_info["component"].text = field_info["label"] + ": " + field_value + " " + field_info["unit"]
-		$frame/History.text += "\n" + field_info["label"] + ": " + field_value + " " + field_info["unit"]
+		#$frame/History.text += "\n" + field_info["label"] + ": " + field_value + " " + field_info["unit"]
+		pull_up_for_new_info()
 	else:
 		print("Field name not recognized:", field_name)
-"""
 
 func _on_history_text_added(text: String):
 	$frame/History.text += "\n" + text
+	pull_up_for_new_info()
+		

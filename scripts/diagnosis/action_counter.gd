@@ -6,7 +6,6 @@ var action_icon_texture = preload("res://sprites/ui/action.png")
 func _ready():
 	GameState.action_counter_manager.connect("action_counter_updated", Callable(self, "_on_action_counter_updated"))
 
-
 func _on_action_counter_updated(_available: int, remaining: int):
 	print("ActionCounter: Available actions:", _available, "Remaining actions:", remaining)
 	for child in get_children():

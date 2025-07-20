@@ -49,6 +49,7 @@ func update_available_actions() -> void:
 	emit_signal("load_questions", GameState.level_manager.current_level_data.questionSetScript)
 	emit_signal("load_inspections")
 	emit_signal("load_action_counter", GameState.level_manager.current_level_data.max_actions, remaining_actions)
+	check_no_more_actions()
 
 # Check if an action is available
 func is_action_available(action_id: String) -> bool:
@@ -84,3 +85,7 @@ func get_available_actions() -> Array:
 # Get remaining actions
 func get_remaining_actions() -> int:
 	return remaining_actions
+	
+func check_no_more_actions():
+	if get_remaining_actions() == 0:
+		GameState.set_diagnosis_state(GameState.DiagnosisState.NO_ACTIONS)

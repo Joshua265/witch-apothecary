@@ -53,6 +53,7 @@ func open_book():
 func close_book():
 	$AnimationPlayer.play_backwards("show")
 	update_page()
+	reset_pages()
 
 func _on_illnesses_changed(new_illnesses: Array[IllnessData]):
 	illnesses.append(new_illnesses)
@@ -153,3 +154,7 @@ func _on_bo_k_button_pressed() -> void:
 
 func _on_confirmation_diagnosis() -> void:
 	GameState.select_diagnosis(GameState.bok_manager.current_illness)
+	
+func reset_pages():
+	current_page = 0
+	illness_index = 0
