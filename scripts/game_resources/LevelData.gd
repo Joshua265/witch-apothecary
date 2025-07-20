@@ -49,7 +49,7 @@ static var levels: Array[LevelData] = [
 		"postcutsceneL1",
 		"Helena",
 		0,  # Patient data index
-		[0, 1, 2, 3, 4, 7],  # Illness indices
+		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],  # Illness indices - all for this level
 		"questionSetL1",
 		"res://scripts/dialogue/questionSet1.dialogue",
 		"res://scripts/dialogue/prologue1.dialogue",

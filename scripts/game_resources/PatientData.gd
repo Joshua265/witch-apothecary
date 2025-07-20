@@ -18,11 +18,12 @@ func _init(
 
 static var patients = [
 	PatientData.new(
-		39,
-		200,
-		"150/100",
-		200
+		36.8,
+		120,
+		"120/75",
+		21
 	),
+	#todo:change
 	PatientData.new(
 		37.5,
 		80,

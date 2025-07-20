@@ -112,3 +112,11 @@ func _on_diagnosis_state_changed(new_state):
 		main_action_container.hide()
 		inspect_list.show()
 		back_button.show()
+	elif new_state == GameState.DiagnosisState.NO_ACTIONS:
+		ask_button.disabled = true
+		inspect_button.disabled = true
+		
+		# Optional: Also visually grey them out for better feedback
+		#ask_button.modulate = Color(0.5, 0.5, 0.5, 1.0)
+		#inspect_button.modulate = Color(0.5, 0.5, 0.5, 1.0)
+		

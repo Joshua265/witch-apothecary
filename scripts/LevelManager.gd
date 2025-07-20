@@ -30,14 +30,26 @@ func _ready() -> void:
 	levels = content_loader.load_all_levels()
 
 func calculate_points(current_illness: String) -> int:
+	#1 need for generation of labels and other
 	var current_points = 0
-	for action_id in GameState.action_manager.get_available_actions():
-		if GameState.action_manager.get_available_actions().has(action_id):
-			# Sum points from ResultData using new structure
-			current_points += result_data.action_points.get(action_id, 0)
-	# Add points for remaining actions (assuming 10 points each)
-	current_points += GameState.action_manager.get_remaining_actions() * 10
 	var correct_diagnosis: bool = current_illness.to_lower() == result_data.correct_diagnosis.to_lower()
+
+	#2 check if anything was done
+	if GameState.action_manager.get_remaining_actions() < 9:
+		for used_action in GameState.action_manager.action_log:
+			var used_action_id: String = used_action.action_id
+			#var points_for_action = result_data.action_points.get(used_action_id, 0) # use for debugging
+			#3 only get points for the actions taken - score is based on relevance for this level 
+			current_points += result_data.action_points.get(used_action_id, 0)
+		#4 Add points for remaining actions -> only 2 or else 1 action + 8 free ones = more points
+		current_points += GameState.action_manager.get_remaining_actions() * 2
+		
+		if correct_diagnosis:
+			current_points += 100 # 100 points for the correct one
+		else: 
+			# 5 is the number of the less valuable action - so 1 action and one wrong diagnosis = 0 points
+			current_points -= 5 # 5 points less for the wrong one - only makes sense if at least one action taken
+			
 	level_scores[current_level] = LevelScore.new(current_illness, correct_diagnosis, current_points)
 	return current_points
 
@@ -46,6 +58,8 @@ func change_level(new_level: int) -> void:
 	current_level_data = content_loader.load_level_data(new_level)
 	emit_signal("level_changed", new_level)
 	print("Changing to level %s..." % current_level)
+	# TODO: maybe centralise the reseting stuff here 
+	#TODO: MUST Remove the data when chnaging levels
 
 
 func unlock_level(level_index: int) -> void:
@@ -55,6 +69,8 @@ func unlock_level(level_index: int) -> void:
 		print("Level %s unlocked!" % level_index)
 	else:
 		print("Level %s is already unlocked." % level_index)
+		
+
 func check_unlock_next_level() -> void:
 	var next_level = current_level + 1
 	if next_level == len(levels) - 1:

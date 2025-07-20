@@ -3,11 +3,13 @@ do get_node("/root/Cutscene").set_background("res://sprites/backgrounds/outside_
 On a rainy night, the wind howled through the crooked trees of Eldervale.
 At the edge of the town, where the forest met the fog, an old hut sat hunched beneath the the thicketh of the forest.
 And where usually no soul dared to touch, a single candle flickered inside. Yes, the once vacant hut, now had a resident, that the townsfolk yet to had warm up to.
-It all started with a desperate knock sounded at the witch's door.
-do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/husband.png",get_node("/root/Cutscene").get_position_from_keyword("left"))
+do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/witch_cool.png",get_node("/root/Cutscene").get_position_from_keyword("center"), Vector2(0.5, 0.5), 0.7)
+A witch starting a new life, leaving all her troubles behind, has taken an oath to help the sick and needy.
+It all started with a desperate knock at the witch's door.
+do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/husband.png",get_node("/root/Cutscene").get_position_from_keyword("left"), Vector2(0.5, 0.5), 0.7, true)
 Edgar: Please...we need your help. My wife- she not well. The doctor in town is too costly for the likes of us.
 Witch: Come closer, both of you. No need to stand in the rain.
-do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
+do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"), Vector2(0.4, 0.4), 0.7, false)
 Helena: I'm sorry to trouble you, ma'am… but I… I haven’t been feeling right.
 Witch: Worry not, child. Tell me, what troubles you?
 Helena: It started a few weeks back. I’ve been so tired… I come home from work and I feel like my bones weigh a hundred pounds.
@@ -15,20 +17,24 @@ Witch: I see. How long have you felt this way? Has it worsened?
 Helena: Yes. The longer the days, the worse it gets. I sew all day, barely stopping, and by nightfall, it’s like my head’s splitting and the room won’t stay still.
 Edgar: And her pulse… it races, even when she’s resting. I’ve seen it. I can’t bear to watch her waste away.
 Witch: I understand. Please — sit down over here, Helena. Let’s have a closer look.
+do get_node("/root/Cutscene").remove_all_speaker_sprites()
   => END
 
-# todo lower case later
+
 ~ postcutsceneL1
 do get_node("/root/Cutscene").set_background("res://sprites/backgrounds/bg.png")
-do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/husband.png",get_node("/root/Cutscene").get_position_from_keyword("left"))
-do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"))
-Helena: So I have {{GameState.level_manager.level_scores[GameState.level_manager.current_level].diagnosis}} ?
+do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/husband.png",get_node("/root/Cutscene").get_position_from_keyword("left"), Vector2(0.5, 0.5), 0.3, true)
+do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"), Vector2(0.5, 0.5), 0.4, false)
+Helena: So I have {{GameState.level_manager.level_scores[GameState.level_manager.current_level].diagnosis.to_lower()}} ?
  =>< witch_illness_response
+do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/seamstress.png", get_node("/root/Cutscene").get_position_from_keyword("right"), Vector2(0.5, 0.5), 0.4, false)
 Helena: Alright. Thank you so much I will do that!
+do get_node("/root/Cutscene").remove_all_speaker_sprites()
  => END
 
 #HERE responses - adjust
 ~ witch_illness_response
+do get_node("/root/Cutscene").create_speaker_sprite("res://sprites/characters/witch_cool.png",get_node("/root/Cutscene").get_position_from_keyword("center"), Vector2(0.5, 0.5), 0.7)
 match GameState.level_manager.level_scores[GameState.level_manager.current_level].diagnosis:
 	when "Food Poisoning":
 		Witch: Ah yes, classic Food Poisoning. Brew some chamomile tea and rest. Avoid anything greasy, dear.
@@ -42,6 +48,18 @@ match GameState.level_manager.level_scores[GameState.level_manager.current_level
 		Witch: A twisted joint? Wrap it in comfrey leaves and stay off your feet, lest the spirits grow cross.
 	when "Sinus Infection":
 		Witch: Ah, the sinuses are angry. Inhale steam with eucalyptus and burn sage to ward off the foul humors.
-	else:
-		Witch: Miau Miau Miau miau think of something to say lmao
+	when "Simple Cold/Flu":
+		Witch: Oh, yes, just a simple cold, no need to worry. Rest and drink some elderberry extract. The herbal store has it in abundance.
+	when "Ear Infection":
+		Witch: That's rough. I'll give you something for the pain, but mind you, the ear drops need to be added by me. I'll try to visit early mornings.
+	when "Sore Throat (Viral or Allergic)":
+		Witch: That's an easy fix, you just need to add more tea to your day. Try marshmallow root or slippery elm to soothe your cough.
+	when "Rash / Skin Irritation":
+		Witch: It's good you came. You can have the cream we applied, just use it on the affected area up to four times a day.
+	when "Anxiety / Stress-Induced Symptoms":
+		Witch: You know, there can be physical symptoms from feeling overwhelmed. You really should prioritize yourself. Here, take this valerian root—it always helps me relax.
+	when "Sprained Ankle":
+		Witch: Aha, you know you shouldn't wait when you get hurt! Please, start resting more, put a pillow under your ankle, and leave the bandages on for a few days.
+
+do get_node("/root/Cutscene").remove_all_speaker_sprites()	
 => END

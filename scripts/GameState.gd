@@ -17,6 +17,8 @@ enum DiagnosisState {
 	DIALOGUE,
 	INSPECTING,
 	DIAGNOSING,
+	#todo add no more actions
+	NO_ACTIONS
 }
 
 var current_diagnosis_state: DiagnosisState = DiagnosisState.DEFAULT

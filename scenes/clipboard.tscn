@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://fxror64qsc4a" path="res://sprites/ui/clipboard.png" id="1_js5ej"]
 [ext_resource type="Script" uid="uid://cfylfgmhp6un1" path="res://scripts/diagnosis/clipboard.gd" id="2_8y8vx"]
-[ext_resource type="FontFile" uid="uid://c6nec1ej45ox7" path="res://fonts/more_to_choose/IndieFlower-Regular.ttf" id="3_8y8vx"]
+[ext_resource type="FontFile" uid="uid://bf7lt5xj6dp7k" path="res://fonts/more_to_choose/Simonetta-Italic.ttf" id="3_8y8vx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_js5ej"]
 bg_color = Color(1, 1, 1, 0)

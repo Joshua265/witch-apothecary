@@ -30,7 +30,7 @@ static var illnesses = [
 			"nasal congestion": true,
 			"facial pressure": true,
 			"headaches": true,
-			"cough": true,
+			"coughing": true,
 			"rise in temperature": true,
 			"temperature": {"min": "38.5 °C"}
 		}),
@@ -68,21 +68,10 @@ static var illnesses = [
 			"Treatment": "Support with warm saltwater gargles and fluid intake; herbal options include teas made from sage and thyme (for their antimicrobial and anti-inflammatory properties), marshmallow root or slippery elm (to soothe mucous membranes), licorice root, and chamomile tea."
 		}, {
 			"sore throat": true,
-			"cough": true,
+			"coughing": true,
 			"rise in temperature": true,
 			"slight temperature": true,
 			"temperature": {"min": "37.5 °C"}
-		}),
-		IllnessData.new("Anxiety / Stress-Induced Symptoms", {
-			"Symptoms": "Racing heartbeat, shortness of breath, sweating, and restlessness.",
-			"Diagnosis": "Symptoms consistent with anxiety or stress-related conditions.",
-			"Treatment": "Along with standard stress management practices (e.g., deep breathing, mindfulness), consider herbal support such as lemon balm tea, chamomile, valerian root, and optionally passionflower or lavender (via teas or aromatherapy) to promote relaxation."
-		}, {
-			"heartrate": {"min": "100 bpm"},
-			"experiences shortness of breath": true,
-			"sweating": true,
-			"restlessness": true,
-			"stress": true
 		}),
 		IllnessData.new("Rash / Skin Irritation", {
 			"Symptoms": "Redness, itching, and possible bumps or welts on the skin.",
@@ -95,6 +84,17 @@ static var illnesses = [
 			"welts": true,
 			"skin": true,
 			"irritation": true
+		}),
+		IllnessData.new("Anxiety / Stress-Induced Symptoms", {
+			"Symptoms": "Racing heartbeat, shortness of breath, sweating, and restlessness.",
+			"Diagnosis": "Symptoms consistent with anxiety or stress-related conditions.",
+			"Treatment": "Along with standard stress management practices (e.g., deep breathing, mindfulness), consider herbal support such as lemon balm tea, chamomile, valerian root, and optionally passionflower or lavender (via teas or aromatherapy) to promote relaxation."
+		}, {
+			"heartrate": {"min": "100 bpm"},
+			"experiences shortness of breath": true,
+			"sweating": true,
+			"restlessness": true,
+			"stress": true
 		}),
 		IllnessData.new("Dehydration", {
 			"Symptoms": "Dry mouth, dizziness, episodes of fainting, and fatigue.",
