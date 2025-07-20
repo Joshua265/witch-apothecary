@@ -54,9 +54,9 @@ do GameState.clipboard_manager.add_history_text("Helena reports an elevated hear
 
 ~ ask_short_breath
 Witch: Have you been feeling short of breath lately? This can sometimes accompany stress or a viral infection.
-Helena: I don’t think I’ve noticed that, no. I feel tired, but not like I can’t breathe.
-Witch: Good to hear. It might rule out some more serious issues like a respiratory infection.
-do GameState.clipboard_manager.add_history_text("Helena denies experiencing shortness of breath, which helps rule out some respiratory conditions.")
+Helena: Actually, yes, I have noticed that I get short of breath, especially after working for a long time or moving around quickly.
+Witch: That could be a sign of overexertion or stress. We'll keep an eye on it in case it points to something more serious.
+do GameState.clipboard_manager.add_history_text("Helena reports experiencing shortness of breath, particularly after exertion, which may be related to overexertion or stress.")
 => END
 
 ~ ask_sleep
