@@ -58,6 +58,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hkpsx")
 
+[node name="NoActionsDialog" type="AcceptDialog" parent="."]
+dialog_text = "You have no more available actions. Please proceed to diagnosis."
+
 [node name="Background" type="TextureRect" parent="."]
 clip_contents = true
 layout_mode = 0

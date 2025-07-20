@@ -88,7 +88,14 @@ func _on_diagnose_pressed():
 
 # Respond to diagnosis state changes
 func _on_diagnosis_state_changed(new_state):
+	print("Handler entered with: ", new_state, " current state: ", GameState.current_diagnosis_state)
 	print("Diagnosis state changed to: ", new_state)
+	if new_state == GameState.DiagnosisState.NO_ACTIONS:
+		# Show the pop-up dialog
+		$NoActionsDialog.popup_centered()
+		# Disable chat and inspect buttons
+		$Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button.disabled = true
+		$Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Inspect_Button.disabled = true
 	if new_state == GameState.DiagnosisState.ASKING:
 		# Hide all main UI elements
 		main_action_container.hide()
@@ -96,12 +103,17 @@ func _on_diagnosis_state_changed(new_state):
 		back_button.show()
 	elif new_state == GameState.DiagnosisState.DEFAULT:
 		# Restore default UI state
+		$Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Dialogue_Button.disabled = false
+		$Interaction/ScrollContainer/ActionButtonsContainer/MainActions/Inspect_Button.disabled = false
 		main_action_container.show()
 		question_list.hide()
 		inspect_list.hide()
 		back_button.hide()
 		clipboard.show()
 		action_counter.show()
+		print(GameState.action_manager.remaining_actions <= 0)
+		if GameState.action_manager.remaining_actions <= 0:
+			GameState.set_diagnosis_state(GameState.DiagnosisState.NO_ACTIONS)
 	elif new_state == GameState.DiagnosisState.DIALOGUE:
 		# Hide question list and back button
 		question_list.hide()
@@ -112,11 +124,3 @@ func _on_diagnosis_state_changed(new_state):
 		main_action_container.hide()
 		inspect_list.show()
 		back_button.show()
-	elif new_state == GameState.DiagnosisState.NO_ACTIONS:
-		ask_button.disabled = true
-		inspect_button.disabled = true
-		
-		# Optional: Also visually grey them out for better feedback
-		#ask_button.modulate = Color(0.5, 0.5, 0.5, 1.0)
-		#inspect_button.modulate = Color(0.5, 0.5, 0.5, 1.0)
-		
