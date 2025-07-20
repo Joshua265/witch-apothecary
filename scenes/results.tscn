@@ -26,10 +26,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_21kdr")
 script = ExtResource("2_r4wmc")
-action_list_node = NodePath("Wrapper/VBoxContainer")
+action_list_node = NodePath("Wrapper/VBoxContainer/ScrollContainer/VBoxContainer")
 background_panel = NodePath("Panel")
 clipboard_panel = NodePath("Wrapper")
-hats = NodePath("Wrapper/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer")
+hats = NodePath("Wrapper/HBoxContainer")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -40,35 +40,49 @@ offset_bottom = 656.0
 layout_mode = 2
 offset_left = 47.0
 offset_top = 25.0
-offset_right = 1117.0
-offset_bottom = 623.0
+offset_right = 1127.0
+offset_bottom = 610.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_21kdr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Wrapper"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 16.0
-offset_right = 710.0
-offset_bottom = 513.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = -19.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(10, 10)
 theme = ExtResource("2_s58my")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Wrapper/VBoxContainer"]
 clip_contents = false
-custom_minimum_size = Vector2(300, 300)
+custom_minimum_size = Vector2(300, 500)
 layout_mode = 2
 theme = SubResource("Theme_r4wmc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Wrapper/VBoxContainer/ScrollContainer"]
-custom_minimum_size = Vector2(300, 100)
+custom_minimum_size = Vector2(1040, 500)
 layout_mode = 2
-alignment = 2
+size_flags_vertical = 0
 
-[node name="Button" type="Button" parent="Wrapper/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Wrapper"]
 layout_mode = 2
+offset_left = 403.0
+offset_top = 550.0
+offset_right = 633.0
+offset_bottom = 579.0
 text = "Close"
 
-[node name="HBoxContainer" parent="Wrapper/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_21kdr")]
+[node name="HBoxContainer" parent="Wrapper" instance=ExtResource("2_21kdr")]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
+offset_left = 767.0
+offset_top = 502.0
+offset_right = 1067.0
+offset_bottom = 602.0
 
-[connection signal="pressed" from="Wrapper/VBoxContainer/ScrollContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Wrapper/Button" to="." method="_on_button_pressed"]

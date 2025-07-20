@@ -51,6 +51,9 @@ signal load_max_actions(max_actions: int)
 # state
 @export var remaining_actions = 0;
 
+# for diagnosis
+@export var current_matched_symptoms: Array[String] = [] # Added for clarity
+
 func _ready() -> void:
 	# Instantiate managers
 	level_manager = preload("res://scripts/LevelManager.gd").new()
@@ -116,3 +119,12 @@ func select_diagnosis(current_illness: String) -> void:
 	level_manager.check_unlock_next_level()
 
 	get_tree().change_scene_to_file("res://scenes/results.tscn")
+	
+func add_unique_matched_symptom(symptom_name: String):
+	if not current_matched_symptoms.has(symptom_name):
+		current_matched_symptoms.append(symptom_name)
+		print("Added unique symptom to GameState: ", symptom_name)
+
+func clear_matched_symptoms():
+	current_matched_symptoms.clear()
+	print("GameState matched symptoms cleared.")
