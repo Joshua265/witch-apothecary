@@ -42,7 +42,7 @@ func was_inspected(action_id: String) -> bool:
 func _on_load_available_actions(_available_actions: Array[String]) -> void:
 	print("[ActionManager] _on_load_available_actions called with: ", _available_actions)
 	# Load actions for the current level
-	available_actions = _available_actions
+	available_actions = _available_actions.duplicate()
 	update_available_actions()
 
 func update_available_actions() -> void:
@@ -85,7 +85,7 @@ func get_available_actions() -> Array:
 # Get remaining actions
 func get_remaining_actions() -> int:
 	return remaining_actions
-	
+
 func check_no_more_actions():
 	if get_remaining_actions() == 0:
 		GameState.set_diagnosis_state(GameState.DiagnosisState.NO_ACTIONS)
