@@ -20,6 +20,7 @@ var illness_index  = 0
 
 var bok_manager = null
 
+
 func _ready() -> void:
 	connect("open_confirmation_dialog", Callable($ConfirmationDialog, "_on_open_dialog"))
 	$ConfirmationDialog.connect("yes_confirmation_dialog", Callable(self, "_on_confirmation_diagnosis"))
@@ -84,9 +85,12 @@ func update_page():
 			# Highlight only the Symptoms section
 			var text = illness["info"][section]
 			if section == "Symptoms":
-				var matched = GameState.bok_highlighter.match_symptoms(illness)
-				print("Matched symptoms: ", matched)
-				text = GameState.bok_highlighter.highlight_symptoms_text(text, matched)
+				var matched_local = GameState.bok_highlighter.match_symptoms(illness)
+				print("Matched symptoms: ", matched_local)
+				text = GameState.bok_highlighter.highlight_symptoms_text(text, matched_local)
+				for item in matched_local:
+					GameState.add_unique_matched_symptom(item.to_lower())
+				
 			var lbl = create_label("[b]" + section + "[/b]: " + text, 12)
 			target_panel.add_child(lbl)
 

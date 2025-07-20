@@ -4,11 +4,13 @@ class_name ResultData
 var action_points: Dictionary [String, int]= {}
 var correct_diagnosis: String = ""
 var star_margins: Array[int] = []
+var probable_diagnosis: Array[String] = []
 
-func _init(_action_points: Dictionary[String, int], _correct_diagnosis: String, _star_margins: Array[int]) -> void:
+func _init(_action_points: Dictionary[String, int], _correct_diagnosis: String, _star_margins: Array[int], _probable_diagnosis: Array[String]) -> void:
 	self.action_points = _action_points
 	self.correct_diagnosis = _correct_diagnosis
 	self.star_margins = _star_margins
+	self.probable_diagnosis = _probable_diagnosis
 
 static var results: Dictionary[int, ResultData] = {
 	0: ResultData.new(
@@ -30,7 +32,9 @@ static var results: Dictionary[int, ResultData] = {
 					"ask_enough_rest": 20
 				},
 				 "Overexertion",
-			[100, 160, 220]),
+			[100, 160, 220],
+			["Anxiety / Stress-Induced Symptoms", "Dehydration"]
+			),
 	1: ResultData.new(
 			{
 				"blood_pressure": 15,
@@ -50,5 +54,7 @@ static var results: Dictionary[int, ResultData] = {
 				"ask_enough_rest": 8
 			}
 			, "dehydration",
-			[30, 60, 90]),
+			[30, 60, 90],
+			[]
+			),
 		}

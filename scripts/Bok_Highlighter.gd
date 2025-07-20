@@ -11,9 +11,9 @@ func _ready() -> void:
 
 # Extract literal symptom keywords + ignore negations
 func extract_keywords(text: String) -> Array:
-	var symptom_keywords = [ "sore throat", "shortness of breath", "fatigue",
+	var symptom_keywords = [ "shortness of breath", "fatigue",
 		"tired", "dizzy", "dizziness", "headaches", "headache", "congestion",
-		"nausea", "rash", "pain", "sore", "cough", "stress", "anxiety", "nausea",
+		"nausea", "rash", "pain", "cough", "stress", "anxiety", "nausea",
 		"abdominal pain", "vomiting", "bloating", "constipation", "ear pain",
 		"swelling", "itching", "bumps", "welts", "skin", "irritation",
 		"restlessness", "sweating"]

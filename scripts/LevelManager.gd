@@ -60,6 +60,10 @@ func change_level(new_level: int) -> void:
 	print("Changing to level %s..." % current_level)
 	# TODO: maybe centralise the reseting stuff here 
 	#TODO: MUST Remove the data when chnaging levels
+	GameState.action_manager.action_log.clear()
+	GameState.current_matched_symptoms.clear()
+	for used_action in GameState.action_manager.action_log:
+		print(used_action.action_id)
 
 
 func unlock_level(level_index: int) -> void:
