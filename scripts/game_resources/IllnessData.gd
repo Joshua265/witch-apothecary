@@ -91,7 +91,7 @@ static var illnesses = [
 			"Treatment": "Along with standard stress management practices (e.g., deep breathing, mindfulness), consider herbal support such as lemon balm tea, chamomile, valerian root, and optionally passionflower or lavender (via teas or aromatherapy) to promote relaxation."
 		}, {
 			"heartrate": {"min": "100 bpm"},
-			"experiences shortness of breath": true,
+			"shortness of breath": true,
 			"sweating": true,
 			"restlessness": true,
 			"stress": true
@@ -117,7 +117,7 @@ static var illnesses = [
 			"lightheaded": true,
 			"dizziness": true,
 			"fatigue": true,
-			"experiences shortness of breath": true,
+			"shortness of breath": true,
 			"breathing": {"min": "20 br/min"}
 		}),
 		IllnessData.new("Sprained Ankle", {
