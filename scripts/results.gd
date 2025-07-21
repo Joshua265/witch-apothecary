@@ -109,7 +109,7 @@ func update_diagnosis_section() -> void:
 			# Construct the hint for what they should consider
 			var hint_diagnosis_str = ""
 			if matching_diagnosis.is_empty():
-				hint_diagnosis_str = "the primary correct diagnosis."
+				hint_diagnosis_str = "the primary correct diagnosis." # its okay this is not posible
 			elif matching_diagnosis.size() == 1:
 				hint_diagnosis_str = matching_diagnosis[0] + "."
 			else:
@@ -124,7 +124,7 @@ func update_diagnosis_section() -> void:
 			
 		else:
 			outcome_status = "incorrect"
-			feedback_message = "Unfortunately, your diagnosis was incorrect. As the the matching symptoms are %s, you should review them more carefully." % [
+			feedback_message = "Unfortunately, your diagnosis was incorrect. As the symptoms are %s, you should review them more carefully." % [
 				matched_symptoms_list_str
 			]
 
